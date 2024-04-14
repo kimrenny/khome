@@ -1,24 +1,32 @@
 {
-    "manifest_version": 1,
-    "name": "Custom Homepage",
+    "manifest_version": 3,
+    "name": "KHome - KDrama New Tab",
     "version": "1.0.0",
     "description": "Sets a custom homepage for Chrome.",
     "permissions": ["storage", "tabs", "http://*/*", "https://*/*", "geolocation"],
     "background": {
-        "scripts": ["background.js"],
+        "scripts": ["dist/bundle.js", "background.js"],
         "persistent": false
     },
     "chrome_url_overrides": {
         "newtab": "index.html"
     },
     "icons": {
-        "16": "icon.png",
-        "48": "icon.png",
-        "128": "icon.png"
+        "16": "images/chrome-image.png",
+        "48": "images/chrome-image.png",
+        "128": "images/chrome-image.png"
     },
     "browser_action": {
-        "default_popup": "popup.html",
-        "default_icon": "icon.png"
+        "default_icon": "images/chrome-image.png"
     },
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object src 'self'"
+    "content_security_policy": {
+        "default-src": "'self' https://api.weatherapi.com http://ip:5000",
+        "script-src": "'self'",
+        "object-src": "'self' https://api.weatherapi.com",
+        "connect-src": "'self' https://api.weatherapi.com http://ip:5000",
+        "img-src": "'self' data:",
+        "style-src": "'self' 'unsafe-inline'",
+        "font-src": "'self'",
+        "media-src": "'self'"
+    }
 }
