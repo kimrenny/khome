@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>New tab</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+    <div id="bg" class="user-select-none">
+        <div id="carousel" class="carousel">
+            
+        </div>
+    </div>
+    <header>
+        <div class="flex-left">
+           <div class="links-wrapper">
+            <div id="bookmark" class="icon-bookmark" data-target="links-list"></div>
+            <div id="links-list" class="display-none">
+               <div class="links-inner">
+                <div id="social-links" class="social-links">
+                    <a href="https://www.youtube.com/" class="icon-youtube-play" target="_blank"></a>
+                    <a href="https://twitter.com/" class="icon-twitter" target="_blank"></a>
+                    <a href="https://www.instagram.com/" class="icon-instagram" target="_blank"></a>
+                    <a href="https://www.facebook.com/" class="icon-facebook" target="_blank"></a>
+                    <a href="https://twitch.tv" class="icon-twitch" target="_blank"></a>
+                </div>
+                <div id="add-link" class="add-link">
+                    <button id="add-link-btn"><span id="add-link-plus">+</span><span id="add-link-text">add</span></button>
+                    <button id="user-links-btn">links <span id="arrow-user-links-btn">➡</span></button>
+                    <div id="link-form" class="display-none">
+                        <input type="text" id="site-name" placeholder="Site Name*">
+                        <input type="text" id="site-url" placeholder="Site URL*">
+                        <button id="save-link-btn">Save</button>
+                        <button id="cancel-link-btn">Cancel</button>
+                    </div>
+                </div>
+               </div>
+            </div>
+            <div id="user-links" class="display-none"></div>
+            <div id="error-message" class="error-message">Limit of custom links creation exceeded!</div>
+           </div>
+           <div id="search-bar" class="search-bar">
+                <form id="searchForm">
+                    <input type="text" id="search-input" placeholder="Search" autocomplete="off">
+                </form>
+           </div> 
+        </div>
+        <div class="flex-center">
+            <div class="d-day user-select-none"></div>
+        </div>
+        <div class="flex-right">
+            <div id="weather" data-target="detailWeather">
+              <img id="weatherIcon" src="" alt="" class="user-select-none">
+              <div class="txt-wrapper">
+                <span id="weatherTemperature" class="weatherText user-select-none"></span>
+                <span id="weatherLocation" class="weatherText user-select-none"></span>
+              </span>
+            </div>
+        </div>
+    </header>
+    <section id="main">
+        <div class="clock-container user-select-none">
+            <span id="clock-inner">
+                <span id="period"></span>
+                <span id="hours-tens"></span><span id="hours-ones"></span><span id="clock-divider"> : </span> 
+                <span id="minutes-tens"></span><span id="minutes-ones"></span><span id="clock-divider"> : </span>
+                <span id="seconds-tens"></span><span id="seconds-ones"></span>
+            </span>
+        </div>
+        <div id="greetings" class="main-item greetings-box user-select-none">
+        </div>
+        <div id="task-container">
+        <div id="tasks" class="user-tasks">
+            <ul id="task-list"></ul>
+        </div>
+
+        <form id="task-form">
+            <input type="text" id="task-input" placeholder="Add new task" autocomplete="off">
+        </form>
+
+        <div id="clear-task-btn" class="clear-task-button" style="display: none">
+            <div class="button-content"></div>
+        </div>
+
+        <div id="modal" class="modal">
+            <div class="modal-content user-select-none">
+                <span id="clear-task-close-button" class="close-button">x</span>
+                <p class="clear-task-list-title">Clear Task List?</p>
+                <div class="modal-buttons">
+                    <button id="confirm-clear-button">Yes</button>
+                    <button id="cancel-clear-button">Cancel</button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </section>
+
+    <div id="footer">
+        <div id="changes-modal-success" class="display-none">Saved</div>
+
+        <div id="settings-btn" class="settings-button"></div>
+
+        <div id="settings-modal" class="set-modal display-none user-select-none">
+            <div id="settings-left" class="settings-left">
+                <div class="settings-section" data-target="general-section">General</div>
+                <div class="settings-section" data-target="d-day-section">D-day</div>
+                <div class="settings-section" data-target="background-section">Background</div>
+                <div class="settings-section" data-target="alarm-section">Alarm</div>
+                <div class="settings-section" data-target="help-section">Help*</div>
+                <div class="settings-section" data-target="whats-new-section">What's new</div>
+                <div class="settings-section" data-target="about-section">About</div>
+            </div>
+            <div class="divider"></div>
+            <div class="settings-right-container">
+                <div id="settings-right" class="settings-right">
+                    <div id="general-section" class="settings-content">
+                        <div class="setting-header">Display</div>
+                        <div class="setting-item">
+                            <span>Bookmark</span>
+                            <div id="bookmark-toggle" class="toggle-switch on">
+                                <div class="toggle-handle"></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="setting-item">
+                            <span>Search</span>
+                            <div id="search-toggle" class="toggle-switch on">
+                                <div class="toggle-handle"></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="setting-item">
+                            <span>Weather</span>
+                            <div id="weather-toggle" class="toggle-switch on">
+                                <div class="toggle-handle"></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="setting-item">
+                            <span>Greetings</span>
+                            <div id="greetings-toggle" class="toggle-switch on">
+                                <div class="toggle-handle"></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="setting-item">
+                            <span>Task List</span>
+                            <div id="task-list-toggle" class="toggle-switch on">
+                                <div class="toggle-handle"></div>
+                            </div>
+                        </div>
+
+                        <div class="other-headers">Clock</div>
+                        <div class="setting-item">
+                            <span>24-clock</span>
+                            <div id="clock-toggle" class="toggle-switch on">
+                                <div class="toggle-handle"></div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-item-addition">Clock format: 24 hour</span>
+                        </div>
+
+                        <div class="other-headers">Change name</div>
+                        <div>
+                            <input type="text" id="name-input" placeholder="Enter your name here">
+                            <button id="submit-btn">Submit</button>
+                        </div>
+
+                        <div class="other-headers">Search Engine</div>
+                        <div class="setting-item">
+                            <span>Google</span>
+                            <div id="google-search-toggle" class="toggle-switch off">
+                                <div class="toggle-handle"></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="setting-item">
+                            <span>DuckDuckGo</span>
+                            <div id="duckduckgo-search-toggle" class="toggle-switch off">
+                                <div class="toggle-handle"></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="setting-item">
+                            <span>Bing</span>
+                            <div id="bing-search-toggle" class="toggle-switch off">
+                                <div class="toggle-handle"></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="setting-item">
+                            <span>Naver</span>
+                            <div id="naver-search-toggle" class="toggle-switch off">
+                                <div class="toggle-handle"></div>
+                            </div>
+                        </div>
+                            
+                        </div>
+                    </div>
+                    <div id="d-day-section" class="settings-content">
+                        <div class="setting-item d-day-switch">
+                            <span>D-day</span>
+                            <div id="d-day-toggle" class="toggle-switch on">
+                                <div class="toggle-handle"></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div id="setting-item-d-day" class="setting-item">
+                            <span>Display D-day at the top of the page.</span>
+                        </div>
+                        <input type="text" id="dateInput" placeholder="dd.mm.yyyy">
+                        <button id="submitDate">Submit</button>
+                        <button id="resetDate">Reset</button>
+                    </div>
+                    <div id="background-section" class="settings-content">
+                        <div class="setting-item">
+                            <span>Background Opacity</span>
+                        </div>
+                        <input type="range" min="0" max="1" step="0.01" value="0.7" class="setting-slider">
+                        <span class="setting-background">0: transparent, 1: opaque</span>
+                        <div class="slider-value-container">
+                            <span class="slider-value">0.7</span>
+                        </div>
+                        <div class="setting-header-slideshow">Slideshow</div>
+                        <div class="setting-item">
+                            <span>Slideshow</span>
+                            <div id="slideshow-toggle" class="toggle-switch-slideshow on">
+                                <div class="toggle-handle"></div>
+                            </div>
+                        </div>
+                        <span class="setting-background">Slideshow for background images (reload)</span>
+                        <hr class="background-hr">
+                        <div class="setting-item">
+                            <span>Number of images</span>
+                        </div>
+                        <input type="range" min="1" max="49" step="1" value="49" class="images-slider">
+                        <div class="images-value-container">
+                            <span class="images-value">49</span>
+                        </div>
+                        <hr>
+                        <div class="setting-item">
+                            <span>Slideshow speed (sec.)</span>
+                        </div>
+                        <input type="range" min="3" max="900" step="1" value="10" class="slideshow-speed">
+                        <div class="slideshow-speed-value-container">
+                            <input type="text" class="slideshow-speed-value" id="slideshow-speed-text" maxlength="3"></span>
+                        </div>
+                    </div>
+                    <div id="alarm-section" class="settings-content">
+                        <div class="setting-item timer-button-switch">
+                            <span>Display Timer Button</span>
+                            <div id="timer-button-toggle" class="toggle-switch on">
+                                <div class="toggle-handle"></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="setting-item timer-button-switch">
+                            <span>Alarm sound</span>
+                            <select id="timerSoundSelect"></select>
+                            <button id="playSoundButton" style="display: inline-block"></button>
+                            <button id="saveSoundButton" style="display: inline-block"></button>
+                        </div>
+                    </div>
+                    <div id="help-section" class="settings-content">
+                        <div class="setting-header">Contact Developer</div>
+                        <div class="whatsnew">
+                            <span>If you have any problems with the application, you find errors or have suggestions for improvement, as well as background images, write to me -  <a href="mailto:kimrenny.tech@gmail.com
+                                ">kimrenny.tech@gmail.com
+                            </a></span> 
+                            <span class="font-12">If you are fluent in your language and would like help adding your language to the application, please write to the email above indicating the translation of all (if possible) application elements.</span>
+                        </div>
+                    </div>
+                    <div id="whats-new-section" class="settings-content">
+                        <div class="setting-header">1.0.0.5</div>
+                        <div class="whatsnew">
+                            <span>Added the feature to change the list of background images.</span>
+                        </div>
+                        <div class="other-setting-header">1.0.0.4</div>
+                        <div class="whatsnew">
+                            <span>Added new background images.</span>
+                            <span>Minor functionality changes and bug fixes.</span>
+                        </div>
+                        <div class="other-setting-header">1.0.0.3</div>
+                        <div class="whatsnew">
+                            <span>Added new background images. To enable their display, change the slider's position in the "Background" settings to the maximum value (41).</span>
+                            <span class="font-12-important">If you did not change this value manually, it will change automatically.</span>
+                        </div>
+                        <div class="other-setting-header">1.0.0.2</div>
+                        <div class="whatsnew">
+                            <span>Fixed some bugs.</span>
+                            <span>ChatGPT has been removed due to security reasons and lack of user usage.</span>
+                        </div>
+                        <div class="other-setting-header">1.0.0.1</div>
+                        <div class="whatsnew">
+                            <span>Minor functional and display bug fixes.</span>
+                        </div>
+                        <div class="other-setting-header">1.0.0</div>
+                        <div class="whatsnew">
+                            <span>Added D-day.</span>
+                            <span>Added background images.</span>
+                            <span>Added Task List.</span>
+                            <span>Added Search Bar.</span>
+                            <span>Added Timer.</span>
+                            <span>Added ChatGPT (gpt 3.5 turbo).</span>
+                        </div>
+                    </div>
+                    <div id="about-section" class="settings-content">
+                        <div class="about">
+                            <img class="about-image" src="images/rvdev.png" alt="">
+                            <span class="font-bold">KHome - KDrama New Tab</span>
+                            <span>Current Version 1.0.0.5</span>
+                            <span><a href="https://chromewebstore.google.com/detail/lembmipemeoknhfmibcladjbediaefjk" target="_blank">Rate this app</a> if you like it.</span>
+                            <span class="about-bottom">Created by <a href="https://github.com/kimrenny" target="_blank">kimrenny</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="timer-btn" class="timer-button"></div>
+
+        <div id="timer-modal" class="timer-modal display-none hidden">
+            <div id="timer-controls">
+                <div id="view-timers-btn" class="view-timers-button"></div>
+
+                <div id="timers-modal" class="timers-modal display-none hidden">
+                    <div id="timers-modal-content" class="timers-modal-content">
+                        <div class="timers-select-header user-select-none">Select Type:</div>
+                        <div id="timers-select-container" class="timers-select-container">
+                            <div class="setting-item-timers">
+                                <span>Timer</span>
+                                <div id="timer-toggle-alarm" class="toggle-switch off">
+                                    <div class="toggle-handle"></div>
+                                </div>
+                            </div>
+                        <hr>
+                            <div class="setting-item-timers">
+                                <span>Alarm</span>
+                                <div id="alarm-toggle-alarm" class="toggle-switch off">
+                                    <div class="toggle-handle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="timer-selected-modal" class="timer-selected-modal display-none">
+                    <div id="timer-selected-modal-content" class="timer-selected-modal-content">
+                        <div id="timers-modal-list"></div>
+                    </div>
+                    <div id="timers-create-btn-arrow" class="timers-create-button-arrow">←</div>
+                    <div id="timers-create-btn" class="timers-create-button">Add new timer</div>
+                </div>
+
+                <div id="timer-create-modal" class="timer-create-modal display-none">
+                    <div id="timer-create-modal-content">
+                        <input type="text" id="timer-name" placeholder="Timer Name*">
+                        <input type="text" id="timer-time" placeholder="Time*" readonly>
+                        <button id="save-timer-btn">Save</button>
+                        <button id="cancel-timer-btn">Cancel</button>
+                    </div>
+                </div>
+
+                <div id="alarm-selected-modal" class="alarm-selected-modal display-none">
+                    <div id="alarm-selected-modal-content" class="alarm-selected-modal-content">
+                        <div id="alarms-modal-list"></div>
+                    </div>
+                    <div id="alarms-create-btn-arrow" class="alarms-create-button-arrow">←</div>
+                    <div id="alarms-create-btn" class="alarms-create-button">Add new timer</div>
+                </div>
+
+                <div id="alarm-create-modal" class="alarm-create-modal display-none">
+                    <div id="alarm-create-modal-content">
+                        <input type="text" id="alarm-name" placeholder="Alarm Name*">
+                        <input type="text" id="alarm-time" placeholder="00:00:00">
+                        <button id="save-alarm-btn">Save</button>
+                        <button id="cancel-alarm-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <svg id="timer-circle" class="timer-circle">
+                <circle id="timer-progress" class="timer-progress" cx="100" cy="100" r="90" fill="none" stroke="#007bff" stroke-width="10" stroke-dasharray="565.48" stroke-dashoffset = "0"></circle>
+            </svg>
+            <div id="timer-text" class="timer-text">00:00:00</div>
+            <div id="pause-timer-btn" class="pause-timer-button hidden"></div>
+            <div id="audio-alarm">
+                <audio id="alarmSound1" src="audio/alert_1.mp3" preload="auto"></audio>
+                <audio id="alarmSound2" src="audio/alert_2.mp3" preload="auto"></audio>
+                <audio id="alarmSound3" src="audio/alert_3.mp3" preload="auto"></audio>
+                <audio id="alarmSound4" src="audio/alert_4.mp3" preload="auto"></audio>
+                <audio id="alarmSound5" src="audio/alert_5.mp3" preload="auto"></audio>
+                <audio id="alarmSound6" src="audio/alert_6.mp3" preload="auto"></audio>
+                <audio id="alarmSound7" src="audio/alert_7.mp3" preload="auto"></audio>
+                <audio id="alarmSound8" src="audio/alert_8.mp3" preload="auto"></audio>
+                <audio id="alarmSound9" src="audio/alert_9.mp3" preload="auto"></audio>
+                <audio id="alarmSound10" src="audio/alert_10.mp3" preload="auto"></audio>
+                <audio id="alarmSound11" src="audio/alert_11.mp3" preload="auto"></audio>
+            </div>
+            </div>
+        </div>
+    </div>
+    <script src="dist/bundle.js"></script>
+</body>
+
+</html>
