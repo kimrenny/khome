@@ -40,18 +40,18 @@
                     <div id="link-form" class="display-none">
                         <input type="text" id="site-name" placeholder="Site Name*">
                         <input type="text" id="site-url" placeholder="Site URL*">
-                        <button id="save-link-btn">Save</button>
-                        <button id="cancel-link-btn">Cancel</button>
+                        <button data-i18n="Save" id="save-link-btn">Save</button>
+                        <button data-i18n="Cancel" id="cancel-link-btn">Cancel</button>
                     </div>
                 </div>
                </div>
             </div>
             <div id="user-links" class="display-none"></div>
-            <div id="error-message" class="error-message">Limit of custom links creation exceeded!</div>
+            <div data-i18n="Limit-custom-links" id="error-message" class="error-message">Limit of custom links creation exceeded!</div>
            </div>
            <div id="search-bar" class="search-bar">
                 <form id="searchForm">
-                    <input type="text" id="search-input" placeholder="Search" autocomplete="off">
+                    <input data-i18n="search" type="text" id="search-input" placeholder="Search" autocomplete="off">
                 </form>
            </div> 
         </div>
@@ -85,7 +85,7 @@
         </div>
 
         <form id="task-form">
-            <input type="text" id="task-input" placeholder="Add new task" autocomplete="off">
+            <input data-i18n="add-new-task" type="text" id="task-input" placeholder="Add new task" autocomplete="off">
         </form>
 
         <div id="clear-task-btn" class="clear-task-button" style="display: none">
@@ -95,10 +95,10 @@
         <div id="modal" class="modal">
             <div class="modal-content user-select-none">
                 <span id="clear-task-close-button" class="close-button">x</span>
-                <p class="clear-task-list-title">Clear Task List?</p>
+                <p data-i18n="clear-task-list" class="clear-task-list-title">Clear Task List?</p>
                 <div class="modal-buttons">
-                    <button id="confirm-clear-button">Yes</button>
-                    <button id="cancel-clear-button">Cancel</button>
+                    <button data-i18n="Yes" id="confirm-clear-button">Yes</button>
+                    <button data-i18n="Cancel" id="cancel-clear-button">Cancel</button>
                 </div>
             </div>
         </div>
@@ -107,55 +107,70 @@
     </section>
 
     <div id="footer">
-        <div id="changes-modal-success" class="display-none">Saved</div>
+        <div data-i18n="saved" id="changes-modal-success" class="display-none">Saved</div>
 
         <div id="settings-btn" class="settings-button"></div>
 
         <div id="settings-modal" class="set-modal display-none user-select-none">
             <div id="settings-left" class="settings-left">
-                <div class="settings-section" data-target="general-section">General</div>
-                <div class="settings-section" data-target="d-day-section">D-day</div>
-                <div class="settings-section" data-target="background-section">Background</div>
-                <div class="settings-section" data-target="alarm-section">Alarm</div>
-                <div class="settings-section" data-target="help-section">Help*</div>
-                <div class="settings-section" data-target="whats-new-section">What's new</div>
-                <div class="settings-section" data-target="about-section">About</div>
+                <div data-i18n="General-section" class="settings-section" data-target="general-section">General</div>
+                <div data-i18n="D-day-section" class="settings-section" data-target="d-day-section">D-day</div>
+                <div data-i18n="Background-section" class="settings-section" data-target="background-section">Background</div>
+                <div data-i18n="Alarm-section" class="settings-section" data-target="alarm-section">Alarm</div>
+                <div data-i18n="Help-section" class="settings-section" data-target="help-section">Help*</div>
+                <div data-i18n="Whats-new-section" class="settings-section" data-target="whats-new-section">What's new</div>
+                <div data-i18n="About-section" class="settings-section" data-target="about-section">About</div>
             </div>
             <div class="divider"></div>
             <div class="settings-right-container">
                 <div id="settings-right" class="settings-right">
                     <div id="general-section" class="settings-content">
                         <div class="setting-header">Display</div>
+
                         <div class="setting-item">
-                            <span>Bookmark</span>
+                            <span data-i18n="Language">Language</span>
+                            <select id="languageSelector">
+                                <option value="en">English</option>
+                                <option value="ko">한국어</option>
+                                <option value="fr">Français</option>
+                                <option value="ru">Русский</option>
+                                <option value="uk">Українська</option>
+                                <option value="zh">中文</option>
+                                <option value="ja">日本語</option>
+                            </select>
+                        </div>
+                        <hr>
+
+                        <div class="setting-item">
+                            <span data-i18n="Bookmark">Bookmark</span>
                             <div id="bookmark-toggle" class="toggle-switch on">
                                 <div class="toggle-handle"></div>
                             </div>
                         </div>
                         <hr>
                         <div class="setting-item">
-                            <span>Search</span>
+                            <span data-i18n="search">Search</span>
                             <div id="search-toggle" class="toggle-switch on">
                                 <div class="toggle-handle"></div>
                             </div>
                         </div>
                         <hr>
                         <div class="setting-item">
-                            <span>Weather</span>
+                            <span data-i18n="Weather">Weather</span>
                             <div id="weather-toggle" class="toggle-switch on">
                                 <div class="toggle-handle"></div>
                             </div>
                         </div>
                         <hr>
                         <div class="setting-item">
-                            <span>Greetings</span>
+                            <span data-i18n="Greetings">Greetings</span>
                             <div id="greetings-toggle" class="toggle-switch on">
                                 <div class="toggle-handle"></div>
                             </div>
                         </div>
                         <hr>
                         <div class="setting-item">
-                            <span>Task List</span>
+                            <span data-i18n="Task-List">Task List</span>
                             <div id="task-list-toggle" class="toggle-switch on">
                                 <div class="toggle-handle"></div>
                             </div>
@@ -163,22 +178,22 @@
 
                         <div class="other-headers">Clock</div>
                         <div class="setting-item">
-                            <span>24-clock</span>
+                            <span data-i18n="24-clock">24-clock</span>
                             <div id="clock-toggle" class="toggle-switch on">
                                 <div class="toggle-handle"></div>
                             </div>
                         </div>
                         <div class="setting-item">
-                            <span class="setting-item-addition">Clock format: 24 hour</span>
+                            <span data-i18n="clock-format" class="setting-item-addition">Clock format: 24 hour</span>
                         </div>
 
-                        <div class="other-headers">Change name</div>
+                        <div data-i18n="change-name" class="other-headers">Change name</div>
                         <div>
-                            <input type="text" id="name-input" placeholder="Enter your name here">
-                            <button id="submit-btn">Submit</button>
+                            <input type="text" id="name-input" data-i18n="Enter-name-placeholder" placeholder="Enter your name here">
+                            <button data-i18n="Submit" id="submit-btn">Submit</button>
                         </div>
 
-                        <div class="other-headers">Search Engine</div>
+                        <div data-i18n="search-engine" class="other-headers">Search Engine</div>
                         <div class="setting-item">
                             <span>Google</span>
                             <div id="google-search-toggle" class="toggle-switch off">
@@ -218,109 +233,105 @@
                         </div>
                         <hr>
                         <div id="setting-item-d-day" class="setting-item">
-                            <span>Display D-day at the top of the page.</span>
+                            <span data-i18n="d-day-display">Display D-day at the top of the page.</span>
                         </div>
                         <input type="text" id="dateInput" placeholder="dd.mm.yyyy">
-                        <button id="submitDate">Submit</button>
-                        <button id="resetDate">Reset</button>
+                        <button data-i18n="Submit" id="submitDate">Submit</button>
+                        <button data-i18n="Reset" id="resetDate">Reset</button>
                     </div>
                     <div id="background-section" class="settings-content">
                         <div class="setting-item">
-                            <span>Background Opacity</span>
+                            <span data-i18n="background-opacity">Background Opacity</span>
                         </div>
                         <input type="range" min="0" max="1" step="0.01" value="0.7" class="setting-slider">
-                        <span class="setting-background">0: transparent, 1: opaque</span>
+                        <span data-i18n="setting-background" class="setting-background">0: transparent, 1: opaque</span>
                         <div class="slider-value-container">
                             <span class="slider-value">0.7</span>
                         </div>
-                        <div class="setting-header-slideshow">Slideshow</div>
+                        <div data-i18n="slideshow" class="setting-header-slideshow">Slideshow</div>
                         <div class="setting-item">
-                            <span>Slideshow</span>
+                            <span data-i18n="slideshow">Slideshow</span>
                             <div id="slideshow-toggle" class="toggle-switch-slideshow on">
                                 <div class="toggle-handle"></div>
                             </div>
                         </div>
-                        <span class="setting-background">Slideshow for background images (reload)</span>
+                        <span data-i18n="slideshow-background" class="setting-background">Slideshow for background images (reload)</span>
                         <hr class="background-hr">
                         <div class="setting-item">
-                            <span>Number of images</span>
-                        </div>
-                        <input type="range" min="1" max="49" step="1" value="49" class="images-slider">
-                        <div class="images-value-container">
-                            <span class="images-value">49</span>
-                        </div>
-                        <hr>
-                        <div class="setting-item">
-                            <span>Slideshow speed (sec.)</span>
+                            <span data-i18n="slideshow-speed">Slideshow speed (sec.)</span>
                         </div>
                         <input type="range" min="3" max="900" step="1" value="10" class="slideshow-speed">
                         <div class="slideshow-speed-value-container">
-                            <input type="text" class="slideshow-speed-value" id="slideshow-speed-text" maxlength="3"></span>
+                            <input type="text" class="slideshow-speed-value" id="slideshow-speed-text" maxlength="3" readonly></span>
+                        </div>
+                        <hr>
+                        <div class="setting-item">
+                            <span data-i18n="edit-images-list">Edit images list</span>
+                            <button data-i18n="Edit" id="edit-images-modal-btn">Edit</button>
                         </div>
                     </div>
                     <div id="alarm-section" class="settings-content">
                         <div class="setting-item timer-button-switch">
-                            <span>Display Timer Button</span>
+                            <span data-i18n="timer-btn">Display Timer Button</span>
                             <div id="timer-button-toggle" class="toggle-switch on">
                                 <div class="toggle-handle"></div>
                             </div>
                         </div>
                         <hr>
                         <div class="setting-item timer-button-switch">
-                            <span>Alarm sound</span>
+                            <span data-i18n="alarm-sound">Alarm sound</span>
                             <select id="timerSoundSelect"></select>
                             <button id="playSoundButton" style="display: inline-block"></button>
                             <button id="saveSoundButton" style="display: inline-block"></button>
                         </div>
                     </div>
                     <div id="help-section" class="settings-content">
-                        <div class="setting-header">Contact Developer</div>
+                        <div data-i18n="contact-dev" class="setting-header">Contact Developer</div>
                         <div class="whatsnew">
-                            <span>If you have any problems with the application, you find errors or have suggestions for improvement, as well as background images, write to me -  <a href="mailto:kimrenny.tech@gmail.com
+                            <span data-i18n="contact-message">If you have any problems with the application, you find errors or have suggestions for improvement, as well as background images, write to me -  <a href="mailto:kimrenny.tech@gmail.com
                                 ">kimrenny.tech@gmail.com
                             </a></span> 
-                            <span class="font-12">If you are fluent in your language and would like help adding your language to the application, please write to the email above indicating the translation of all (if possible) application elements.</span>
+                            <span data-i18n="localize-contact-message" class="font-12">If you are fluent in your language and would like help adding your language to the application, please write to the email above indicating the translation of all (if possible) application elements.</span>
                         </div>
                     </div>
                     <div id="whats-new-section" class="settings-content">
                         <div class="setting-header">1.0.0.5</div>
                         <div class="whatsnew">
-                            <span>Added the feature to change the list of background images.</span>
+                            <span data-i18n="whats-new-1005-1">Added the feature to change the list of background images.</span>
+                            <span data-i18n="whats-new-1005-2">Added translation into several popular languages ​​in the world.</span>
                         </div>
                         <div class="other-setting-header">1.0.0.4</div>
                         <div class="whatsnew">
-                            <span>Added new background images.</span>
-                            <span>Minor functionality changes and bug fixes.</span>
+                            <span data-i18n="whats-new-1004-1">Added new background images.</span>
+                            <span data-i18n="whats-new-1004-2">Minor functionality changes and bug fixes.</span>
                         </div>
                         <div class="other-setting-header">1.0.0.3</div>
                         <div class="whatsnew">
-                            <span>Added new background images. To enable their display, change the slider's position in the "Background" settings to the maximum value (41).</span>
-                            <span class="font-12-important">If you did not change this value manually, it will change automatically.</span>
+                            <span data-i18n="whats-new-1003-1">Added new background images. To enable their display, change the slider's position in the "Background" settings to the maximum value (41).</span>
+                            <span data-i18n="whats-new-1003-2" class="font-12-important">If you did not change this value manually, it will change automatically.</span>
                         </div>
                         <div class="other-setting-header">1.0.0.2</div>
                         <div class="whatsnew">
-                            <span>Fixed some bugs.</span>
-                            <span>ChatGPT has been removed due to security reasons and lack of user usage.</span>
+                            <span data-i18n="whats-new-1002-1">Fixed some bugs.</span>
                         </div>
                         <div class="other-setting-header">1.0.0.1</div>
                         <div class="whatsnew">
-                            <span>Minor functional and display bug fixes.</span>
+                            <span data-i18n="whats-new-1001-1">Minor functional and display bug fixes.</span>
                         </div>
                         <div class="other-setting-header">1.0.0</div>
                         <div class="whatsnew">
-                            <span>Added D-day.</span>
-                            <span>Added background images.</span>
-                            <span>Added Task List.</span>
-                            <span>Added Search Bar.</span>
-                            <span>Added Timer.</span>
-                            <span>Added ChatGPT (gpt 3.5 turbo).</span>
+                            <span data-i18n="whats-new-1000-1">Added D-day.</span>
+                            <span data-i18n="whats-new-1000-2">Added background images.</span>
+                            <span data-i18n="whats-new-1000-3">Added Task List.</span>
+                            <span data-i18n="whats-new-1000-4">Added Search Bar.</span>
+                            <span data-i18n="whats-new-1000-5">Added Timer.</span>
                         </div>
                     </div>
                     <div id="about-section" class="settings-content">
                         <div class="about">
                             <img class="about-image" src="images/rvdev.png" alt="">
                             <span class="font-bold">KHome - KDrama New Tab</span>
-                            <span>Current Version 1.0.0.5</span>
+                            <span data-i18n="current-version">Current Version 1.0.0.5</span>
                             <span><a href="https://chromewebstore.google.com/detail/lembmipemeoknhfmibcladjbediaefjk" target="_blank">Rate this app</a> if you like it.</span>
                             <span class="about-bottom">Created by <a href="https://github.com/kimrenny" target="_blank">kimrenny</a></span>
                         </div>
@@ -337,17 +348,17 @@
 
                 <div id="timers-modal" class="timers-modal display-none hidden">
                     <div id="timers-modal-content" class="timers-modal-content">
-                        <div class="timers-select-header user-select-none">Select Type:</div>
+                        <div data-i18n="timer-type" class="timers-select-header user-select-none">Select Type:</div>
                         <div id="timers-select-container" class="timers-select-container">
                             <div class="setting-item-timers">
-                                <span>Timer</span>
+                                <span data-i18n="timer">Timer</span>
                                 <div id="timer-toggle-alarm" class="toggle-switch off">
                                     <div class="toggle-handle"></div>
                                 </div>
                             </div>
                         <hr>
                             <div class="setting-item-timers">
-                                <span>Alarm</span>
+                                <span data-i18n="alarm">Alarm</span>
                                 <div id="alarm-toggle-alarm" class="toggle-switch off">
                                     <div class="toggle-handle"></div>
                                 </div>
@@ -361,15 +372,15 @@
                         <div id="timers-modal-list"></div>
                     </div>
                     <div id="timers-create-btn-arrow" class="timers-create-button-arrow">←</div>
-                    <div id="timers-create-btn" class="timers-create-button">Add new timer</div>
+                    <div data-i18n="add-new-timer" id="timers-create-btn" class="timers-create-button">Add new timer</div>
                 </div>
 
                 <div id="timer-create-modal" class="timer-create-modal display-none">
                     <div id="timer-create-modal-content">
-                        <input type="text" id="timer-name" placeholder="Timer Name*">
-                        <input type="text" id="timer-time" placeholder="Time*" readonly>
-                        <button id="save-timer-btn">Save</button>
-                        <button id="cancel-timer-btn">Cancel</button>
+                        <input data-i18n="new-timer-name" type="text" id="timer-name" placeholder="Timer Name*">
+                        <input data-i18n="new-timer-time" type="text" id="timer-time" placeholder="Time*" readonly>
+                        <button data-i18n="Save" id="save-timer-btn">Save</button>
+                        <button data-i18n="Cancel" id="cancel-timer-btn">Cancel</button>
                     </div>
                 </div>
 
@@ -378,15 +389,15 @@
                         <div id="alarms-modal-list"></div>
                     </div>
                     <div id="alarms-create-btn-arrow" class="alarms-create-button-arrow">←</div>
-                    <div id="alarms-create-btn" class="alarms-create-button">Add new timer</div>
+                    <div data-i18n="add-new-alarm" id="alarms-create-btn" class="alarms-create-button">Add new alarm</div>
                 </div>
 
                 <div id="alarm-create-modal" class="alarm-create-modal display-none">
                     <div id="alarm-create-modal-content">
-                        <input type="text" id="alarm-name" placeholder="Alarm Name*">
+                        <input data-i18n="new-alarm-name" type="text" id="alarm-name" placeholder="Alarm Name*">
                         <input type="text" id="alarm-time" placeholder="00:00:00">
-                        <button id="save-alarm-btn">Save</button>
-                        <button id="cancel-alarm-btn">Cancel</button>
+                        <button data-i18n="Save" id="save-alarm-btn">Save</button>
+                        <button data-i18n="Cancel" id="cancel-alarm-btn">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -409,6 +420,14 @@
                 <audio id="alarmSound11" src="audio/alert_11.mp3" preload="auto"></audio>
             </div>
             </div>
+        </div>
+    </div>
+    <div id="editImagesModal" class="modal-edit-images">
+        <div class="modal-edit-images-content">
+            <span class="close">&times;</span>
+            <h2 data-i18n="select-images">Select Images</h2>
+            <div class="image-grid" id="imageGrid"></div>
+            <button data-i18n="select-all" id="selectAllBtn">Select All</button>
         </div>
     </div>
     <script src="dist/bundle.js"></script>

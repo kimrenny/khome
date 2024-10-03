@@ -7,7 +7,7 @@ let currentSpeed;
 let slideshowIntervalId;
 
 chrome.storage.local.get("currentSpeed", function (result) {
-  if (result.currentSpeed === undefined) {
+  if (!result.currentSpeed) {
     currentSpeed = 10;
     chrome.storage.local.set({ currentSpeed: currentSpeed });
   } else {
@@ -70,10 +70,55 @@ const images = [
   "bg-jpg/photo_49.jpg",
 ];
 
-function preloadImages() {
+const imageGrid = document.getElementById("imageGrid");
+
+chrome.storage.local.get("selectedImages", function (result) {
+  let selectedImages = result.selectedImages || images;
+
+  images.forEach((image, index) => {
+    const imgElement = document.createElement("img");
+    imgElement.src = image;
+    imgElement.classList.add("grid-image");
+
+    if (selectedImages.includes(image)) {
+      imgElement.classList.add("selected");
+    }
+
+    imgElement.addEventListener("click", function () {
+      const currentSelectedImages = selectedImages.length;
+
+      if (imgElement.classList.contains("selected")) {
+        if (currentSelectedImages > 3) {
+          imgElement.classList.remove("selected");
+          selectedImages = selectedImages.filter((img) => img !== image);
+          chrome.storage.local.set({ selectedImages: selectedImages });
+        }
+      } else {
+        imgElement.classList.add("selected");
+        selectedImages.push(image);
+        chrome.storage.local.set({ selectedImages: selectedImages });
+      }
+    });
+
+    imageGrid.appendChild(imgElement);
+  });
+});
+
+chrome.storage.local.get("selectedImages", function (result) {
+  let selectedImages = result.selectedImages || [];
+
+  if (selectedImages.length < 3) {
+    selectedImages = images;
+    chrome.storage.local.set({ selectedImages: selectedImages });
+  }
+
+  preloadImages(selectedImages);
+});
+
+function preloadImages(selectedImages) {
   chrome.storage.local.get("carouselOpacity", function (result) {
     const savedOpacity = result.carouselOpacity;
-    images.forEach((image, index) => {
+    selectedImages.forEach((image, index) => {
       const img = new Image();
       img.src = image;
       if (index === 0) {
@@ -92,15 +137,6 @@ function preloadImages() {
   });
 }
 
-let maxImages;
-
-chrome.storage.local.get("maxImages", function (result) {
-  if (result.maxImages === undefined) {
-    maxImages = images.length;
-    chrome.storage.local.set({ maxImages: maxImages });
-  } else maxImages = result.maxImages;
-});
-
 function getRandomIndex(max) {
   return Math.floor(Math.random() * max);
 }
@@ -115,39 +151,43 @@ function revealNextImage() {
   const currentImage = bgContainer.querySelector(".carousel-item");
   currentImage.classList.remove("reveal");
 
-  let nextIndex;
-  do {
-    nextIndex = getRandomIndex(maxImages);
-  } while (nextIndex === currentIndex);
+  chrome.storage.local.get("selectedImages", function (result) {
+    const selectedImages = result.selectedImages || images;
 
-  currentIndex = nextIndex;
+    let nextIndex;
+    do {
+      nextIndex = getRandomIndex(selectedImages.length);
+    } while (nextIndex === currentIndex);
 
-  const nextImage = new Image();
-  nextImage.src = images[currentIndex];
-  nextImage.classList.add("carousel-item", "reveal");
-  nextImage.style.opacity = "0";
-  bgContainer.appendChild(nextImage);
+    currentIndex = nextIndex;
 
-  setTimeout(() => {
-    nextImage.style.transition = "opacity 2s ease-in-out";
-    chrome.storage.local.get("carouselOpacity", function (result) {
-      const opacity = result.carouselOpacity || 0.7;
-      nextImage.style.opacity = opacity;
-    });
-    currentImage.style.opacity = "0";
-  }, 100);
+    const nextImage = new Image();
+    nextImage.src = selectedImages[currentIndex];
+    nextImage.classList.add("carousel-item", "reveal");
+    nextImage.style.opacity = "0";
+    bgContainer.appendChild(nextImage);
 
-  setTimeout(() => {
-    if (bgContainer.contains(currentImage)) {
-      bgContainer.removeChild(currentImage);
-    }
-  }, 2000);
+    setTimeout(() => {
+      nextImage.style.transition = "opacity 2s ease-in-out";
+      chrome.storage.local.get("carouselOpacity", function (result) {
+        const opacity = result.carouselOpacity || 0.7;
+        nextImage.style.opacity = opacity;
+      });
+      currentImage.style.opacity = "0";
+    }, 100);
 
-  setTimeout(() => {
-    isTransitioning = false;
-    clearInterval(slideshowIntervalId);
-    slideshowIntervalId = setInterval(revealNextImage, currentSpeed * 1000);
-  }, 2000);
+    setTimeout(() => {
+      if (bgContainer.contains(currentImage)) {
+        bgContainer.removeChild(currentImage);
+      }
+    }, 2000);
+
+    setTimeout(() => {
+      isTransitioning = false;
+      clearInterval(slideshowIntervalId);
+      slideshowIntervalId = setInterval(revealNextImage, currentSpeed * 1000);
+    }, 2000);
+  });
 }
 
 let slideshowToggleIsActive;
@@ -170,10 +210,11 @@ if (typeof document !== "undefined") {
     const slider = document.querySelector(".setting-slider");
     const sliderValue = document.querySelector(".slider-value");
     const slideshowToggle = document.getElementById("slideshow-toggle");
-    const maxImagesSlider = document.querySelector(".images-slider");
-    const maxImagesValue = document.querySelector(".images-value");
     const sliderSpeedInput = document.querySelector(".slideshow-speed");
     const sliderSpeedValue = document.getElementById("slideshow-speed-text");
+
+    sliderSpeedValue.value = currentSpeed;
+    sliderSpeedValue.readOnly = true;
 
     if (slideshowToggleIsActive) {
       if (!slideshowToggle.classList.contains("on")) {
@@ -191,6 +232,55 @@ if (typeof document !== "undefined") {
       }
     }
 
+    const editImagesModal = document.getElementById("editImagesModal");
+    const editImagesModalContent = document.querySelector(
+      ".modal-edit-images-content"
+    );
+    const editImagesModalBtn = document.getElementById("edit-images-modal-btn");
+    const closeBtn = document.querySelector(".close");
+    const selectAllBtn = document.getElementById("selectAllBtn");
+
+    if (editImagesModalBtn) {
+      editImagesModalBtn.addEventListener("click", () => {
+        editImagesModal.style.display = "flex";
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => {
+        editImagesModal.style.display = "none";
+      });
+    }
+
+    selectAllBtn.addEventListener("click", function () {
+      selectedImages = [...images];
+      imageGrid.querySelectorAll("img").forEach((img) => {
+        if (!img.classList.contains("selected")) {
+          img.classList.add("selected");
+        }
+      });
+      chrome.storage.local.set({ selectedImages: selectedImages });
+    });
+
+    function closeEditModal() {
+      editImagesModal.style.display = "none";
+    }
+
+    editImagesModal.addEventListener("click", function (event) {
+      if (event.target === editImagesModal) {
+        closeEditModal();
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      if (
+        editImagesModal.style.display === "flex" &&
+        !editImagesModal.contains(event.target)
+      ) {
+        closeEditModal();
+      }
+    });
+
     function setOpacityAndSave(value) {
       chrome.storage.local.set({ carouselOpacity: value });
     }
@@ -202,100 +292,29 @@ if (typeof document !== "undefined") {
       setOpacityAndSave(savedOpacity);
     });
 
-    let maxImagesSet;
-
-    chrome.storage.local.get("maxImagesSet", function (result) {
-      maxImagesSet = result.maxImagesSet == true;
-    });
-
-    chrome.storage.local.get("maxImages", function (result) {
-      const savedMaxImages = result.maxImages || images.length;
-      if (
-        (savedMaxImages == 24 ||
-          (savedMaxImages > 40 && savedMaxImages < images.length)) &&
-        !maxImagesSet
-      ) {
-        maxImagesSlider.value = images.length;
-        maxImagesValue.textContent = images.length;
-        maxImagesSet = true;
-        chrome.storage.local.set({ maxImagesSet: true });
-      } else {
-        maxImagesSlider.value = savedMaxImages;
-        maxImagesValue.textContent = savedMaxImages;
-      }
-    });
-
-    slider.addEventListener("input", function () {
-      const value = this.value;
-      sliderValue.textContent = value;
-
-      const activeImage = bgContainer.querySelector(".carousel-item.reveal");
-      activeImage.style.opacity = value;
-
-      setOpacityAndSave(value);
-    });
-
-    maxImagesSlider.addEventListener("input", function () {
-      const value = this.value;
-      maxImagesValue.textContent = value;
-
-      chrome.storage.local.set({ maxImages: value });
+    sliderSpeedInput.addEventListener("input", () => {
+      const speed = sliderSpeedInput.value;
+      currentSpeed = speed;
+      sliderSpeedValue.value = currentSpeed;
+      chrome.storage.local.set({ currentSpeed: currentSpeed });
     });
 
     sliderSpeedInput.addEventListener("input", function () {
-      const value = parseInt(this.value);
-      sliderSpeedValue.value = value;
-
-      chrome.storage.local.set({ currentSpeed: value });
-
-      if (slideshowToggleIsActive) {
-        clearInterval(slideshowIntervalId);
-        slideshowIntervalId = setInterval(revealNextImage, value * 1000);
-      }
+      sliderSpeedValue.value = this.value;
     });
 
-    sliderSpeedValue.addEventListener("input", function () {
-      let value = this.value.trim();
-
-      if (value === "") {
-        return;
-      }
-
-      let parsedValue = parseInt(value);
-
-      if (isNaN(parsedValue) || parsedValue < 3) {
-        return;
-      } else if (parsedValue > 900) {
-        parsedValue = 900;
-      }
-
-      this.value = parsedValue;
-
-      chrome.storage.local.set({ currentSpeed: parsedValue });
+    slideshowToggle.addEventListener("click", () => {
+      slideshowToggleIsActive = !slideshowToggleIsActive;
+      chrome.storage.local.set({ "slideshow-toggle": slideshowToggleIsActive });
 
       if (slideshowToggleIsActive) {
-        clearInterval(slideshowIntervalId);
-        slideshowIntervalId = setInterval(revealNextImage, parsedValue * 1000);
-      }
-    });
-
-    slideshowToggle.addEventListener("click", function () {
-      if (slideshowToggle.classList.contains("on")) {
-        slideshowToggle.classList.remove("on");
-        slideshowToggle.classList.add("off");
-        slideshowToggleIsActive = false;
-        chrome.storage.local.set({
-          "slideshow-toggle": slideshowToggleIsActive,
-        });
-        clearInterval(revealNextImage);
-      } else if (slideshowToggle.classList.contains("off")) {
-        slideshowToggle.classList.remove("off");
+        slideshowIntervalId = setInterval(revealNextImage, currentSpeed * 1000);
         slideshowToggle.classList.add("on");
-        slideshowToggleIsActive = true;
-        chrome.storage.local.set({
-          "slideshow-toggle": slideshowToggleIsActive,
-        });
-        setInterval(revealNextImage, currentSpeed);
+        slideshowToggle.classList.remove("off");
+      } else {
+        clearInterval(slideshowIntervalId);
+        slideshowToggle.classList.add("off");
+        slideshowToggle.classList.remove("on");
       }
     });
   });

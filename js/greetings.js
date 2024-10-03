@@ -1,84 +1,143 @@
-function getRandomItemFromArray(array){
-    return array[Math.floor(Math.random() * array.length)];
+const translations = {};
+let currentLang = "en";
+
+function loadTranslations(lang) {
+  fetch(`/assets/${lang}.json`)
+    .then((response) => response.json())
+    .then((data) => {
+      translations[lang] = data;
+      updateTranslations();
+      updateGreetings(); // Обновляем приветствия после загрузки переводов
+    });
 }
 
-if(typeof document !== 'undefined'){
-    document.addEventListener("DOMContentLoaded", function(){
-        const greetingBox = document.getElementById('greetings');
+function updateTranslations() {
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    const key = element.getAttribute("data-i18n");
 
-        function updateGreetings(name){
-            const greetings = {
-                morning: [
-                    `Good Morning, ${name}!`,
-                    `Rise and shine, ${name}!`,
-                    `Morning, ${name}!`
-                ],
-                afternoon: [
-                    `Hello, ${name}!`,
-                    `Hey there, ${name}!`,
-                    `Good afternoon, ${name}!`
-                ],
-                evening: [
-                    `Good Evening, ${name}!`,
-                    `Evening, ${name}!`,
-                    `Hi, ${name}!`
-                ],
-                night: [
-                    `Good Night, ${name}!`,
-                    `Nighty night, ${name}!`,
-                    `Sweet dreams, ${name}!`
-                ]
-            };
+    if (element.tagName === "INPUT" && element.hasAttribute("placeholder")) {
+      element.placeholder = translations[currentLang][key];
+    } else {
+      element.innerHTML = translations[currentLang][key];
+    }
+  });
+}
 
-            const currentDate = new Date();
-            const currentHour = currentDate.getHours();
+function changeLanguage(lang) {
+  currentLang = lang; // Обновляем текущий язык
+  chrome.storage.sync.set({ language: lang }, () => {
+    console.log(`Language saved: ${lang}`);
+  });
 
-            let greeting = "";
-            if (currentHour >= 5 && currentHour < 12){
-                greeting = getRandomItemFromArray(greetings.morning);
-            }else if(currentHour >= 12 && currentHour < 17){
-                greeting = getRandomItemFromArray(greetings.afternoon);
-            }else if(currentHour >= 17 && currentHour < 22){
-                greeting = getRandomItemFromArray(greetings.evening);
-            }else{
-                greeting = getRandomItemFromArray(greetings.night);
-            }
+  if (!translations[lang]) {
+    loadTranslations(lang); // Если переводы еще не загружены, загружаем их
+  } else {
+    updateTranslations(); // Обновляем переводы немедленно
+    updateGreetings(); // Обновляем приветствия немедленно
+  }
+}
 
-            greetingBox.textContent = greeting;
-        }
+function getRandomItemFromArray(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
 
-        chrome.storage.local.get("userName", function(result){
-            const savedName = result.userName;
-            const defaultName = "Dear Friend";
-            const userName = savedName || defaultName;
-            updateGreetings(userName);
-        })
+function updateGreetings() {
+  const greetingBox = document.getElementById("greetings");
+  const currentDate = new Date();
+  const currentHour = currentDate.getHours();
 
-        const nameInput = document.getElementById("name-input");
-        const submitButton = document.getElementById("submit-btn");
+  let greetingKey = "";
+  if (currentHour >= 5 && currentHour < 12) {
+    greetingKey = getRandomItemFromArray([
+      "greeting_morning_1",
+      "greeting_morning_2",
+      "greeting_morning_3",
+    ]);
+  } else if (currentHour >= 12 && currentHour < 17) {
+    greetingKey = getRandomItemFromArray([
+      "greeting_afternoon_1",
+      "greeting_afternoon_2",
+      "greeting_afternoon_3",
+    ]);
+  } else if (currentHour >= 17 && currentHour < 22) {
+    greetingKey = getRandomItemFromArray([
+      "greeting_evening_1",
+      "greeting_evening_2",
+      "greeting_evening_3",
+    ]);
+  } else {
+    greetingKey = getRandomItemFromArray([
+      "greeting_night_1",
+      "greeting_night_2",
+      "greeting_night_3",
+    ]);
+  }
 
-        submitButton.addEventListener("click", function(){
-            const newName = nameInput.value.trim();
-            if(newName.length > 0){
-                let name = newName.substring(0, 15);
-                chrome.storage.local.set({"userName": name}, function(){
-                    updateGreetings(name);
-                });
-            }
-        });
+  // Проверка имени пользователя
+  chrome.storage.sync.get("userName", function (result) {
+    const userName =
+      result.userName || translations[currentLang]["default_user_name"];
+    const greeting = translations[currentLang][greetingKey].replace(
+      "{name}",
+      userName
+    );
+    greetingBox.textContent = greeting; // Обновляем текст приветствия
+  });
+}
 
-        nameInput.addEventListener("keypress", function(event){
-            if(event.key === "Enter"){
-                const newName = nameInput.value.trim();
-                if(newName.length > 0){
-                    let name = newName.substring(0, 15);
-                    chrome.storage.local.set({"userName": name}, function(){
-                        updateGreetings(name);
-                    });
-                    nameInput.value = "";
-                }
-            }
-        })
+if (typeof document !== "undefined") {
+  document.addEventListener("DOMContentLoaded", function () {
+    chrome.storage.sync.get("userName", function (result) {
+      const savedName = result.userName;
+      const userName =
+        savedName || translations[currentLang]["default_user_name"];
 
+      // Устанавливаем имя пользователя в хранилище
+      chrome.storage.sync.set({ userName: userName }, function () {
+        updateGreetings();
+      });
     });
+
+    const nameInput = document.getElementById("name-input");
+    const submitButton = document.getElementById("submit-btn");
+
+    submitButton.addEventListener("click", function () {
+      const newName = nameInput.value.trim();
+      if (newName.length > 0) {
+        let name = newName.substring(0, 15);
+        chrome.storage.sync.set({ userName: name }, function () {
+          updateGreetings();
+        });
+      }
+    });
+
+    nameInput.addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
+        const newName = nameInput.value.trim();
+        if (newName.length > 0) {
+          let name = newName.substring(0, 15);
+          chrome.storage.sync.set({ userName: name }, function () {
+            updateGreetings();
+          });
+          nameInput.value = "";
+        }
+      }
+    });
+
+    chrome.storage.sync.get("language", (result) => {
+      if (result.language) {
+        currentLang = result.language;
+      } else {
+        currentLang = "en";
+      }
+      loadTranslations(currentLang);
+    });
+
+    // Обработчик для выбора языка
+    document
+      .getElementById("languageSelector")
+      .addEventListener("change", (event) => {
+        changeLanguage(event.target.value); // Изменение языка
+      });
+  });
 }
