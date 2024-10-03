@@ -13,8 +13,6 @@ chrome.storage.local.get("currentSpeed", function (result) {
   } else {
     currentSpeed = result.currentSpeed;
   }
-
-  preloadImages();
 });
 
 let currentIndex = 0;
@@ -105,10 +103,12 @@ chrome.storage.local.get("selectedImages", function (result) {
 });
 
 chrome.storage.local.get("selectedImages", function (result) {
-  let selectedImages = result.selectedImages || [];
+  let selectedImages = Array.isArray(result.selectedImages)
+    ? result.selectedImages
+    : [];
 
   if (selectedImages.length < 3) {
-    selectedImages = images;
+    selectedImages = images.slice();
     chrome.storage.local.set({ selectedImages: selectedImages });
   }
 
@@ -116,24 +116,35 @@ chrome.storage.local.get("selectedImages", function (result) {
 });
 
 function preloadImages(selectedImages) {
+  if (!Array.isArray(selectedImages)) {
+    return;
+  }
+
   chrome.storage.local.get("carouselOpacity", function (result) {
     const savedOpacity = result.carouselOpacity;
-    selectedImages.forEach((image, index) => {
-      const img = new Image();
-      img.src = image;
-      if (index === 0) {
-        img.onload = () => {
-          img.classList.add("carousel-item", "reveal");
-          if (savedOpacity !== undefined) {
-            img.style.opacity = savedOpacity;
-          } else {
-            img.style.opacity = 0.7;
-            chrome.storage.local.set({ carouselOpacity: 0.7 });
-          }
-          bgContainer.appendChild(img);
-        };
-      }
-    });
+
+    if (selectedImages.length > 0) {
+      selectedImages.forEach((image, index) => {
+        const img = new Image();
+        img.src = image;
+
+        if (index === 0) {
+          img.onload = () => {
+            img.classList.add("carousel-item", "reveal");
+            img.style.opacity = savedOpacity !== undefined ? savedOpacity : 0.7;
+            if (savedOpacity === undefined) {
+              chrome.storage.local.set({ carouselOpacity: 0.7 });
+            }
+            bgContainer.appendChild(img);
+          };
+          img.onerror = () => {
+            console.error(`Error loading image: ${image}`);
+          };
+        }
+      });
+    } else {
+      console.error("selectedImages is empty: ", selectedImages);
+    }
   });
 }
 
@@ -232,10 +243,19 @@ if (typeof document !== "undefined") {
       }
     }
 
+    slider.addEventListener("input", function () {
+      const newOpacity = this.value;
+      sliderValue.textContent = newOpacity;
+
+      const currentImage = bgContainer.querySelector(".carousel-item");
+      if (currentImage) {
+        currentImage.style.opacity = newOpacity;
+      }
+
+      setOpacityAndSave(newOpacity);
+    });
+
     const editImagesModal = document.getElementById("editImagesModal");
-    const editImagesModalContent = document.querySelector(
-      ".modal-edit-images-content"
-    );
     const editImagesModalBtn = document.getElementById("edit-images-modal-btn");
     const closeBtn = document.querySelector(".close");
     const selectAllBtn = document.getElementById("selectAllBtn");
