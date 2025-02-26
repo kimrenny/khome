@@ -62,6 +62,7 @@
   "contact-message": "If you have any problems with the application, you find errors or have suggestions for improvement, as well as background images, write to me -  <a href='mailto:kimrenny.tech@gmail.com'>kimrenny.tech@gmail.com</a>",
   "localize-contact-message": "If you are fluent in your language and would like help adding your language to the application, please write to the email above indicating the translation of all (if possible) application elements.",
 
+  "whats-new-1012-1": "The ability to change the search engine has been disabled. All searches will now be conducted through the browser's default search engine, as required for Google Chrome applications.",
   "whats-new-1005-1": "Added the feature to change the list of background images.",
   "whats-new-1005-2": "Added translation into several popular languages ​​in the world.",
   "whats-new-1004-1": "Added new background images.",
@@ -76,7 +77,7 @@
   "whats-new-1000-4": "Added Search Bar.",
   "whats-new-1000-5": "Added Timer.",
 
-  "current-version": "Current Version 1.0.1.1",
+  "current-version": "Current Version 1.0.1.2",
 
   "timer-type": "Select Type:",
   "timer": "Timer",

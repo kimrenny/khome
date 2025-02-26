@@ -62,6 +62,7 @@
   "contact-message": "アプリの問題やエラー、提案があれば、こちらまで - <a href='mailto:kimrenny.tech@gmail.com'>kimrenny.tech@gmail.com</a>",
   "localize-contact-message": "あなたの言語でアプリを翻訳したい場合、上記メールに翻訳を送ってください。",
 
+  "whats-new-1012-1": "検索エンジンの変更機能は無効になりました。すべての検索は、Google Chrome アプリケーションの要件に従い、ブラウザのデフォルト検索エンジンを通じて実行されます。",
   "whats-new-1005-1": "背景画像リスト変更機能追加。",
   "whats-new-1005-2": "人気言語翻訳追加。",
   "whats-new-1004-1": "新しい背景画像追加。",
@@ -76,7 +77,7 @@
   "whats-new-1000-4": "検索バー追加。",
   "whats-new-1000-5": "タイマー追加。",
 
-  "current-version": "バージョン 1.0.1.1",
+  "current-version": "バージョン 1.0.1.2",
 
   "timer-type": "タイプ選択：",
   "timer": "タイマー",

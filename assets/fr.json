@@ -62,6 +62,7 @@
   "contact-message": "Si vous avez des problèmes avec l'application, trouvez des erreurs ou avez des suggestions, ainsi que des images de fond, écrivez-moi - <a href='mailto:kimrenny.tech@gmail.com'>kimrenny.tech@gmail.com</a>",
   "localize-contact-message": "Si vous souhaitez aider à ajouter votre langue, écrivez à l'email ci-dessus avec les traductions des éléments de l'application.",
 
+  "whats-new-1012-1": "La possibilité de changer le moteur de recherche a été désactivée. Toutes les recherches seront désormais effectuées via le moteur de recherche par défaut du navigateur, comme l'exige les applications Google Chrome.",
   "whats-new-1005-1": "Ajout de la liste des images de fond.",
   "whats-new-1005-2": "Ajout de plusieurs langues populaires.",
   "whats-new-1004-1": "Ajout de nouvelles images de fond.",
@@ -76,7 +77,7 @@
   "whats-new-1000-4": "Ajout de la barre de recherche.",
   "whats-new-1000-5": "Ajout du Timer.",
 
-  "current-version": "Version actuelle 1.0.1.1",
+  "current-version": "Version actuelle 1.0.1.2",
 
   "timer-type": "Sélectionner le type :",
   "timer": "Minuteur",

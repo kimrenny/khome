@@ -2459,7 +2459,7 @@ hr {
 #submitDate,
 #resetDate {
   position: relative;
-  width: 70px;
+  width: 60px;
   overflow: hidden;
   background-color: rgba(209, 209, 209, 0.2);
   color: rgba(255, 255, 255, 1);
