@@ -3220,44 +3220,25 @@ hr {
 .modal-edit-images-content {
   position: relative;
   background-color: rgba(0, 0, 0, 0.8);
-  margin: 10% auto;
+  margin: 0;
   padding: 20px;
+  padding-bottom: 60px;
   border-radius: 5px;
   width: 80%;
-  max-height: 80%;
-  overflow-y: auto;
-  overflow-x: hidden;
+  max-height: 90%;
   color: rgba(255, 255, 255, 0.6);
   font-family: "Epilogue", sans-serif;
-  scrollbar-width: none;
-}
-
-.modal-edit-images-content::-webkit-scrollbar {
-  width: 12px;
-}
-
-.modal-edit-images-content::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-}
-
-.modal-edit-images-content::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 10px;
-}
-
-.modal-edit-images-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 1);
+  box-sizing: border-box;
 }
 
 .image-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 10px;
-  max-height: 70vh;
+  max-height: calc(100%-50px);
   overflow-y: auto;
-  overflow-x: hidden;
   padding-right: 12px;
+  box-sizing: border-box;
 }
 
 .image-grid img {
@@ -3268,8 +3249,10 @@ hr {
   cursor: pointer;
   border: 2px solid transparent;
   scale: 0.95;
+  transition: all 0.2s ease;
 }
 
+.image-grid img:hover,
 .image-grid img.selected {
   border-color: rgb(255, 255, 255);
   scale: 1;

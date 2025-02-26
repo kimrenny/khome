@@ -66,6 +66,19 @@ const images = [
   "bg-jpg/photo_47.jpg",
   "bg-jpg/photo_48.jpg",
   "bg-jpg/photo_49.jpg",
+  "bg-jpg/photo_50.jpg",
+  "bg-jpg/photo_51.jpg",
+  "bg-jpg/photo_52.jpg",
+  "bg-jpg/photo_53.jpg",
+  "bg-jpg/photo_54.jpg",
+  "bg-jpg/photo_55.jpg",
+  "bg-jpg/photo_56.jpg",
+  "bg-jpg/photo_57.jpg",
+  "bg-jpg/photo_58.jpg",
+  "bg-jpg/photo_59.jpg",
+  "bg-jpg/photo_60.jpg",
+  "bg-jpg/photo_61.jpg",
+  "bg-jpg/photo_62.jpg",
 ];
 
 const imageGrid = document.getElementById("imageGrid");
