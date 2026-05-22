@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "KHome - KDrama New Tab",
-  "version": "1.0.1.2",
+  "version": "1.0.2",
   "description": "Sets a custom homepage for Chrome.",
   "permissions": ["geolocation", "storage", "search"],
   "host_permissions": ["https://api.weatherapi.com/*"],

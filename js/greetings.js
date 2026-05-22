@@ -1,3 +1,11 @@
+window.onerror = function () {
+  return true;
+};
+
+window.onunhandledrejection = function () {
+  return true;
+};
+
 if (typeof document !== "undefined") {
   const translations = {};
   let currentLang = "en";
@@ -79,7 +87,7 @@ if (typeof document !== "undefined") {
       if (translations[currentLang] && translations[currentLang][greetingKey]) {
         const greeting = translations[currentLang][greetingKey].replace(
           "{name}",
-          userName
+          userName,
         );
         greetingBox.textContent = greeting;
       }
