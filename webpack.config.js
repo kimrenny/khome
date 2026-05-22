@@ -7,13 +7,4 @@ module.exports = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
   },
-
-  module: {
-    rules: [
-      {
-        test: /\.(webp|png|jpg|jpeg)$/i,
-        type: "asset/resource",
-      },
-    ],
-  },
 };

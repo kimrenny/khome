@@ -885,6 +885,157 @@ html {
     bottom: 499px;
     right: 391px;
   }
+
+  .gpt-modal {
+    position: absolute;
+    right: 10px;
+    bottom: 6%;
+    width: 30%;
+    height: 75%;
+  }
+
+  .gpt-modal:before {
+    position: absolute;
+    bottom: -1.5%;
+    right: 1.5%;
+    transform: translateX(-50%) rotate(180deg);
+  }
+
+  #user-input {
+    position: absolute;
+    left: 50%;
+    bottom: 1%;
+    transform: translateX(-50%);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    width: 65%;
+    padding-right: 55px;
+  }
+
+  #send-button {
+    position: absolute;
+    bottom: 5.75%;
+    right: 4%;
+    width: 30px;
+    height: 30px;
+  }
+
+  #chatHistory {
+    display: flex;
+    flex-direction: column-reverse;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10px;
+    width: 95%;
+    height: 90%;
+    max-height: 90%;
+    overflow-y: scroll;
+  }
+
+  #chatHistory::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  #chatHistory:hover::-webkit-scrollbar {
+    background-color: transparent;
+  }
+
+  #chatHistory::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  #chatHistory:hover::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+  }
+
+  .message-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    animation: slideUpMessage 1s ease forwards;
+  }
+
+  .message {
+    width: auto;
+    max-width: 70%;
+    word-wrap: break-word;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .message::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  .message:hover::-webkit-scrollbar {
+    background-color: transparent;
+  }
+
+  .message::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  .message:hover::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+  }
+
+  .message.user {
+    margin-left: auto;
+    align-self: flex-end;
+    background-color: rgba(138, 193, 214, 0.7);
+  }
+
+  .message.server {
+    margin-right: auto;
+    align-self: flex-start;
+    background-color: rgba(92, 1, 145, 0.7);
+  }
+
+  .message.error {
+    margin-right: auto;
+    align-self: flex-start;
+    background-color: rgba(255, 0, 0, 0.7);
+  }
+
+  .message.warning {
+    margin-right: auto;
+    align-self: flex-start;
+    background-color: rgba(0, 247, 255, 0.7);
+  }
+
+  #timeout-error-container {
+    position: absolute;
+    top: 0;
+    width: 95%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  #timeout-error {
+    position: absolute;
+    top: 5px;
+    background-color: rgba(255, 0, 0, 0.5);
+    text-align: center;
+    width: 220px;
+    height: auto;
+    z-index: 17;
+    animation: slideDown 0.5s ease forwards;
+  }
+
+  #timeout-error.hidden {
+    animation: fadeOutUp 0.3s ease forwards;
+  }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1400px) {
@@ -1155,6 +1306,157 @@ html {
     bottom: 398px;
     right: 269px;
   }
+
+  .gpt-modal {
+    position: absolute;
+    right: 10px;
+    bottom: 9%;
+    width: 25%;
+    height: 75%;
+  }
+
+  .gpt-modal:before {
+    position: absolute;
+    bottom: -2.5%;
+    right: 2%;
+    transform: translateX(-50%) rotate(180deg);
+  }
+
+  #user-input {
+    position: absolute;
+    left: 50%;
+    bottom: 1%;
+    transform: translateX(-50%);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    width: 75%;
+    padding-right: 55px;
+  }
+
+  #send-button {
+    position: absolute;
+    bottom: 4%;
+    right: 4%;
+    width: 40px;
+    height: 30px;
+  }
+
+  #chatHistory {
+    display: flex;
+    flex-direction: column-reverse;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10px;
+    width: 95%;
+    height: 85%;
+    max-height: 90%;
+    overflow-y: scroll;
+  }
+
+  #chatHistory::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  #chatHistory:hover::-webkit-scrollbar {
+    background-color: transparent;
+  }
+
+  #chatHistory::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  #chatHistory:hover::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+  }
+
+  .message-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    animation: slideUpMessage 1s ease forwards;
+  }
+
+  .message {
+    width: auto;
+    max-width: 70%;
+    word-wrap: break-word;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .message::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  .message:hover::-webkit-scrollbar {
+    background-color: transparent;
+  }
+
+  .message::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  .message:hover::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+  }
+
+  .message.user {
+    margin-left: auto;
+    align-self: flex-end;
+    background-color: rgba(138, 193, 214, 0.7);
+  }
+
+  .message.server {
+    margin-right: auto;
+    align-self: flex-start;
+    background-color: rgba(92, 1, 145, 0.7);
+  }
+
+  .message.error {
+    margin-right: auto;
+    align-self: flex-start;
+    background-color: rgba(255, 0, 0, 0.7);
+  }
+
+  .message.warning {
+    margin-right: auto;
+    align-self: flex-start;
+    background-color: rgba(0, 247, 255, 0.7);
+  }
+
+  #timeout-error-container {
+    position: absolute;
+    top: 0;
+    width: 95%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  #timeout-error {
+    position: absolute;
+    top: 5px;
+    background-color: rgba(255, 0, 0, 0.5);
+    text-align: center;
+    width: 220px;
+    height: auto;
+    z-index: 17;
+    animation: slideDown 0.5s ease forwards;
+  }
+
+  #timeout-error.hidden {
+    animation: fadeOutUp 0.3s ease forwards;
+  }
 }
 
 @media screen and (min-width: 1401px) {
@@ -1423,6 +1725,157 @@ html {
     position: absolute;
     bottom: 499px;
     right: 350px;
+  }
+
+  .gpt-modal {
+    position: absolute;
+    right: 10px;
+    bottom: 6%;
+    width: 25%;
+    height: 80%;
+  }
+
+  .gpt-modal:before {
+    position: absolute;
+    bottom: -1.5%;
+    right: 1.5%;
+    transform: translateX(-50%) rotate(180deg);
+  }
+
+  #user-input {
+    position: absolute;
+    left: 50%;
+    bottom: 1%;
+    transform: translateX(-50%);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    width: calc(95% - 55px);
+    padding-right: 55px;
+  }
+
+  #send-button {
+    position: absolute;
+    bottom: 3%;
+    right: 3%;
+    width: 40px;
+    height: 30px;
+  }
+
+  #chatHistory {
+    display: flex;
+    flex-direction: column-reverse;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10px;
+    width: 95%;
+    height: 90%;
+    max-height: 90%;
+    overflow-y: scroll;
+  }
+
+  #chatHistory::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  #chatHistory:hover::-webkit-scrollbar {
+    background-color: transparent;
+  }
+
+  #chatHistory::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  #chatHistory:hover::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+  }
+
+  .message-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    animation: slideUpMessage 1s ease forwards;
+  }
+
+  .message {
+    width: auto;
+    max-width: 70%;
+    word-wrap: break-word;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .message::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  .message:hover::-webkit-scrollbar {
+    background-color: transparent;
+  }
+
+  .message::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  .message:hover::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+  }
+
+  .message.user {
+    margin-left: auto;
+    align-self: flex-end;
+    background-color: rgba(138, 193, 214, 0.7);
+  }
+
+  .message.server {
+    margin-right: auto;
+    align-self: flex-start;
+    background-color: rgba(92, 1, 145, 0.7);
+  }
+
+  .message.error {
+    margin-right: auto;
+    align-self: flex-start;
+    background-color: rgba(255, 0, 0, 0.7);
+  }
+
+  .message.warning {
+    margin-right: auto;
+    align-self: flex-start;
+    background-color: rgba(0, 247, 255, 0.7);
+  }
+
+  #timeout-error-container {
+    position: absolute;
+    top: 0;
+    width: 95%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  #timeout-error {
+    position: absolute;
+    top: 5px;
+    background-color: rgba(255, 0, 0, 0.5);
+    text-align: center;
+    width: 220px;
+    height: auto;
+    z-index: 17;
+    animation: slideDown 0.5s ease forwards;
+  }
+
+  #timeout-error.hidden {
+    animation: fadeOutUp 0.3s ease forwards;
   }
 }
 
@@ -1970,9 +2423,7 @@ hr {
   width: 300%;
   height: 300%;
   background-color: rgba(0, 0, 0, 0.4);
-  transition:
-    transform 0.2s ease,
-    background-color 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease;
   border-radius: 25%;
   transform: translate(-50%, -50%);
 }
@@ -2029,9 +2480,7 @@ hr {
   width: 300%;
   height: 300%;
   background-color: rgba(0, 0, 0, 0.3);
-  transition:
-    transform 0.2s ease,
-    background-color 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease;
   border-radius: 25%;
   transform: translate(-50%, -50%);
 }
@@ -2044,6 +2493,7 @@ hr {
 #d-day-section,
 #background-section,
 #alarm-section,
+#gpt-section,
 #help-section,
 #whats-new-section,
 #about-section {
@@ -2191,9 +2641,7 @@ hr {
   width: 300%;
   height: 300%;
   background-color: rgba(0, 0, 0, 0.4);
-  transition:
-    transform 0.2s ease,
-    background-color 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease;
   border-radius: 25%;
   transform: translate(-50%, -50%);
 }
@@ -2246,6 +2694,10 @@ hr {
   background-color: transparent;
 }
 
+.gpt-radio {
+  cursor: pointer;
+}
+
 .radio-container {
   position: absolute;
   right: 0;
@@ -2277,7 +2729,7 @@ hr {
 }
 
 .about-image {
-  width: 128px;
+  width: 200px;
   height: auto;
   display: block;
   margin-bottom: 10px;
@@ -2300,9 +2752,33 @@ hr {
 }
 
 .about-bottom {
-  margin-top: auto;
+  margin-top: 80px;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.6);
+}
+
+.unavailable-error {
+  position: absolute;
+  top: 100%;
+  font-size: 12px !important;
+  color: red !important;
+}
+
+.gpt-button {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  width: 26px;
+  height: 26px;
+  background-image: url("icons/chatgpt.png");
+  background-size: cover;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.3s;
+}
+
+.gpt-button.active {
+  background-image: url("icons/chatgpt-gray.png");
 }
 
 .rotate-right-btn {
@@ -2753,36 +3229,16 @@ hr {
   color: rgba(255, 255, 255, 0.6);
   font-family: "Epilogue", sans-serif;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
 }
 
 .image-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 10px;
-  flex: 1;
+  max-height: calc(100%-50px);
   overflow-y: auto;
-  padding-right: 8px;
+  padding-right: 12px;
   box-sizing: border-box;
-}
-
-.image-grid::-webkit-scrollbar {
-  width: 8px;
-}
-
-.image-grid::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.image-grid::-webkit-scrollbar-thumb {
-  background: rgba(150, 150, 150, 0.35);
-  border-radius: 10px;
-}
-
-.image-grid::-webkit-scrollbar-thumb:hover {
-  background: rgba(150, 150, 150, 0.55);
 }
 
 .image-grid img {
@@ -2803,19 +3259,9 @@ hr {
 }
 
 .close {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-
+  float: right;
   font-size: 24px;
   cursor: pointer;
-
-  color: rgba(255, 255, 255, 0.7);
-  transition: color 0.2s ease;
-}
-
-.close:hover {
-  color: rgba(255, 255, 255, 1);
 }
 
 #selectAllBtn {
@@ -2831,11 +3277,6 @@ hr {
   margin-left: 10px;
   font-size: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-#selectAllBtn:hover {
-  transform: scale(1.03);
 }
 
 #selectAllBtn:before {
@@ -2846,9 +3287,7 @@ hr {
   width: 300%;
   height: 300%;
   background-color: rgba(0, 0, 0, 0.4);
-  transition:
-    transform 0.2s ease,
-    background-color 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease;
   border-radius: 25%;
   transform: translate(-50%, -50%);
 }
