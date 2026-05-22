@@ -18,7 +18,7 @@ if (typeof document !== "undefined") {
     }
 
     function fetchWeatherDataByCoordinates(latitude, longitude) {
-      const apiKey = "bb8950f4bfd1404c89c112241242302";
+      const apiKey = ""; // change to your api key
       const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${latitude},${longitude}&aqi=no`;
 
       fetch(apiUrl)
