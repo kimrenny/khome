@@ -4,6 +4,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "flatpickr": "^4.6.13"
+    "flatpickr": "^4.6.13",
+    "sharp": "^0.34.5"
   }
 }
