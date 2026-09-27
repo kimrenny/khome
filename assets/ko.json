@@ -64,6 +64,9 @@
 
   "whats-new-102-1": "새로운 배경 이미지가 추가되었습니다.",
   "whats-new-102-2": "이미지 미리보기 표시가 최적화되었습니다.",
+  "whats-new-110-1": "나만의 배경 이미지를 추가할 수 있습니다.",
+  "whats-new-110-2": "사용자 지정 배경 이미지와 선택 항목은 확장 프로그램 업데이트 후에도 유지됩니다.",
+  "whats-new-110-3": "이미지 편집기에서 모두 선택 및 모두 선택 해제를 사용할 수 있습니다.",
   "whats-new-1012-1": "검색 엔진 변경 기능이 비활성화되었습니다. 모든 검색은 이제 브라우저의 기본 검색 엔진을 통해 수행됩니다. 이는 Google Chrome 애플리케이션의 요구 사항에 해당합니다.",
   "whats-new-1005-1": "배경 이미지 목록 변경 기능이 추가되었습니다.",
   "whats-new-1005-2": "여러 인기 언어로 번역이 추가되었습니다.",
@@ -79,7 +82,7 @@
   "whats-new-1000-4": "검색 바가 추가되었습니다.",
   "whats-new-1000-5": "타이머가 추가되었습니다.",
 
-  "current-version": "현재 버전 1.0.2",
+  "current-version": "현재 버전 1.1.0",
 
   "timer-type": "타입 선택:",
   "timer": "타이머",
@@ -91,6 +94,14 @@
   "new-alarm-name": "알람 이름*",
   "select-images": "이미지 선택",
   "select-all": "모두 선택",
+  "deselect-all": "모두 선택 해제",
+  "add-custom-image": "사용자 이미지 추가",
+  "remove-custom-image": "사용자 지정 이미지 삭제",
+  "custom-background-unsupported": "이 파일 형식은 지원되지 않습니다.",
+  "custom-background-invalid": "이 이미지를 읽을 수 없습니다.",
+  "custom-background-copy-failed": "이미지를 저장할 수 없습니다.",
+  "custom-background-source-unavailable": "선택한 파일을 더 이상 사용할 수 없습니다.",
+  "custom-background-storage-error": "사용자 이미지를 불러올 수 없습니다.",
 
   "saved": "저장됨",
   "Limit-custom-links": "사용자 링크 생성 한도를 초과했습니다!"

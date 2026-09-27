@@ -12,15 +12,31 @@ if (typeof document !== "undefined") {
   }
 
   function updateTranslations() {
-    document.querySelectorAll("[data-i18n]").forEach((element) => {
-      const key = element.getAttribute("data-i18n");
+    document
+      .querySelectorAll("[data-i18n], [data-i18n-aria-label]")
+      .forEach((element) => {
+        const ariaLabelKey = element.getAttribute("data-i18n-aria-label");
+        if (ariaLabelKey) {
+          element.setAttribute(
+            "aria-label",
+            translations[currentLang][ariaLabelKey],
+          );
+        }
 
-      if (element.tagName === "INPUT" && element.hasAttribute("placeholder")) {
-        element.placeholder = translations[currentLang][key];
-      } else {
-        element.innerHTML = translations[currentLang][key];
-      }
-    });
+        const key = element.getAttribute("data-i18n");
+        if (!key) {
+          return;
+        }
+
+        if (
+          element.tagName === "INPUT" &&
+          element.hasAttribute("placeholder")
+        ) {
+          element.placeholder = translations[currentLang][key];
+        } else {
+          element.innerHTML = translations[currentLang][key];
+        }
+      });
   }
 
   function changeLanguage(lang) {

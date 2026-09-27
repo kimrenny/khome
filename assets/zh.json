@@ -64,6 +64,9 @@
 
   "whats-new-102-1": "新增了背景图片。",
   "whats-new-102-2": "优化了图片预览的显示。",
+  "whats-new-110-1": "添加您自己的自定义背景图片。",
+  "whats-new-110-2": "自定义背景图片和已选图片会在扩展程序更新后保留。",
+  "whats-new-110-3": "图片编辑器现已支持“全选”和“取消全选”。",
   "whats-new-1012-1": "更改搜索引擎的功能已被禁用。所有搜索将通过浏览器的默认搜索引擎进行，这是 Google Chrome 应用程序的要求。",
   "whats-new-1005-1": "新增更改背景图片列表的功能。",
   "whats-new-1005-2": "新增多种流行语言的翻译。",
@@ -79,7 +82,7 @@
   "whats-new-1000-4": "新增搜索栏。",
   "whats-new-1000-5": "新增定时器。",
 
-  "current-version": "当前版本 1.0.2",
+  "current-version": "当前版本 1.1.0",
 
   "timer-type": "选择类型:",
   "timer": "定时器",
@@ -91,6 +94,14 @@
   "new-alarm-name": "闹钟名称*",
   "select-images": "选择图片",
   "select-all": "全选",
+  "deselect-all": "取消全选",
+  "add-custom-image": "添加自定义图片",
+  "remove-custom-image": "删除自定义图片",
+  "custom-background-invalid": "无法读取此图片。",
+  "custom-background-unsupported": "不支持此文件类型。",
+  "custom-background-copy-failed": "无法保存该图片。",
+  "custom-background-source-unavailable": "所选文件已不可用。",
+  "custom-background-storage-error": "无法加载自定义图片。",
 
   "saved": "已保存",
   "Limit-custom-links": "超过自定义链接创建的限制！"

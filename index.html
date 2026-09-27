@@ -264,7 +264,13 @@
                         </div>
                     </div>
                     <div id="whats-new-section" class="settings-content">
-                        <div class="setting-header">1.0.2</div>
+                        <div class="setting-header">1.1.0</div>
+                        <div class="whatsnew">
+                            <span data-i18n="whats-new-110-1">Add your own custom background images.</span>
+                            <span data-i18n="whats-new-110-2">Custom backgrounds and selections are preserved across extension updates.</span>
+                            <span data-i18n="whats-new-110-3">The image editor now includes Select All and Deselect All.</span>
+                        </div>
+                        <div class="other-setting-header">1.0.2</div>
                         <div class="whatsnew">
                             <span data-i18n="whats-new-102-1">Added new background images.</span>
                             <span data-i18n="whats-new-102-2">The display of image previews has been optimized.</span>
@@ -313,7 +319,7 @@
                     <div class="about">
                         <img class="about-image" src="images/favicon.png" alt="">
                         <span class="font-bold">KHome - KDrama New Tab</span>
-                        <span data-i18n="current-version">Current Version 1.0.2</span>
+                        <span data-i18n="current-version">Current Version 1.1.0</span>
                         <span>
                         <a href="https://chromewebstore.google.com/detail/lembmipemeoknhfmibcladjbediaefjk" target="_blank">Rate this app</a>
                         <span>if you like it.</span>
@@ -417,7 +423,15 @@
             <span class="close">&times;</span>
             <h2 data-i18n="select-images">Select Images</h2>
             <div class="image-grid" id="imageGrid"></div>
-            <button data-i18n="select-all" id="selectAllBtn">Select All</button>
+            <p id="custom-background-error" class="custom-background-error display-none"></p>
+            <div class="edit-images-actions">
+                <button data-i18n="add-custom-image" type="button" id="addCustomImageBtn">Add custom image</button>
+                <button type="button" id="selectAllBtn">
+                    <span data-i18n="select-all">Select All</span>
+                    <span data-i18n="deselect-all" hidden>Deselect All</span>
+                </button>
+            </div>
+            <input type="file" id="custom-background-input" accept="image/jpeg,image/png,image/webp,image/gif,.jpg,.jpeg,.png,.webp,.gif" multiple hidden>
         </div>
     </div>
     <script src="dist/bundle.js"></script>

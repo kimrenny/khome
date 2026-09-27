@@ -1,3 +1,8 @@
+const {
+  formatWeatherFailure,
+  parseWeatherResponse,
+} = require("./weatherResponse");
+
 if (typeof document !== "undefined") {
   document.addEventListener("DOMContentLoaded", function () {
     function fetchWeatherByLocation() {
@@ -18,16 +23,15 @@ if (typeof document !== "undefined") {
     }
 
     function fetchWeatherDataByCoordinates(latitude, longitude) {
-      const apiKey = ""; // change to your api key
-      const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${latitude},${longitude}&aqi=no`;
+      const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${latitude},${longitude}&aqi=no`;
 
       fetch(apiUrl)
-        .then((response) => response.json())
+        .then(parseWeatherResponse)
         .then((data) => {
           updateWeather(data);
         })
         .catch((error) => {
-          console.error("Error fetching weather data:", error);
+          console.error(formatWeatherFailure(error));
         });
     }
 
@@ -35,11 +39,6 @@ if (typeof document !== "undefined") {
       const temperatureElement = document.getElementById("weatherTemperature");
       const locationElement = document.getElementById("weatherLocation");
       const iconElement = document.getElementById("weatherIcon");
-
-      if (data.error) {
-        console.error("Error fetching weather data:", data.error);
-        return;
-      }
 
       temperatureElement.textContent = data.current.temp_c + "°C";
       locationElement.textContent = data.location.name;

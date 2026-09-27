@@ -64,6 +64,9 @@
 
   "whats-new-102-1": "新しい背景画像を追加しました。",
   "whats-new-102-2": "画像のプレビュー表示を最適化しました。",
+  "whats-new-110-1": "自分のカスタム背景画像を追加できます。",
+  "whats-new-110-2": "カスタム背景画像と選択内容は、拡張機能の更新後も保持されます。",
+  "whats-new-110-3": "画像エディターで「すべて選択」と「すべて選択解除」ができるようになりました。",
   "whats-new-1012-1": "検索エンジンの変更機能は無効になりました。すべての検索は、Google Chrome アプリケーションの要件に従い、ブラウザのデフォルト検索エンジンを通じて実行されます。",
   "whats-new-1005-1": "背景画像リスト変更機能追加。",
   "whats-new-1005-2": "人気言語翻訳追加。",
@@ -79,7 +82,7 @@
   "whats-new-1000-4": "検索バー追加。",
   "whats-new-1000-5": "タイマー追加。",
 
-  "current-version": "バージョン 1.0.2",
+  "current-version": "バージョン 1.1.0",
 
   "timer-type": "タイプ選択：",
   "timer": "タイマー",
@@ -91,6 +94,14 @@
   "new-alarm-name": "アラーム名*",
   "select-images": "画像選択",
   "select-all": "すべて選択",
+  "deselect-all": "すべて選択解除",
+  "add-custom-image": "カスタム画像を追加",
+  "remove-custom-image": "カスタム画像を削除",
+  "custom-background-unsupported": "このファイル形式はサポートされていません。",
+  "custom-background-invalid": "この画像を読み込めませんでした。",
+  "custom-background-copy-failed": "画像を保存できませんでした。",
+  "custom-background-source-unavailable": "選択したファイルは利用できません。",
+  "custom-background-storage-error": "カスタム画像を読み込めませんでした。",
 
   "saved": "保存されました",
   "Limit-custom-links": "カスタムリンク作成制限超過！"

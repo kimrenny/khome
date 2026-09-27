@@ -1,40 +1,131 @@
-const bgContainer = document.getElementById("bg");
+const {
+  getBuiltinBackgroundIds,
+  getBuiltinThumbPath,
+  isCustomBackgroundId,
+  mergeBackgroundCatalog,
+  sanitizeSelectedImages,
+  normalizePersistedSelectedImages,
+  areAllBackgroundsSelected,
+  toggleAllBackgroundSelections,
+} = require("./backgroundCatalog");
+const customBackgroundStore = require("./customBackgroundStore");
+const { importCustomImages } = require("./customBackgroundService");
+const {
+  DEFAULT_SLIDESHOW_INTERVAL,
+  normalizeSlideshowInterval,
+  normalizeSlideshowSettings,
+  shouldRunSlideshow,
+} = require("./slideshowSettings");
 
-const IMAGE_COUNT = 85;
+const bgContainer = document.getElementById("bg");
+const imageGrid = document.getElementById("imageGrid");
+
+const images = getBuiltinBackgroundIds();
 
 let isTransitioning = false;
 
-let currentSpeed;
+let currentSpeed = DEFAULT_SLIDESHOW_INTERVAL;
 let savedOpacity = 0.7;
 let slideshowIntervalId;
+let activeTransition;
+let slideshowToggleIsActive = true;
+let slideshowSettingsReady = false;
 
 let selectedImages = [];
+let customRecords = [];
+let availableBackgroundIds = [...images];
+let customCatalogReady = false;
 
-const images = Array.from(
-  { length: IMAGE_COUNT },
-  (_, i) => `bg-webp/photo_${i + 1}.webp`,
-);
+const customObjectUrls = new Map();
 
-const thumbs = Array.from(
-  { length: IMAGE_COUNT },
-  (_, i) => `thumbs/photo_${i + 1}.webp`,
-);
+function getCustomIds() {
+  return customRecords.map((record) => record.id);
+}
+
+function rebuildAvailableBackgroundIds() {
+  availableBackgroundIds = mergeBackgroundCatalog(images, getCustomIds());
+  return availableBackgroundIds;
+}
+
+function getCustomObjectUrl(record) {
+  if (!record || !record.id || !record.blob) {
+    return "";
+  }
+
+  if (customObjectUrls.has(record.id)) {
+    return customObjectUrls.get(record.id);
+  }
+
+  const url = URL.createObjectURL(record.blob);
+  customObjectUrls.set(record.id, url);
+  return url;
+}
+
+function revokeCustomObjectUrl(id) {
+  const url = customObjectUrls.get(id);
+  if (url) {
+    URL.revokeObjectURL(url);
+    customObjectUrls.delete(id);
+  }
+}
+
+function getBackgroundSrc(id) {
+  if (!isCustomBackgroundId(id)) {
+    return id;
+  }
+
+  const record = customRecords.find((item) => item.id === id);
+  return record ? getCustomObjectUrl(record) : "";
+}
+
+function persistSelectedImages() {
+  chrome.storage.local.set({
+    selectedImages,
+    allImages: availableBackgroundIds,
+  });
+  updateSlideshowLifecycle();
+}
+
+function updateSelectAllButton() {
+  const button = document.getElementById("selectAllBtn");
+  if (!button) {
+    return;
+  }
+
+  const allSelected = areAllBackgroundsSelected(
+    selectedImages,
+    availableBackgroundIds,
+  );
+  const selectAllLabel = button.querySelector('[data-i18n="select-all"]');
+  const deselectAllLabel = button.querySelector('[data-i18n="deselect-all"]');
+
+  if (selectAllLabel && deselectAllLabel) {
+    selectAllLabel.hidden = allSelected;
+    deselectAllLabel.hidden = !allSelected;
+  }
+}
 
 function syncSelectedImages(callback) {
-  chrome.storage.local.get(["selectedImages", "allImages"], function (result) {
-    const allImages = Array.isArray(result.allImages)
-      ? result.allImages
-      : images;
+  chrome.storage.local.get(["selectedImages"], function (result) {
+    const persisted = normalizePersistedSelectedImages(result.selectedImages);
+    const sanitized = sanitizeSelectedImages(
+      persisted,
+      availableBackgroundIds,
+      {
+        keepUnknownCustomIds: !customCatalogReady,
+      },
+    );
+    selectedImages = sanitized;
+    updateSelectAllButton();
 
-    if (!result.allImages) {
-      chrome.storage.local.set({ allImages: images });
+    if (customCatalogReady && sanitized.length !== persisted.length) {
+      persistSelectedImages();
+    } else if (customCatalogReady) {
+      chrome.storage.local.set({ allImages: availableBackgroundIds });
     }
 
-    selectedImages = Array.isArray(result.selectedImages)
-      ? result.selectedImages
-      : [];
-
-    if (callback) callback(selectedImages, allImages);
+    updateSlideshowLifecycle();
+    if (callback) callback(selectedImages, availableBackgroundIds);
   });
 }
 
@@ -51,60 +142,183 @@ function syncOpacity(callback) {
   });
 }
 
-chrome.storage.local.get("currentSpeed", function (result) {
-  if (!result.currentSpeed) {
-    currentSpeed = 10;
-    chrome.storage.local.set({ currentSpeed });
-  } else {
-    currentSpeed = result.currentSpeed;
-  }
-});
-
 let currentIndex = 0;
 
 function isValidImage(img) {
-  return images.includes(img);
+  return availableBackgroundIds.includes(img);
 }
 
 function getSafeRandomImage(list) {
-  const valid = list.filter(isValidImage);
+  const valid = (Array.isArray(list) ? list : []).filter(isValidImage);
   if (!valid.length) return images[Math.floor(Math.random() * images.length)];
   return valid[Math.floor(Math.random() * valid.length)];
 }
 
-const imageGrid = document.getElementById("imageGrid");
+function appendGridItem(id, thumbSrc, isCustom) {
+  const wrap = document.createElement("div");
+  wrap.className = isCustom ? "grid-image-wrap custom" : "grid-image-wrap";
+  wrap.dataset.backgroundId = id;
 
-syncSelectedImages(function () {
-  thumbs.forEach((image, index) => {
-    const imgElement = document.createElement("img");
-    imgElement.src = image;
-    imgElement.classList.add("grid-image");
+  const imgElement = document.createElement("img");
+  imgElement.src = thumbSrc;
+  imgElement.classList.add("grid-image");
+  imgElement.alt = "";
 
-    const realImage = images[index];
+  if (selectedImages.includes(id)) {
+    imgElement.classList.add("selected");
+  }
 
-    if (selectedImages.includes(realImage)) {
+  imgElement.addEventListener("click", function () {
+    const isSelected = imgElement.classList.contains("selected");
+
+    if (isSelected) {
+      if (selectedImages.length > 3) {
+        imgElement.classList.remove("selected");
+        selectedImages = selectedImages.filter((img) => img !== id);
+      }
+    } else {
       imgElement.classList.add("selected");
+      selectedImages.push(id);
     }
 
-    imgElement.addEventListener("click", function () {
-      const isSelected = imgElement.classList.contains("selected");
-
-      if (isSelected) {
-        if (selectedImages.length > 3) {
-          imgElement.classList.remove("selected");
-          selectedImages = selectedImages.filter((img) => img !== realImage);
-        }
-      } else {
-        imgElement.classList.add("selected");
-        selectedImages.push(realImage);
-      }
-
-      chrome.storage.local.set({ selectedImages });
-    });
-
-    imageGrid.appendChild(imgElement);
+    persistSelectedImages();
+    updateSelectAllButton();
   });
-});
+
+  wrap.appendChild(imgElement);
+
+  if (isCustom) {
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.className = "remove-custom-bg";
+    removeBtn.setAttribute("data-i18n-aria-label", "remove-custom-image");
+    removeBtn.setAttribute("aria-label", "Remove");
+    removeBtn.textContent = "×";
+    removeBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      removeCustomBackground(id);
+    });
+    wrap.appendChild(removeBtn);
+  }
+
+  imageGrid.appendChild(wrap);
+}
+
+function renderBackgroundGrid() {
+  if (!imageGrid) {
+    return;
+  }
+
+  imageGrid.innerHTML = "";
+
+  images.forEach((id) => {
+    appendGridItem(id, getBuiltinThumbPath(id), false);
+  });
+
+  customRecords.forEach((record) => {
+    appendGridItem(record.id, getCustomObjectUrl(record), true);
+  });
+
+  updateSelectAllButton();
+}
+
+function showCustomBackgroundError(reason) {
+  const errorEl = document.getElementById("custom-background-error");
+  if (!errorEl) {
+    return;
+  }
+
+  const keys = {
+    unsupported: "custom-background-unsupported",
+    invalid: "custom-background-invalid",
+    "copy-failed": "custom-background-copy-failed",
+    "source-unavailable": "custom-background-source-unavailable",
+    "storage-error": "custom-background-storage-error",
+  };
+
+  const fallbacks = {
+    "custom-background-unsupported": "This file type is not supported.",
+    "custom-background-invalid": "This image could not be read.",
+    "custom-background-copy-failed": "The image could not be saved.",
+    "custom-background-source-unavailable":
+      "The selected file is no longer available.",
+    "custom-background-storage-error": "Custom images could not be loaded.",
+  };
+
+  const key = keys[reason] || "custom-background-storage-error";
+  errorEl.setAttribute("data-i18n", key);
+  errorEl.textContent = fallbacks[key];
+  errorEl.classList.remove("display-none");
+}
+
+function clearCustomBackgroundError() {
+  const errorEl = document.getElementById("custom-background-error");
+  if (!errorEl) {
+    return;
+  }
+  errorEl.textContent = "";
+  errorEl.classList.add("display-none");
+}
+
+async function decodeCustomImage(blob) {
+  if (typeof createImageBitmap === "function") {
+    const bitmap = await createImageBitmap(blob);
+    if (bitmap && typeof bitmap.close === "function") {
+      bitmap.close();
+    }
+    return true;
+  }
+
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(blob);
+    const image = new Image();
+    image.onload = function () {
+      URL.revokeObjectURL(url);
+      resolve(true);
+    };
+    image.onerror = function () {
+      URL.revokeObjectURL(url);
+      reject(new Error("invalid"));
+    };
+    image.src = url;
+  });
+}
+
+async function loadCustomBackgrounds() {
+  let loaded = false;
+
+  try {
+    customRecords = await customBackgroundStore.listCustomBackgrounds();
+    loaded = true;
+  } catch (error) {
+    customRecords = [];
+    showCustomBackgroundError("storage-error");
+  }
+
+  customRecords.forEach((record) => getCustomObjectUrl(record));
+  rebuildAvailableBackgroundIds();
+  customCatalogReady = loaded;
+}
+
+async function removeCustomBackground(id) {
+  try {
+    await customBackgroundStore.deleteCustomBackground(id);
+  } catch (error) {
+    showCustomBackgroundError("storage-error");
+    return;
+  }
+
+  customRecords = customRecords.filter((record) => record.id !== id);
+  revokeCustomObjectUrl(id);
+  rebuildAvailableBackgroundIds();
+  selectedImages = sanitizeSelectedImages(
+    selectedImages,
+    availableBackgroundIds,
+  );
+  persistSelectedImages();
+  renderBackgroundGrid();
+}
 
 let firstLoadDone = false;
 
@@ -113,9 +327,14 @@ function loadFirstImage(ids, opacity) {
 
   const source = safeIds.length ? safeIds : images;
   const first = source[0];
+  const src = getBackgroundSrc(first);
+  if (!src) {
+    firstLoadDone = true;
+    return;
+  }
 
   const img = new Image();
-  img.src = first;
+  img.src = src;
 
   img.onload = () => {
     img.classList.add("carousel-item", "reveal");
@@ -126,8 +345,13 @@ function loadFirstImage(ids, opacity) {
 
   img.onerror = () => {
     const fallback = getSafeRandomImage(source);
+    const fallbackSrc = getBackgroundSrc(fallback);
+    if (!fallbackSrc) {
+      firstLoadDone = true;
+      return;
+    }
     const retry = new Image();
-    retry.src = fallback;
+    retry.src = fallbackSrc;
 
     retry.onload = () => {
       retry.classList.add("carousel-item", "reveal");
@@ -138,19 +362,15 @@ function loadFirstImage(ids, opacity) {
   };
 }
 
-syncSelectedImages(function (imgs) {
-  syncOpacity(function (opacity) {
-    loadFirstImage(imgs, opacity);
-  });
-});
+function preloadImages(selectedList, opacity) {
+  if (!Array.isArray(selectedList)) return;
 
-function preloadImages(selectedImages, opacity) {
-  if (!Array.isArray(selectedImages)) return;
-
-  const firstImage = getSafeRandomImage(selectedImages);
+  const firstImage = getSafeRandomImage(selectedList);
+  const src = getBackgroundSrc(firstImage);
+  if (!src) return;
 
   const img = new Image();
-  img.src = firstImage;
+  img.src = src;
 
   img.onload = () => {
     img.classList.add("carousel-item", "reveal");
@@ -161,6 +381,72 @@ function preloadImages(selectedImages, opacity) {
 
 function getRandomIndex(max) {
   return Math.floor(Math.random() * max);
+}
+
+function startSlideshow() {
+  if (
+    !slideshowSettingsReady ||
+    !shouldRunSlideshow(
+      slideshowToggleIsActive,
+      new Set(selectedImages).size,
+    ) ||
+    slideshowIntervalId !== undefined
+  ) {
+    return;
+  }
+
+  slideshowIntervalId = setInterval(revealNextImage, currentSpeed * 1000);
+}
+
+function stopSlideshow() {
+  if (slideshowIntervalId !== undefined) {
+    clearInterval(slideshowIntervalId);
+    slideshowIntervalId = undefined;
+  }
+
+  if (activeTransition) {
+    activeTransition.timeouts.forEach(clearTimeout);
+    activeTransition.nextImage.remove();
+    activeTransition.currentImage.classList.add("reveal");
+    activeTransition.currentImage.style.opacity = String(savedOpacity);
+    activeTransition = undefined;
+    isTransitioning = false;
+  }
+}
+
+function restartSlideshow() {
+  stopSlideshow();
+  startSlideshow();
+}
+
+function updateSlideshowLifecycle() {
+  if (
+    !slideshowSettingsReady ||
+    !shouldRunSlideshow(slideshowToggleIsActive, new Set(selectedImages).size)
+  ) {
+    stopSlideshow();
+    return;
+  }
+
+  startSlideshow();
+}
+
+function updateSlideshowControls() {
+  const sliderSpeedInput = document.querySelector(".slideshow-speed");
+  const sliderSpeedValue = document.getElementById("slideshow-speed-text");
+  const slideshowToggle = document.getElementById("slideshow-toggle");
+
+  if (sliderSpeedInput) {
+    sliderSpeedInput.value = String(currentSpeed);
+  }
+  if (sliderSpeedValue) {
+    sliderSpeedValue.value = String(currentSpeed);
+    sliderSpeedValue.readOnly = true;
+  }
+  if (slideshowToggle) {
+    slideshowToggle.classList.toggle("on", slideshowToggleIsActive);
+    slideshowToggle.classList.toggle("off", !slideshowToggleIsActive);
+  }
 }
 
 function revealNextImage() {
@@ -174,10 +460,8 @@ function revealNextImage() {
     return;
   }
 
-  currentImage.classList.remove("reveal");
-
   syncSelectedImages(function (ids) {
-    if (!ids.length) {
+    if (!slideshowSettingsReady || !slideshowToggleIsActive || !ids.length) {
       isTransitioning = false;
       return;
     }
@@ -188,6 +472,8 @@ function revealNextImage() {
       return;
     }
 
+    currentImage.classList.remove("reveal");
+
     let nextIndex;
     do {
       nextIndex = getRandomIndex(safeIds.length);
@@ -195,58 +481,106 @@ function revealNextImage() {
 
     currentIndex = nextIndex;
 
+    const nextSrc = getBackgroundSrc(safeIds[currentIndex]);
+    if (!nextSrc) {
+      isTransitioning = false;
+      return;
+    }
+
     const nextImage = new Image();
-    nextImage.src = safeIds[currentIndex];
+    nextImage.src = nextSrc;
 
     nextImage.classList.add("carousel-item", "reveal");
     nextImage.style.opacity = "0";
 
     bgContainer.appendChild(nextImage);
 
-    nextImage.onload = () => {
-      setTimeout(() => {
-        nextImage.style.transition = "opacity 2s ease-in-out";
+    const transition = {
+      currentImage,
+      nextImage,
+      timeouts: [],
+    };
+    activeTransition = transition;
 
-        syncOpacity(function (opacity) {
-          nextImage.style.opacity = opacity;
-          currentImage.style.opacity = "0";
-        });
-      }, 100);
+    nextImage.onload = () => {
+      if (activeTransition !== transition || !slideshowToggleIsActive) {
+        return;
+      }
+
+      transition.timeouts.push(
+        setTimeout(() => {
+          if (activeTransition !== transition || !slideshowToggleIsActive) {
+            return;
+          }
+          nextImage.style.transition = "opacity 2s ease-in-out";
+
+          syncOpacity(function (opacity) {
+            if (activeTransition !== transition || !slideshowToggleIsActive) {
+              return;
+            }
+            nextImage.style.opacity = opacity;
+            currentImage.style.opacity = "0";
+          });
+        }, 100),
+      );
     };
 
     nextImage.onerror = () => {
+      if (activeTransition !== transition || !slideshowToggleIsActive) {
+        return;
+      }
       const fallback = getSafeRandomImage(safeIds);
-      nextImage.src = fallback;
+      const fallbackSrc = getBackgroundSrc(fallback);
+      if (fallbackSrc) {
+        nextImage.src = fallbackSrc;
+      }
     };
 
-    setTimeout(() => {
-      if (bgContainer.contains(currentImage)) {
-        bgContainer.removeChild(currentImage);
-      }
-    }, 2000);
-
-    setTimeout(() => {
-      isTransitioning = false;
-
-      clearInterval(slideshowIntervalId);
-      slideshowIntervalId = setInterval(revealNextImage, currentSpeed * 1000);
-    }, 2000);
+    transition.timeouts.push(
+      setTimeout(() => {
+        if (activeTransition !== transition) {
+          return;
+        }
+        if (bgContainer.contains(currentImage)) {
+          bgContainer.removeChild(currentImage);
+        }
+        activeTransition = undefined;
+        isTransitioning = false;
+      }, 2000),
+    );
   });
 }
 
-let slideshowToggleIsActive;
+chrome.storage.local.get(
+  ["currentSpeed", "slideshow-toggle"],
+  function (result) {
+    const normalized = normalizeSlideshowSettings(result);
+    currentSpeed = normalized.currentSpeed;
+    slideshowToggleIsActive = normalized.enabled;
+    slideshowSettingsReady = true;
 
-chrome.storage.local.get("slideshow-toggle", function (result) {
-  if (result["slideshow-toggle"] === undefined) {
-    slideshowToggleIsActive = true;
-    chrome.storage.local.set({ "slideshow-toggle": true });
-  } else {
-    slideshowToggleIsActive = result["slideshow-toggle"];
-  }
+    if (
+      result.currentSpeed !== currentSpeed ||
+      result["slideshow-toggle"] !== slideshowToggleIsActive
+    ) {
+      chrome.storage.local.set({
+        currentSpeed,
+        "slideshow-toggle": slideshowToggleIsActive,
+      });
+    }
 
-  if (slideshowToggleIsActive) {
-    slideshowIntervalId = setInterval(revealNextImage, currentSpeed * 1000);
-  }
+    updateSlideshowControls();
+    updateSlideshowLifecycle();
+  },
+);
+
+loadCustomBackgrounds().then(function () {
+  syncSelectedImages(function (imgs) {
+    renderBackgroundGrid();
+    syncOpacity(function (opacity) {
+      loadFirstImage(imgs, opacity);
+    });
+  });
 });
 
 if (typeof document !== "undefined") {
@@ -256,9 +590,12 @@ if (typeof document !== "undefined") {
     const slideshowToggle = document.getElementById("slideshow-toggle");
     const sliderSpeedInput = document.querySelector(".slideshow-speed");
     const sliderSpeedValue = document.getElementById("slideshow-speed-text");
+    const addCustomImageBtn = document.getElementById("addCustomImageBtn");
+    const customBackgroundInput = document.getElementById(
+      "custom-background-input",
+    );
 
-    sliderSpeedValue.value = currentSpeed;
-    sliderSpeedValue.readOnly = true;
+    updateSlideshowControls();
 
     function applyUIOpacity(value) {
       slider.value = value;
@@ -268,14 +605,6 @@ if (typeof document !== "undefined") {
     syncOpacity(function (opacity) {
       applyUIOpacity(opacity);
     });
-
-    if (slideshowToggleIsActive) {
-      slideshowToggle.classList.add("on");
-      slideshowToggle.classList.remove("off");
-    } else {
-      slideshowToggle.classList.add("off");
-      slideshowToggle.classList.remove("on");
-    }
 
     slider.addEventListener("input", function () {
       const newOpacity = this.value;
@@ -296,6 +625,8 @@ if (typeof document !== "undefined") {
     const selectAllBtn = document.getElementById("selectAllBtn");
 
     editImagesModalBtn?.addEventListener("click", () => {
+      clearCustomBackgroundError();
+      updateSelectAllButton();
       editImagesModal.style.display = "flex";
     });
 
@@ -303,30 +634,72 @@ if (typeof document !== "undefined") {
       editImagesModal.style.display = "none";
     });
 
+    editImagesModal?.addEventListener("click", (event) => {
+      if (event.target === event.currentTarget) {
+        editImagesModal.style.display = "none";
+      }
+    });
+
     selectAllBtn.addEventListener("click", function () {
-      const allSelected = selectedImages.length === images.length;
+      selectedImages = toggleAllBackgroundSelections(
+        selectedImages,
+        availableBackgroundIds,
+      );
 
-      if (allSelected) {
-        selectedImages = [];
+      const selectedIds = new Set(selectedImages);
+      imageGrid.querySelectorAll(".grid-image-wrap").forEach((item) => {
+        const image = item.querySelector("img");
+        image?.classList.toggle(
+          "selected",
+          selectedIds.has(item.dataset.backgroundId),
+        );
+      });
 
-        imageGrid.querySelectorAll("img").forEach((img) => {
-          img.classList.remove("selected");
-        });
-      } else {
-        selectedImages = [...images];
+      persistSelectedImages();
+      updateSelectAllButton();
+    });
 
-        imageGrid.querySelectorAll("img").forEach((img) => {
-          img.classList.add("selected");
-        });
+    addCustomImageBtn?.addEventListener("click", function () {
+      clearCustomBackgroundError();
+      customBackgroundInput?.click();
+    });
+
+    customBackgroundInput?.addEventListener("change", async function () {
+      const files = customBackgroundInput.files;
+      const result = await importCustomImages(
+        files,
+        {
+          save: (record) => customBackgroundStore.saveCustomBackground(record),
+        },
+        {
+          decodeImage: decodeCustomImage,
+        },
+      );
+
+      customBackgroundInput.value = "";
+
+      if (result.cancelled) {
+        return;
       }
 
-      chrome.storage.local.set({ selectedImages });
+      if (result.imported.length) {
+        customRecords = customRecords.concat(result.imported);
+        rebuildAvailableBackgroundIds();
+        persistSelectedImages();
+        renderBackgroundGrid();
+      }
+
+      if (result.errors.length) {
+        showCustomBackgroundError(result.errors[0].reason);
+      }
     });
 
     sliderSpeedInput.addEventListener("input", () => {
-      currentSpeed = sliderSpeedInput.value;
-      sliderSpeedValue.value = currentSpeed;
+      currentSpeed = normalizeSlideshowInterval(sliderSpeedInput.value);
+      sliderSpeedInput.value = String(currentSpeed);
+      sliderSpeedValue.value = String(currentSpeed);
       chrome.storage.local.set({ currentSpeed });
+      restartSlideshow();
     });
 
     slideshowToggle.addEventListener("click", () => {
@@ -336,15 +709,8 @@ if (typeof document !== "undefined") {
         "slideshow-toggle": slideshowToggleIsActive,
       });
 
-      if (slideshowToggleIsActive) {
-        slideshowIntervalId = setInterval(revealNextImage, currentSpeed * 1000);
-        slideshowToggle.classList.add("on");
-        slideshowToggle.classList.remove("off");
-      } else {
-        clearInterval(slideshowIntervalId);
-        slideshowToggle.classList.add("off");
-        slideshowToggle.classList.remove("on");
-      }
+      updateSlideshowControls();
+      updateSlideshowLifecycle();
     });
   });
 }

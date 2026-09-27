@@ -64,6 +64,9 @@
 
   "whats-new-102-1": "Added new background images.",
   "whats-new-102-2": "The display of image previews has been optimized.",
+  "whats-new-110-1": "Add your own custom background images.",
+  "whats-new-110-2": "Custom backgrounds and selections are preserved across extension updates.",
+  "whats-new-110-3": "The image editor now includes Select All and Deselect All.",
   "whats-new-1012-1": "The ability to change the search engine has been disabled. All searches will now be conducted through the browser's default search engine, as required for Google Chrome applications.",
   "whats-new-1005-1": "Added the feature to change the list of background images.",
   "whats-new-1005-2": "Added translation into several popular languages ​​in the world.",
@@ -79,7 +82,7 @@
   "whats-new-1000-4": "Added Search Bar.",
   "whats-new-1000-5": "Added Timer.",
 
-  "current-version": "Current Version 1.0.2",
+  "current-version": "Current Version 1.1.0",
 
   "timer-type": "Select Type:",
   "timer": "Timer",
@@ -91,6 +94,14 @@
   "new-alarm-name": "Alarm Name*",
   "select-images": "Select Images",
   "select-all": "Select All",
+  "deselect-all": "Deselect All",
+  "add-custom-image": "Add custom image",
+  "remove-custom-image": "Remove custom image",
+  "custom-background-unsupported": "This file type is not supported.",
+  "custom-background-invalid": "This image could not be read.",
+  "custom-background-copy-failed": "The image could not be saved.",
+  "custom-background-source-unavailable": "The selected file is no longer available.",
+  "custom-background-storage-error": "Custom images could not be loaded.",
 
   "saved": "Saved",
   "Limit-custom-links": "Limit of custom links creation exceeded!"

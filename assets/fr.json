@@ -64,6 +64,9 @@
 
   "whats-new-102-1": "Ajout de nouvelles images de fond.",
   "whats-new-102-2": "L'affichage des aperçus d'images a été optimisé.",
+  "whats-new-110-1": "Ajoutez vos propres images d’arrière-plan.",
+  "whats-new-110-2": "Vos images personnalisées et vos sélections sont conservées après les mises à jour de l’extension.",
+  "whats-new-110-3": "L’éditeur d’images propose désormais « Tout sélectionner » et « Tout désélectionner ».",
   "whats-new-1012-1": "La possibilité de changer le moteur de recherche a été désactivée. Toutes les recherches seront désormais effectuées via le moteur de recherche par défaut du navigateur, comme l'exige les applications Google Chrome.",
   "whats-new-1005-1": "Ajout de la liste des images de fond.",
   "whats-new-1005-2": "Ajout de plusieurs langues populaires.",
@@ -79,7 +82,7 @@
   "whats-new-1000-4": "Ajout de la barre de recherche.",
   "whats-new-1000-5": "Ajout du Timer.",
 
-  "current-version": "Version actuelle 1.0.2",
+  "current-version": "Version actuelle 1.1.0",
 
   "timer-type": "Sélectionner le type :",
   "timer": "Minuteur",
@@ -91,6 +94,14 @@
   "new-alarm-name": "Nom de l'alarme*",
   "select-images": "Sélectionner les images",
   "select-all": "Tout sélectionner",
+  "deselect-all": "Tout désélectionner",
+  "add-custom-image": "Ajouter une image personnalisée",
+  "remove-custom-image": "Supprimer l’image personnalisée",
+  "custom-background-unsupported": "Ce type de fichier n'est pas pris en charge.",
+  "custom-background-invalid": "Cette image n'a pas pu être lue.",
+  "custom-background-copy-failed": "L'image n'a pas pu être enregistrée.",
+  "custom-background-source-unavailable": "Le fichier sélectionné n'est plus disponible.",
+  "custom-background-storage-error": "Impossible de charger les images personnalisées.",
 
   "saved": "sauvegardé",
   "Limit-custom-links": "Limite de création de liens personnalisés dépassée !"
