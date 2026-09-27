@@ -9,4 +9,4 @@ import "./usertask";
 import "./settings";
 import "./timer";
 import "./alarmSound";
-import "./i18nlocalize";
+import "./localizePage";

@@ -1,5 +1,5 @@
 const CUSTOM_BACKGROUND_PREFIX = "custom:";
-const BUILTIN_IMAGE_COUNT = 85;
+const BUILTIN_IMAGE_COUNT = 89;
 
 const SUPPORTED_MIME_TYPES = {
   "image/jpeg": [".jpg", ".jpeg"],

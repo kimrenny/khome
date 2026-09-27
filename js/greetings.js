@@ -1,3 +1,6 @@
+const { appI18n } = require("./appI18n");
+const { resolveGreetingName } = require("./greetingName");
+
 window.onerror = function () {
   return true;
 };
@@ -7,48 +10,12 @@ window.onunhandledrejection = function () {
 };
 
 if (typeof document !== "undefined") {
-  const translations = {};
-  let currentLang = "en";
-
-  function loadTranslations(lang) {
-    fetch(`/assets/${lang}.json`)
-      .then((response) => response.json())
-      .then((data) => {
-        translations[lang] = data;
-        updateTranslations();
-        updateGreetings();
-      });
-  }
-
-  function updateTranslations() {
-    document.querySelectorAll("[data-i18n]").forEach((element) => {
-      const key = element.getAttribute("data-i18n");
-
-      if (element.tagName === "INPUT" && element.hasAttribute("placeholder")) {
-        element.placeholder = translations[currentLang][key];
-      } else {
-        element.innerHTML = translations[currentLang][key];
-      }
-    });
-  }
-
-  function changeLanguage(lang) {
-    currentLang = lang;
-    chrome.storage.sync.set({ language: lang }, () => {});
-
-    if (!translations[lang]) {
-      loadTranslations(lang);
-    } else {
-      updateTranslations();
-      updateGreetings();
-    }
-  }
-
   function getRandomItemFromArray(array) {
     return array[Math.floor(Math.random() * array.length)];
   }
 
-  function updateGreetings() {
+  async function updateGreetings() {
+    await appI18n.ready;
     const greetingBox = document.getElementById("greetings");
     const currentDate = new Date();
     const currentHour = currentDate.getHours();
@@ -56,55 +23,41 @@ if (typeof document !== "undefined") {
     let greetingKey = "";
     if (currentHour >= 5 && currentHour < 12) {
       greetingKey = getRandomItemFromArray([
-        "greeting_morning_1",
-        "greeting_morning_2",
-        "greeting_morning_3",
+        "greetingMorning1",
+        "greetingMorning2",
+        "greetingMorning3",
       ]);
     } else if (currentHour >= 12 && currentHour < 17) {
       greetingKey = getRandomItemFromArray([
-        "greeting_afternoon_1",
-        "greeting_afternoon_2",
-        "greeting_afternoon_3",
+        "greetingAfternoon1",
+        "greetingAfternoon2",
+        "greetingAfternoon3",
       ]);
     } else if (currentHour >= 17 && currentHour < 22) {
       greetingKey = getRandomItemFromArray([
-        "greeting_evening_1",
-        "greeting_evening_2",
-        "greeting_evening_3",
+        "greetingEvening1",
+        "greetingEvening2",
+        "greetingEvening3",
       ]);
     } else {
       greetingKey = getRandomItemFromArray([
-        "greeting_night_1",
-        "greeting_night_2",
-        "greeting_night_3",
+        "greetingNight1",
+        "greetingNight2",
+        "greetingNight3",
       ]);
     }
 
     chrome.storage.sync.get("userName", function (result) {
-      const userName =
-        result.userName || translations[currentLang]["default_user_name"];
-
-      if (translations[currentLang] && translations[currentLang][greetingKey]) {
-        const greeting = translations[currentLang][greetingKey].replace(
-          "{name}",
-          userName,
-        );
-        greetingBox.textContent = greeting;
-      }
+      const userName = resolveGreetingName(result.userName, appI18n.getMessage);
+      greetingBox.textContent = appI18n.getMessage(greetingKey, [userName]);
     });
   }
 
+  appI18n.onLanguageChanged(updateGreetings);
+
   if (typeof document !== "undefined") {
     document.addEventListener("DOMContentLoaded", function () {
-      chrome.storage.sync.get("userName", function (result) {
-        const savedName = result.userName;
-        const userName =
-          savedName || translations[currentLang]["default_user_name"];
-
-        chrome.storage.sync.set({ userName: userName }, function () {
-          updateGreetings();
-        });
-      });
+      updateGreetings();
 
       const nameInput = document.getElementById("name-input");
       const submitButton = document.getElementById("submit-btn");
@@ -131,21 +84,6 @@ if (typeof document !== "undefined") {
           }
         }
       });
-
-      chrome.storage.sync.get("language", (result) => {
-        if (result.language) {
-          currentLang = result.language;
-        } else {
-          currentLang = "en";
-        }
-        loadTranslations(currentLang);
-      });
-
-      document
-        .getElementById("languageSelector")
-        .addEventListener("change", (event) => {
-          changeLanguage(event.target.value);
-        });
     });
   }
 }

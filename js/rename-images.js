@@ -1,10 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 
-const inputDir = "./new";
-const outputDir = "./new-bg";
+const inputDir = "./bg-jpg";
+const outputDir = "./bg-jpg-renamed";
 
-let startNumber = 63;
+let startNumber = 86;
 
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });

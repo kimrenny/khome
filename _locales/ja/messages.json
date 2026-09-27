@@ -1,0 +1,498 @@
+{
+  "greetingMorning1": {
+    "message": "$name$さん、おはよう！",
+    "description": "Existing localized UI text for greeting_morning_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "友だち"
+      }
+    }
+  },
+  "greetingMorning2": {
+    "message": "$name$さん、元気に！",
+    "description": "Existing localized UI text for greeting_morning_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "友だち"
+      }
+    }
+  },
+  "greetingMorning3": {
+    "message": "$name$さん、おはよう！",
+    "description": "Existing localized UI text for greeting_morning_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "友だち"
+      }
+    }
+  },
+  "greetingAfternoon1": {
+    "message": "$name$さん、こんにちは！",
+    "description": "Existing localized UI text for greeting_afternoon_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "友だち"
+      }
+    }
+  },
+  "greetingAfternoon2": {
+    "message": "$name$さん、やあ！",
+    "description": "Existing localized UI text for greeting_afternoon_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "友だち"
+      }
+    }
+  },
+  "greetingAfternoon3": {
+    "message": "$name$さん、良い午後を！",
+    "description": "Existing localized UI text for greeting_afternoon_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "友だち"
+      }
+    }
+  },
+  "greetingEvening1": {
+    "message": "$name$さん、こんばんは！",
+    "description": "Existing localized UI text for greeting_evening_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "友だち"
+      }
+    }
+  },
+  "greetingEvening2": {
+    "message": "$name$さん、夕方ですね！",
+    "description": "Existing localized UI text for greeting_evening_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "友だち"
+      }
+    }
+  },
+  "greetingEvening3": {
+    "message": "$name$さん、やあ！",
+    "description": "Existing localized UI text for greeting_evening_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "友だち"
+      }
+    }
+  },
+  "greetingNight1": {
+    "message": "$name$さん、おやすみ！",
+    "description": "Existing localized UI text for greeting_night_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "友だち"
+      }
+    }
+  },
+  "greetingNight2": {
+    "message": "$name$さん、ぐっすり！",
+    "description": "Existing localized UI text for greeting_night_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "友だち"
+      }
+    }
+  },
+  "greetingNight3": {
+    "message": "$name$さん、良い夢を！",
+    "description": "Existing localized UI text for greeting_night_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "友だち"
+      }
+    }
+  },
+  "defaultUserName": {
+    "message": "親愛なる友へ",
+    "description": "Existing localized UI text for default_user_name."
+  },
+  "greetingDefaultName": {
+    "message": "友達",
+    "description": "Fallback name used in greetings when the user has not configured a name."
+  },
+  "addNewTask": {
+    "message": "タスク追加",
+    "description": "Existing localized UI text for add-new-task."
+  },
+  "clearTaskList": {
+    "message": "リストをクリアしますか？",
+    "description": "Existing localized UI text for clear-task-list."
+  },
+  "searchPlaceholder": {
+    "message": "検索",
+    "description": "Existing localized UI text for search."
+  },
+  "generalSection": {
+    "message": "一般",
+    "description": "Existing localized UI text for General-section."
+  },
+  "dDaySection": {
+    "message": "D-day",
+    "description": "Existing localized UI text for D-day-section."
+  },
+  "backgroundSection": {
+    "message": "背景",
+    "description": "Existing localized UI text for Background-section."
+  },
+  "alarmSection": {
+    "message": "アラーム",
+    "description": "Existing localized UI text for Alarm-section."
+  },
+  "helpSection": {
+    "message": "ヘルプ*",
+    "description": "Existing localized UI text for Help-section."
+  },
+  "whatsNewSection": {
+    "message": "新着情報",
+    "description": "Existing localized UI text for Whats-new-section."
+  },
+  "aboutSection": {
+    "message": "アプリについて",
+    "description": "Existing localized UI text for About-section."
+  },
+  "language": {
+    "message": "言語",
+    "description": "Existing localized UI text for Language."
+  },
+  "bookmark": {
+    "message": "ブックマーク",
+    "description": "Existing localized UI text for Bookmark."
+  },
+  "searchSettings": {
+    "message": "検索",
+    "description": "Existing localized UI text for Search."
+  },
+  "weather": {
+    "message": "天気",
+    "description": "Existing localized UI text for Weather."
+  },
+  "greetings": {
+    "message": "挨拶",
+    "description": "Existing localized UI text for Greetings."
+  },
+  "taskList": {
+    "message": "タスクリスト",
+    "description": "Existing localized UI text for Task-List."
+  },
+  "clock24Hour": {
+    "message": "24時間制",
+    "description": "Existing localized UI text for 24-clock."
+  },
+  "clockFormat": {
+    "message": "時計形式: 24時間",
+    "description": "Existing localized UI text for clock-format."
+  },
+  "changeName": {
+    "message": "名前変更",
+    "description": "Existing localized UI text for change-name."
+  },
+  "enterNamePlaceholder": {
+    "message": "名前を入力",
+    "description": "Existing localized UI text for Enter-name-placeholder."
+  },
+  "submit": {
+    "message": "保存",
+    "description": "Existing localized UI text for Submit."
+  },
+  "reset": {
+    "message": "リセット",
+    "description": "Existing localized UI text for Reset."
+  },
+  "save": {
+    "message": "保存",
+    "description": "Existing localized UI text for Save."
+  },
+  "edit": {
+    "message": "編集",
+    "description": "Existing localized UI text for Edit."
+  },
+  "yes": {
+    "message": "はい",
+    "description": "Existing localized UI text for Yes."
+  },
+  "cancel": {
+    "message": "キャンセル",
+    "description": "Existing localized UI text for Cancel."
+  },
+  "searchEngine": {
+    "message": "検索エンジン",
+    "description": "Existing localized UI text for search-engine."
+  },
+  "dDayDisplay": {
+    "message": "D-dayを表示。",
+    "description": "Existing localized UI text for d-day-display."
+  },
+  "backgroundOpacity": {
+    "message": "背景の不透明度",
+    "description": "Existing localized UI text for background-opacity."
+  },
+  "settingBackground": {
+    "message": "0: 透明、1: 不透明",
+    "description": "Existing localized UI text for setting-background."
+  },
+  "slideshow": {
+    "message": "スライドショー",
+    "description": "Existing localized UI text for slideshow."
+  },
+  "slideshowBackground": {
+    "message": "背景画像スライドショー（再読み込み）",
+    "description": "Existing localized UI text for slideshow-background."
+  },
+  "slideshowSpeed": {
+    "message": "スライドショー速度（秒）",
+    "description": "Existing localized UI text for slideshow-speed."
+  },
+  "editImagesList": {
+    "message": "画像リスト編集",
+    "description": "Existing localized UI text for edit-images-list."
+  },
+  "timerBtn": {
+    "message": "タイマーボタン表示",
+    "description": "Existing localized UI text for timer-btn."
+  },
+  "alarmSound": {
+    "message": "アラーム音",
+    "description": "Existing localized UI text for alarm-sound."
+  },
+  "contactDev": {
+    "message": "開発者に連絡",
+    "description": "Existing localized UI text for contact-dev."
+  },
+  "contactMessage": {
+    "message": "アプリの問題やエラー、提案があれば、こちらまで - <a href='mailto:kimrenny.tech@gmail.com'>kimrenny.tech@gmail.com</a>",
+    "description": "Existing localized UI text for contact-message."
+  },
+  "localizeContactMessage": {
+    "message": "あなたの言語でアプリを翻訳したい場合、上記メールに翻訳を送ってください。",
+    "description": "Existing localized UI text for localize-contact-message."
+  },
+  "whatsNew1021": {
+    "message": "新しい背景画像を追加しました。",
+    "description": "Existing localized UI text for whats-new-102-1."
+  },
+  "whatsNew1022": {
+    "message": "画像のプレビュー表示を最適化しました。",
+    "description": "Existing localized UI text for whats-new-102-2."
+  },
+  "whatsNew1101": {
+    "message": "自分のカスタム背景画像を追加できます。",
+    "description": "Existing localized UI text for whats-new-110-1."
+  },
+  "whatsNew1102": {
+    "message": "カスタム背景画像と選択内容は、拡張機能の更新後も保持されます。",
+    "description": "Existing localized UI text for whats-new-110-2."
+  },
+  "whatsNew1103": {
+    "message": "画像エディターで「すべて選択」と「すべて選択解除」ができるようになりました。",
+    "description": "Existing localized UI text for whats-new-110-3."
+  },
+  "whatsNew10121": {
+    "message": "検索エンジンの変更機能は無効になりました。すべての検索は、Google Chrome アプリケーションの要件に従い、ブラウザのデフォルト検索エンジンを通じて実行されます。",
+    "description": "Existing localized UI text for whats-new-1012-1."
+  },
+  "whatsNew10051": {
+    "message": "背景画像リスト変更機能追加。",
+    "description": "Existing localized UI text for whats-new-1005-1."
+  },
+  "whatsNew10052": {
+    "message": "人気言語翻訳追加。",
+    "description": "Existing localized UI text for whats-new-1005-2."
+  },
+  "whatsNew10041": {
+    "message": "新しい背景画像追加。",
+    "description": "Existing localized UI text for whats-new-1004-1."
+  },
+  "whatsNew10042": {
+    "message": "小さな機能変更とバグ修正。",
+    "description": "Existing localized UI text for whats-new-1004-2."
+  },
+  "whatsNew10031": {
+    "message": "新しい背景画像追加。スライダー最大値（41）に変更してください。",
+    "description": "Existing localized UI text for whats-new-1003-1."
+  },
+  "whatsNew10032": {
+    "message": "手動変更しない限り自動変更。",
+    "description": "Existing localized UI text for whats-new-1003-2."
+  },
+  "whatsNew10021": {
+    "message": "バグ修正。",
+    "description": "Existing localized UI text for whats-new-1002-1."
+  },
+  "whatsNew10011": {
+    "message": "機能と表示のバグ修正。",
+    "description": "Existing localized UI text for whats-new-1001-1."
+  },
+  "whatsNew10001": {
+    "message": "D-day追加。",
+    "description": "Existing localized UI text for whats-new-1000-1."
+  },
+  "whatsNew10002": {
+    "message": "背景画像追加。",
+    "description": "Existing localized UI text for whats-new-1000-2."
+  },
+  "whatsNew10003": {
+    "message": "タスクリスト追加。",
+    "description": "Existing localized UI text for whats-new-1000-3."
+  },
+  "whatsNew10004": {
+    "message": "検索バー追加。",
+    "description": "Existing localized UI text for whats-new-1000-4."
+  },
+  "whatsNew10005": {
+    "message": "タイマー追加。",
+    "description": "Existing localized UI text for whats-new-1000-5."
+  },
+  "currentVersion": {
+    "message": "バージョン 1.1.0",
+    "description": "Existing localized UI text for current-version."
+  },
+  "timerType": {
+    "message": "タイプ選択：",
+    "description": "Existing localized UI text for timer-type."
+  },
+  "timer": {
+    "message": "タイマー",
+    "description": "Existing localized UI text for timer."
+  },
+  "alarm": {
+    "message": "アラーム",
+    "description": "Existing localized UI text for alarm."
+  },
+  "addNewTimer": {
+    "message": "新しいタイマー追加",
+    "description": "Existing localized UI text for add-new-timer."
+  },
+  "newTimerName": {
+    "message": "タイマー名*",
+    "description": "Existing localized UI text for new-timer-name."
+  },
+  "newTimerTime": {
+    "message": "時間*",
+    "description": "Existing localized UI text for new-timer-time."
+  },
+  "addNewAlarm": {
+    "message": "新しいアラーム追加",
+    "description": "Existing localized UI text for add-new-alarm."
+  },
+  "newAlarmName": {
+    "message": "アラーム名*",
+    "description": "Existing localized UI text for new-alarm-name."
+  },
+  "selectImages": {
+    "message": "画像選択",
+    "description": "Existing localized UI text for select-images."
+  },
+  "selectAll": {
+    "message": "すべて選択",
+    "description": "Existing localized UI text for select-all."
+  },
+  "deselectAll": {
+    "message": "すべて選択解除",
+    "description": "Existing localized UI text for deselect-all."
+  },
+  "addCustomImage": {
+    "message": "カスタム画像を追加",
+    "description": "Existing localized UI text for add-custom-image."
+  },
+  "removeCustomImage": {
+    "message": "カスタム画像を削除",
+    "description": "Existing localized UI text for remove-custom-image."
+  },
+  "customBackgroundUnsupported": {
+    "message": "このファイル形式はサポートされていません。",
+    "description": "Existing localized UI text for custom-background-unsupported."
+  },
+  "customBackgroundInvalid": {
+    "message": "この画像を読み込めませんでした。",
+    "description": "Existing localized UI text for custom-background-invalid."
+  },
+  "customBackgroundCopyFailed": {
+    "message": "画像を保存できませんでした。",
+    "description": "Existing localized UI text for custom-background-copy-failed."
+  },
+  "customBackgroundSourceUnavailable": {
+    "message": "選択したファイルは利用できません。",
+    "description": "Existing localized UI text for custom-background-source-unavailable."
+  },
+  "customBackgroundStorageError": {
+    "message": "カスタム画像を読み込めませんでした。",
+    "description": "Existing localized UI text for custom-background-storage-error."
+  },
+  "saved": {
+    "message": "保存されました",
+    "description": "Existing localized UI text for saved."
+  },
+  "limitCustomLinks": {
+    "message": "カスタムリンク作成制限超過！",
+    "description": "Existing localized UI text for Limit-custom-links."
+  },
+  "extensionName": {
+    "message": "KHome - KDrama New Tab",
+    "description": "The localized name of the Chrome extension."
+  },
+  "extensionDescription": {
+    "message": "Chrome のホームページをカスタマイズします。",
+    "description": "The localized description shown for the extension."
+  },
+  "newTabTitle": {
+    "message": "新しいタブ",
+    "description": "The document title of the extension's new-tab page."
+  },
+  "dDayLabel": {
+    "message": "D - Day",
+    "description": "Label shown when the configured D-day is today."
+  },
+  "invalidDate": {
+    "message": "有効な日付を入力してください。",
+    "description": "Validation message shown when an invalid D-day is entered."
+  },
+  "ok": {
+    "message": "OK",
+    "description": "Confirmation button label."
+  },
+  "deleteLink": {
+    "message": "リンクを削除",
+    "description": "Accessible name for the delete-link control."
+  },
+  "settings": {
+    "message": "設定を開く",
+    "description": "Accessible name for the settings control."
+  },
+  "viewTimers": {
+    "message": "タイマーとアラームを表示",
+    "description": "Accessible name for the timers view control."
+  },
+  "close": {
+    "message": "閉じる",
+    "description": "Accessible name for a close control."
+  },
+  "playSound": {
+    "message": "アラーム音を再生",
+    "description": "Accessible name for the play-sound control."
+  },
+  "saveSound": {
+    "message": "アラーム音を保存",
+    "description": "Accessible name for the save-sound control."
+  },
+  "pauseTimer": {
+    "message": "タイマーを一時停止",
+    "description": "Accessible name for the pause-timer control."
+  }
+}

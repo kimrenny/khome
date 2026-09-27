@@ -1,0 +1,498 @@
+{
+  "greetingMorning1": {
+    "message": "$name$님, 좋은 아침이에요!",
+    "description": "Existing localized UI text for greeting_morning_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "친구"
+      }
+    }
+  },
+  "greetingMorning2": {
+    "message": "$name$님, 일어나세요!",
+    "description": "Existing localized UI text for greeting_morning_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "친구"
+      }
+    }
+  },
+  "greetingMorning3": {
+    "message": "$name$님, 아침입니다!",
+    "description": "Existing localized UI text for greeting_morning_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "친구"
+      }
+    }
+  },
+  "greetingAfternoon1": {
+    "message": "$name$님, 안녕하세요!",
+    "description": "Existing localized UI text for greeting_afternoon_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "친구"
+      }
+    }
+  },
+  "greetingAfternoon2": {
+    "message": "$name$님, 반가워요!",
+    "description": "Existing localized UI text for greeting_afternoon_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "친구"
+      }
+    }
+  },
+  "greetingAfternoon3": {
+    "message": "$name$님, 좋은 오후입니다!",
+    "description": "Existing localized UI text for greeting_afternoon_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "친구"
+      }
+    }
+  },
+  "greetingEvening1": {
+    "message": "$name$님, 좋은 저녁이에요!",
+    "description": "Existing localized UI text for greeting_evening_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "친구"
+      }
+    }
+  },
+  "greetingEvening2": {
+    "message": "$name$님, 저녁입니다!",
+    "description": "Existing localized UI text for greeting_evening_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "친구"
+      }
+    }
+  },
+  "greetingEvening3": {
+    "message": "$name$님, 안녕하세요!",
+    "description": "Existing localized UI text for greeting_evening_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "친구"
+      }
+    }
+  },
+  "greetingNight1": {
+    "message": "$name$님, 잘 자요!",
+    "description": "Existing localized UI text for greeting_night_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "친구"
+      }
+    }
+  },
+  "greetingNight2": {
+    "message": "$name$님, 좋은 꿈 꾸세요!",
+    "description": "Existing localized UI text for greeting_night_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "친구"
+      }
+    }
+  },
+  "greetingNight3": {
+    "message": "$name$님, 달콤한 꿈 꾸세요!",
+    "description": "Existing localized UI text for greeting_night_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "친구"
+      }
+    }
+  },
+  "defaultUserName": {
+    "message": "친애하는 친구",
+    "description": "Existing localized UI text for default_user_name."
+  },
+  "greetingDefaultName": {
+    "message": "친구",
+    "description": "Fallback name used in greetings when the user has not configured a name."
+  },
+  "addNewTask": {
+    "message": "새 작업 추가",
+    "description": "Existing localized UI text for add-new-task."
+  },
+  "clearTaskList": {
+    "message": "작업 목록을 지우겠습니까?",
+    "description": "Existing localized UI text for clear-task-list."
+  },
+  "searchPlaceholder": {
+    "message": "검색",
+    "description": "Existing localized UI text for search."
+  },
+  "generalSection": {
+    "message": "일반",
+    "description": "Existing localized UI text for General-section."
+  },
+  "dDaySection": {
+    "message": "D-day",
+    "description": "Existing localized UI text for D-day-section."
+  },
+  "backgroundSection": {
+    "message": "배경",
+    "description": "Existing localized UI text for Background-section."
+  },
+  "alarmSection": {
+    "message": "알람",
+    "description": "Existing localized UI text for Alarm-section."
+  },
+  "helpSection": {
+    "message": "도움말*",
+    "description": "Existing localized UI text for Help-section."
+  },
+  "whatsNewSection": {
+    "message": "새 소식",
+    "description": "Existing localized UI text for Whats-new-section."
+  },
+  "aboutSection": {
+    "message": "정보",
+    "description": "Existing localized UI text for About-section."
+  },
+  "language": {
+    "message": "언어",
+    "description": "Existing localized UI text for Language."
+  },
+  "bookmark": {
+    "message": "북마크",
+    "description": "Existing localized UI text for Bookmark."
+  },
+  "searchSettings": {
+    "message": "검색",
+    "description": "Existing localized UI text for Search."
+  },
+  "weather": {
+    "message": "날씨",
+    "description": "Existing localized UI text for Weather."
+  },
+  "greetings": {
+    "message": "인사말",
+    "description": "Existing localized UI text for Greetings."
+  },
+  "taskList": {
+    "message": "작업 목록",
+    "description": "Existing localized UI text for Task-List."
+  },
+  "clock24Hour": {
+    "message": "24시간 시계",
+    "description": "Existing localized UI text for 24-clock."
+  },
+  "clockFormat": {
+    "message": "시계 형식: 24시간",
+    "description": "Existing localized UI text for clock-format."
+  },
+  "changeName": {
+    "message": "이름 변경",
+    "description": "Existing localized UI text for change-name."
+  },
+  "enterNamePlaceholder": {
+    "message": "여기에 이름을 입력하세요",
+    "description": "Existing localized UI text for Enter-name-placeholder."
+  },
+  "submit": {
+    "message": "제출",
+    "description": "Existing localized UI text for Submit."
+  },
+  "reset": {
+    "message": "초기화",
+    "description": "Existing localized UI text for Reset."
+  },
+  "save": {
+    "message": "저장",
+    "description": "Existing localized UI text for Save."
+  },
+  "edit": {
+    "message": "편집",
+    "description": "Existing localized UI text for Edit."
+  },
+  "yes": {
+    "message": "예",
+    "description": "Existing localized UI text for Yes."
+  },
+  "cancel": {
+    "message": "취소",
+    "description": "Existing localized UI text for Cancel."
+  },
+  "searchEngine": {
+    "message": "검색 엔진",
+    "description": "Existing localized UI text for search-engine."
+  },
+  "dDayDisplay": {
+    "message": "페이지 상단에 D-day 표시.",
+    "description": "Existing localized UI text for d-day-display."
+  },
+  "backgroundOpacity": {
+    "message": "배경 불투명도",
+    "description": "Existing localized UI text for background-opacity."
+  },
+  "settingBackground": {
+    "message": "0: 투명, 1: 불투명",
+    "description": "Existing localized UI text for setting-background."
+  },
+  "slideshow": {
+    "message": "슬라이드쇼",
+    "description": "Existing localized UI text for slideshow."
+  },
+  "slideshowBackground": {
+    "message": "배경 이미지 슬라이드쇼(새로고침)",
+    "description": "Existing localized UI text for slideshow-background."
+  },
+  "slideshowSpeed": {
+    "message": "슬라이드쇼 속도(초)",
+    "description": "Existing localized UI text for slideshow-speed."
+  },
+  "editImagesList": {
+    "message": "이미지 목록 편집",
+    "description": "Existing localized UI text for edit-images-list."
+  },
+  "timerBtn": {
+    "message": "타이머 버튼 표시",
+    "description": "Existing localized UI text for timer-btn."
+  },
+  "alarmSound": {
+    "message": "알람 소리",
+    "description": "Existing localized UI text for alarm-sound."
+  },
+  "contactDev": {
+    "message": "개발자에게 연락하기",
+    "description": "Existing localized UI text for contact-dev."
+  },
+  "contactMessage": {
+    "message": "앱에 문제가 있거나 오류를 발견했거나 개선 제안이 있다면, 배경 이미지에 대해서도 알려주세요 - <a href='mailto:kimrenny.tech@gmail.com'>kimrenny.tech@gmail.com</a>",
+    "description": "Existing localized UI text for contact-message."
+  },
+  "localizeContactMessage": {
+    "message": "귀하의 언어에 능통하시고 이 앱에 언어 추가를 도와주고 싶으시다면, 위 이메일로 연락 주시기 바랍니다. 가능한 모든 앱 요소의 번역을 기재해 주세요.",
+    "description": "Existing localized UI text for localize-contact-message."
+  },
+  "whatsNew1021": {
+    "message": "새로운 배경 이미지가 추가되었습니다.",
+    "description": "Existing localized UI text for whats-new-102-1."
+  },
+  "whatsNew1022": {
+    "message": "이미지 미리보기 표시가 최적화되었습니다.",
+    "description": "Existing localized UI text for whats-new-102-2."
+  },
+  "whatsNew1101": {
+    "message": "나만의 배경 이미지를 추가할 수 있습니다.",
+    "description": "Existing localized UI text for whats-new-110-1."
+  },
+  "whatsNew1102": {
+    "message": "사용자 지정 배경 이미지와 선택 항목은 확장 프로그램 업데이트 후에도 유지됩니다.",
+    "description": "Existing localized UI text for whats-new-110-2."
+  },
+  "whatsNew1103": {
+    "message": "이미지 편집기에서 모두 선택 및 모두 선택 해제를 사용할 수 있습니다.",
+    "description": "Existing localized UI text for whats-new-110-3."
+  },
+  "whatsNew10121": {
+    "message": "검색 엔진 변경 기능이 비활성화되었습니다. 모든 검색은 이제 브라우저의 기본 검색 엔진을 통해 수행됩니다. 이는 Google Chrome 애플리케이션의 요구 사항에 해당합니다.",
+    "description": "Existing localized UI text for whats-new-1012-1."
+  },
+  "whatsNew10051": {
+    "message": "배경 이미지 목록 변경 기능이 추가되었습니다.",
+    "description": "Existing localized UI text for whats-new-1005-1."
+  },
+  "whatsNew10052": {
+    "message": "여러 인기 언어로 번역이 추가되었습니다.",
+    "description": "Existing localized UI text for whats-new-1005-2."
+  },
+  "whatsNew10041": {
+    "message": "새 배경 이미지가 추가되었습니다.",
+    "description": "Existing localized UI text for whats-new-1004-1."
+  },
+  "whatsNew10042": {
+    "message": "기능 변경 및 버그 수정이 있었습니다.",
+    "description": "Existing localized UI text for whats-new-1004-2."
+  },
+  "whatsNew10031": {
+    "message": "새 배경 이미지가 추가되었습니다. 표시하려면 '배경' 설정의 슬라이더를 최대값(41)으로 변경하세요.",
+    "description": "Existing localized UI text for whats-new-1003-1."
+  },
+  "whatsNew10032": {
+    "message": "수동으로 이 값을 변경하지 않았다면, 자동으로 변경됩니다.",
+    "description": "Existing localized UI text for whats-new-1003-2."
+  },
+  "whatsNew10021": {
+    "message": "일부 버그가 수정되었습니다.",
+    "description": "Existing localized UI text for whats-new-1002-1."
+  },
+  "whatsNew10011": {
+    "message": "사소한 기능 및 표시 오류가 수정되었습니다.",
+    "description": "Existing localized UI text for whats-new-1001-1."
+  },
+  "whatsNew10001": {
+    "message": "D-day가 추가되었습니다.",
+    "description": "Existing localized UI text for whats-new-1000-1."
+  },
+  "whatsNew10002": {
+    "message": "배경 이미지가 추가되었습니다.",
+    "description": "Existing localized UI text for whats-new-1000-2."
+  },
+  "whatsNew10003": {
+    "message": "작업 목록이 추가되었습니다.",
+    "description": "Existing localized UI text for whats-new-1000-3."
+  },
+  "whatsNew10004": {
+    "message": "검색 바가 추가되었습니다.",
+    "description": "Existing localized UI text for whats-new-1000-4."
+  },
+  "whatsNew10005": {
+    "message": "타이머가 추가되었습니다.",
+    "description": "Existing localized UI text for whats-new-1000-5."
+  },
+  "currentVersion": {
+    "message": "현재 버전 1.1.0",
+    "description": "Existing localized UI text for current-version."
+  },
+  "timerType": {
+    "message": "타입 선택:",
+    "description": "Existing localized UI text for timer-type."
+  },
+  "timer": {
+    "message": "타이머",
+    "description": "Existing localized UI text for timer."
+  },
+  "alarm": {
+    "message": "알람",
+    "description": "Existing localized UI text for alarm."
+  },
+  "addNewTimer": {
+    "message": "새 타이머 추가",
+    "description": "Existing localized UI text for add-new-timer."
+  },
+  "newTimerName": {
+    "message": "타이머 이름*",
+    "description": "Existing localized UI text for new-timer-name."
+  },
+  "newTimerTime": {
+    "message": "시간*",
+    "description": "Existing localized UI text for new-timer-time."
+  },
+  "addNewAlarm": {
+    "message": "새 알람 추가",
+    "description": "Existing localized UI text for add-new-alarm."
+  },
+  "newAlarmName": {
+    "message": "알람 이름*",
+    "description": "Existing localized UI text for new-alarm-name."
+  },
+  "selectImages": {
+    "message": "이미지 선택",
+    "description": "Existing localized UI text for select-images."
+  },
+  "selectAll": {
+    "message": "모두 선택",
+    "description": "Existing localized UI text for select-all."
+  },
+  "deselectAll": {
+    "message": "모두 선택 해제",
+    "description": "Existing localized UI text for deselect-all."
+  },
+  "addCustomImage": {
+    "message": "사용자 이미지 추가",
+    "description": "Existing localized UI text for add-custom-image."
+  },
+  "removeCustomImage": {
+    "message": "사용자 지정 이미지 삭제",
+    "description": "Existing localized UI text for remove-custom-image."
+  },
+  "customBackgroundUnsupported": {
+    "message": "이 파일 형식은 지원되지 않습니다.",
+    "description": "Existing localized UI text for custom-background-unsupported."
+  },
+  "customBackgroundInvalid": {
+    "message": "이 이미지를 읽을 수 없습니다.",
+    "description": "Existing localized UI text for custom-background-invalid."
+  },
+  "customBackgroundCopyFailed": {
+    "message": "이미지를 저장할 수 없습니다.",
+    "description": "Existing localized UI text for custom-background-copy-failed."
+  },
+  "customBackgroundSourceUnavailable": {
+    "message": "선택한 파일을 더 이상 사용할 수 없습니다.",
+    "description": "Existing localized UI text for custom-background-source-unavailable."
+  },
+  "customBackgroundStorageError": {
+    "message": "사용자 이미지를 불러올 수 없습니다.",
+    "description": "Existing localized UI text for custom-background-storage-error."
+  },
+  "saved": {
+    "message": "저장됨",
+    "description": "Existing localized UI text for saved."
+  },
+  "limitCustomLinks": {
+    "message": "사용자 링크 생성 한도를 초과했습니다!",
+    "description": "Existing localized UI text for Limit-custom-links."
+  },
+  "extensionName": {
+    "message": "KHome - KDrama New Tab",
+    "description": "The localized name of the Chrome extension."
+  },
+  "extensionDescription": {
+    "message": "Chrome의 홈페이지를 맞춤 설정합니다.",
+    "description": "The localized description shown for the extension."
+  },
+  "newTabTitle": {
+    "message": "새 탭",
+    "description": "The document title of the extension's new-tab page."
+  },
+  "dDayLabel": {
+    "message": "D - Day",
+    "description": "Label shown when the configured D-day is today."
+  },
+  "invalidDate": {
+    "message": "올바른 날짜를 입력하세요.",
+    "description": "Validation message shown when an invalid D-day is entered."
+  },
+  "ok": {
+    "message": "확인",
+    "description": "Confirmation button label."
+  },
+  "deleteLink": {
+    "message": "링크 삭제",
+    "description": "Accessible name for the delete-link control."
+  },
+  "settings": {
+    "message": "설정 열기",
+    "description": "Accessible name for the settings control."
+  },
+  "viewTimers": {
+    "message": "타이머 및 알람 보기",
+    "description": "Accessible name for the timers view control."
+  },
+  "close": {
+    "message": "닫기",
+    "description": "Accessible name for a close control."
+  },
+  "playSound": {
+    "message": "알람 소리 재생",
+    "description": "Accessible name for the play-sound control."
+  },
+  "saveSound": {
+    "message": "알람 소리 저장",
+    "description": "Accessible name for the save-sound control."
+  },
+  "pauseTimer": {
+    "message": "타이머 일시 중지",
+    "description": "Accessible name for the pause-timer control."
+  }
+}

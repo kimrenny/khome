@@ -40,8 +40,15 @@ const {
   MISSING_WEATHER_API_KEY_MESSAGE,
   getRequiredWeatherApiKey,
 } = require("../js/weatherApiConfig");
+const {
+  SUPPORTED_LOCALES,
+  normalizeAppLocale,
+  resolveInitialLocale,
+  createAppI18n,
+} = require("../js/appI18n");
+const { resolveGreetingName } = require("../js/greetingName");
 
-const localeFiles = ["en", "fr", "ja", "ko", "ru", "uk", "zh"];
+const localeDirectories = ["en", "fr", "ja", "ko", "ru", "uk", "zh_CN"];
 
 function fakeFile(name, type, size = 12) {
   return {
@@ -376,23 +383,202 @@ test("startup does not duplicate custom images already in storage", async () => 
   assert.equal(listedTwice[0].id, "custom:existing");
 });
 
-test("all locales include the new release and selection strings", () => {
-  for (const locale of localeFiles) {
-    const translations = JSON.parse(
-      fs.readFileSync(
-        path.join(__dirname, "..", "assets", `${locale}.json`),
-        "utf8",
-      ),
+test("Chrome locale catalogs are complete and consistently formatted", () => {
+  const root = path.join(__dirname, "..");
+  const catalogs = new Map();
+  const expectedKeys = new Set();
+
+  for (const locale of localeDirectories) {
+    const catalogPath = path.join(root, "_locales", locale, "messages.json");
+    assert.equal(
+      fs.existsSync(catalogPath),
+      true,
+      `${locale} catalog is missing`,
+    );
+    const raw = fs.readFileSync(catalogPath, "utf8");
+    const catalog = JSON.parse(raw);
+    const catalogKeys = Object.keys(catalog);
+    const declaredKeys = [...raw.matchAll(/^  "([^"\n]+)": \{$/gm)].map(
+      (match) => match[1],
     );
 
-    assert.ok(translations["deselect-all"], `${locale} lacks deselect-all`);
-    assert.ok(translations["whats-new-110-1"], `${locale} lacks release text`);
-    assert.ok(translations["whats-new-110-2"], `${locale} lacks release text`);
-    assert.ok(translations["whats-new-110-3"], `${locale} lacks release text`);
-    assert.match(
-      translations["current-version"],
-      /1\.1\.0/,
-      `${locale} has stale version`,
+    assert.equal(
+      new Set(declaredKeys.map((key) => key.toLowerCase())).size,
+      declaredKeys.length,
+      `${locale} has duplicate message keys`,
+    );
+    for (const [key, definition] of Object.entries(catalog)) {
+      assert.match(
+        key,
+        /^[A-Za-z_][A-Za-z0-9_]*$/,
+        `${locale} has invalid key ${key}`,
+      );
+      assert.equal(
+        typeof definition.message,
+        "string",
+        `${locale}.${key} lacks a message`,
+      );
+      assert.equal(
+        typeof definition.description,
+        "string",
+        `${locale}.${key} lacks a description`,
+      );
+      assert.ok(
+        definition.description.trim(),
+        `${locale}.${key} has an empty description`,
+      );
+
+      const placeholders = definition.placeholders || {};
+      for (const [name, placeholder] of Object.entries(placeholders)) {
+        assert.ok(
+          definition.message.includes(`$${name}$`),
+          `${locale}.${key} does not use ${name}`,
+        );
+        assert.match(
+          placeholder.content,
+          /^\$[1-9]$/,
+          `${locale}.${key}.${name} has invalid content`,
+        );
+        assert.equal(
+          typeof placeholder.example,
+          "string",
+          `${locale}.${key}.${name} lacks an example`,
+        );
+      }
+      const usedPlaceholders = [
+        ...definition.message.matchAll(/\$([A-Za-z0-9_]+)\$/g),
+      ]
+        .map((match) => match[1])
+        .sort();
+      assert.deepEqual(
+        usedPlaceholders,
+        Object.keys(placeholders).sort(),
+        `${locale}.${key} has inconsistent placeholder definitions`,
+      );
+    }
+
+    if (locale === "en") {
+      catalogKeys.forEach((key) => expectedKeys.add(key));
+      assert.equal(
+        catalogKeys.length,
+        106,
+        "English catalog no longer accounts for all legacy messages",
+      );
+    } else {
+      assert.deepEqual(
+        catalogKeys.sort(),
+        [...expectedKeys].sort(),
+        `${locale} message keys differ from English`,
+      );
+    }
+    catalogs.set(locale, catalog);
+  }
+
+  const defaultCatalog = catalogs.get("en");
+  assert.ok(defaultCatalog.language, "legacy Language message was dropped");
+  assert.ok(
+    defaultCatalog.searchEngine,
+    "legacy Search Engine message was dropped",
+  );
+  const manifest = JSON.parse(
+    fs.readFileSync(path.join(root, "manifest.json"), "utf8"),
+  );
+  assert.equal(manifest.default_locale, "en");
+  for (const match of JSON.stringify(manifest).matchAll(
+    /__MSG_([A-Za-z0-9_]+)__/g,
+  )) {
+    assert.ok(
+      defaultCatalog[match[1]],
+      `manifest references missing message ${match[1]}`,
+    );
+  }
+});
+
+test("application references only native Chrome messages and has no old locale source", () => {
+  const root = path.join(__dirname, "..");
+  const jsFiles = fs
+    .readdirSync(path.join(root, "js"))
+    .filter((file) => file.endsWith(".js"));
+  const javascript = jsFiles
+    .map((file) => fs.readFileSync(path.join(root, "js", file), "utf8"))
+    .join("\n");
+  const greetingsSource = fs.readFileSync(
+    path.join(root, "js", "greetings.js"),
+    "utf8",
+  );
+  const appI18nSource = fs.readFileSync(
+    path.join(root, "js", "appI18n.js"),
+    "utf8",
+  );
+  const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
+  const staticBindings = fs.readFileSync(
+    path.join(root, "js", "localizePage.js"),
+    "utf8",
+  );
+  const defaultCatalog = JSON.parse(
+    fs.readFileSync(path.join(root, "_locales", "en", "messages.json"), "utf8"),
+  );
+  const referencedKeys = new Set(
+    [
+      ...javascript.matchAll(/chrome\.i18n\.getMessage\(\s*["']([^"']+)["']/g),
+    ].map((match) => match[1]),
+  );
+  const bindingIds = [];
+
+  for (const match of staticBindings.matchAll(
+    /\["([^"]+)", "([^"]+)", "(?:textContent|placeholder|innerHTML|aria-label)"\]/g,
+  )) {
+    bindingIds.push(match[1]);
+    referencedKeys.add(match[2]);
+    const escapedId = match[1].replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const elementId = new RegExp(`\\bid="${escapedId}"`, "g");
+    assert.equal(
+      [...html.matchAll(elementId)].length,
+      1,
+      `static binding ${match[1]} must target one HTML element`,
+    );
+  }
+  assert.equal(
+    new Set(bindingIds).size,
+    bindingIds.length,
+    "static message bindings contain duplicate element IDs",
+  );
+  for (const key of referencedKeys) {
+    assert.ok(
+      defaultCatalog[key],
+      `application references missing message ${key}`,
+    );
+  }
+  for (const match of greetingsSource.matchAll(
+    /"(greeting[A-Z][A-Za-z0-9]+)"/g,
+  )) {
+    assert.ok(
+      defaultCatalog[match[1]],
+      `greeting lookup references missing message ${match[1]}`,
+    );
+  }
+  assert.doesNotMatch(
+    greetingsSource,
+    /greeting_(morning|afternoon|evening|night)_/,
+  );
+
+  assert.doesNotMatch(html, /data-i18n/);
+  assert.equal((html.match(/id="languageSelector"/g) || []).length, 1);
+  for (const locale of ["en", "fr", "ja", "ko", "ru", "uk", "zh_CN"]) {
+    assert.match(html, new RegExp(`<option value="${locale}">`));
+  }
+  assert.doesNotMatch(
+    javascript,
+    /updateTranslations|loadTranslations|currentLang|assets\/\$\{lang\}\.json/,
+  );
+  assert.doesNotMatch(javascript, /chrome\.i18n\.getMessage/);
+  assert.match(appI18nSource, /chrome\.i18n\.getUILanguage/);
+  assert.equal(fs.existsSync(path.join(root, "js", "i18nlocalize.js")), false);
+  for (const locale of ["en", "fr", "ja", "ko", "ru", "uk", "zh"]) {
+    assert.equal(
+      fs.existsSync(path.join(root, "assets", `${locale}.json`)),
+      false,
+      `obsolete assets/${locale}.json remains`,
     );
   }
 });
@@ -410,7 +596,7 @@ test("manifest and About release representations use version 1.1.0", () => {
   assert.match(html, /class="setting-header">1\.1\.0<\/div>/);
   assert.match(
     html,
-    /data-i18n="current-version">Current Version 1\.1\.0<\/span>/,
+    /id="localized-currentVersion-1">Current Version 1\.1\.0<\/span>/,
   );
 });
 
@@ -556,10 +742,9 @@ test("weather failures are categorized without including response bodies", () =>
 
 test("WeatherAPI build configuration requires a non-empty key", () => {
   for (const missingValue of [undefined, null, "", "  "]) {
-    assert.throws(
-      () => getRequiredWeatherApiKey(missingValue),
-      { message: MISSING_WEATHER_API_KEY_MESSAGE },
-    );
+    assert.throws(() => getRequiredWeatherApiKey(missingValue), {
+      message: MISSING_WEATHER_API_KEY_MESSAGE,
+    });
   }
   assert.equal(getRequiredWeatherApiKey(" test-key "), "test-key");
 });
@@ -572,4 +757,275 @@ test("weather source uses the injected key instead of a hardcoded value", () => 
 
   assert.match(source, /\bWEATHER_API_KEY\b/);
   assert.doesNotMatch(source, /const\s+apiKey\s*=\s*["'][^"']*["']/);
+});
+
+function readLocaleCatalog(locale) {
+  return JSON.parse(
+    fs.readFileSync(
+      path.join(__dirname, "..", "_locales", locale, "messages.json"),
+      "utf8",
+    ),
+  );
+}
+
+test("application locale matching supports all configured Chrome locale forms", () => {
+  assert.deepEqual(SUPPORTED_LOCALES, [
+    "en",
+    "fr",
+    "ja",
+    "ko",
+    "ru",
+    "uk",
+    "zh_CN",
+  ]);
+  assert.equal(normalizeAppLocale("en-US"), "en");
+  assert.equal(normalizeAppLocale("en-GB"), "en");
+  assert.equal(normalizeAppLocale("ko-KR"), "ko");
+  assert.equal(normalizeAppLocale("uk-UA"), "uk");
+  assert.equal(normalizeAppLocale("ru-RU"), "ru");
+  assert.equal(normalizeAppLocale("ja-JP"), "ja");
+  assert.equal(normalizeAppLocale("fr-FR"), "fr");
+  assert.equal(normalizeAppLocale("zh-CN"), "zh_CN");
+  assert.equal(normalizeAppLocale("de-DE"), null);
+});
+
+test("saved application language takes priority over Chrome locale", async () => {
+  const service = createAppI18n({
+    loadCatalog: async (locale) => readLocaleCatalog(locale),
+    readPreference: async () => "en",
+    getChromeLocale: () => "uk-UA",
+  });
+
+  await service.initialize();
+  assert.equal(service.getLocale(), "en");
+  assert.equal(service.getMessage("bookmark"), "Bookmark");
+});
+
+test("supported Chrome locale and English fallback are used when no app choice exists", async () => {
+  const supported = createAppI18n({
+    loadCatalog: async (locale) => readLocaleCatalog(locale),
+    readPreference: async () => null,
+    getChromeLocale: () => "uk-UA",
+  });
+  await supported.initialize();
+  assert.equal(supported.getLocale(), "uk");
+  assert.equal(supported.getMessage("bookmark"), "Закладка");
+
+  const unsupported = createAppI18n({
+    loadCatalog: async (locale) => readLocaleCatalog(locale),
+    readPreference: async () => null,
+    getChromeLocale: () => "de-DE",
+  });
+  await unsupported.initialize();
+  assert.equal(unsupported.getLocale(), "en");
+  assert.equal(unsupported.getMessage("bookmark"), "Bookmark");
+});
+
+test("each supported app locale loads and returns its own translation", async () => {
+  const expectedBookmark = {
+    en: "Bookmark",
+    fr: "Favoris",
+    ja: "ブックマーク",
+    ko: "북마크",
+    ru: "Закладка",
+    uk: "Закладка",
+    zh_CN: "书签",
+  };
+
+  for (const locale of SUPPORTED_LOCALES) {
+    const loaded = [];
+    const service = createAppI18n({
+      loadCatalog: async (requestedLocale) => {
+        loaded.push(requestedLocale);
+        return readLocaleCatalog(requestedLocale);
+      },
+      readPreference: async () => locale,
+      getChromeLocale: () => "en-US",
+    });
+
+    await service.initialize();
+    assert.equal(service.getLocale(), locale);
+    assert.equal(service.getMessage("bookmark"), expectedBookmark[locale]);
+    assert.ok(loaded.includes(locale), `${locale} catalog was not loaded`);
+  }
+});
+
+test("application language changes persist and restore across service instances", async () => {
+  let savedLocale = null;
+  const writes = [];
+  const options = {
+    loadCatalog: async (locale) => readLocaleCatalog(locale),
+    readPreference: async () => savedLocale,
+    writePreference: async (locale) => {
+      savedLocale = locale;
+      writes.push(locale);
+    },
+    getChromeLocale: () => "uk-UA",
+  };
+
+  const firstPage = createAppI18n(options);
+  const localeChanges = [];
+  firstPage.onLanguageChanged((locale) => localeChanges.push(locale));
+  await firstPage.initialize();
+  await firstPage.setLanguage("ko");
+  assert.equal(savedLocale, "ko");
+  assert.deepEqual(writes, ["ko"]);
+  assert.deepEqual(localeChanges, ["uk", "ko"]);
+
+  const reopenedPage = createAppI18n(options);
+  await reopenedPage.initialize();
+  assert.equal(reopenedPage.getLocale(), "ko");
+  assert.equal(reopenedPage.getMessage("bookmark"), "북마크");
+});
+
+test("missing locale messages and catalogs fall back to English without exposing keys", async () => {
+  const english = readLocaleCatalog("en");
+  const korean = { ...readLocaleCatalog("ko") };
+  delete korean.searchEngine;
+
+  const missingMessage = createAppI18n({
+    loadCatalog: async (locale) => (locale === "en" ? english : korean),
+    readPreference: async () => "ko",
+  });
+  await missingMessage.initialize();
+  assert.equal(missingMessage.getMessage("searchEngine"), "Search Engine");
+  assert.equal(missingMessage.getMessage("notARealMessage"), "");
+
+  const missingCatalog = createAppI18n({
+    loadCatalog: async (locale) => {
+      if (locale === "ru") {
+        throw new Error("missing catalog");
+      }
+      return english;
+    },
+    readPreference: async () => "ru",
+  });
+  await missingCatalog.initialize();
+  assert.equal(missingCatalog.getLocale(), "en");
+  assert.equal(missingCatalog.getMessage("bookmark"), "Bookmark");
+});
+
+test("Chrome message placeholders substitute values and malformed definitions fall back", async () => {
+  const english = readLocaleCatalog("en");
+  const korean = { ...readLocaleCatalog("ko") };
+  korean.greetingMorning1 = {
+    message: "안녕하세요, $name$!",
+    placeholders: { name: { content: "bad", example: "친구" } },
+  };
+
+  const service = createAppI18n({
+    loadCatalog: async (locale) => (locale === "en" ? english : korean),
+    readPreference: async () => "ko",
+  });
+  await service.initialize();
+
+  assert.equal(
+    service.getMessage("greetingMorning1", ["Mina"]),
+    "Good Morning, Mina!",
+  );
+  assert.equal(
+    service.getMessage("greetingMorning2", ["Mina"]),
+    "Mina님, 일어나세요!",
+  );
+});
+
+test("every supported locale has the expected greeting fallback name", async () => {
+  const expectedNames = {
+    en: "Friend",
+    fr: "Ami",
+    ja: "友達",
+    ko: "친구",
+    ru: "Друг",
+    uk: "Друже",
+    zh_CN: "朋友",
+  };
+
+  for (const locale of SUPPORTED_LOCALES) {
+    const catalog = readLocaleCatalog(locale);
+    assert.equal(catalog.greetingDefaultName.message, expectedNames[locale]);
+
+    const service = createAppI18n({
+      loadCatalog: async (requestedLocale) =>
+        readLocaleCatalog(requestedLocale),
+      readPreference: async () => locale,
+    });
+    await service.initialize();
+    assert.equal(
+      service.getMessage("greetingDefaultName"),
+      expectedNames[locale],
+    );
+  }
+});
+
+test("configured greeting names take priority and empty names use the locale fallback", async () => {
+  for (const locale of SUPPORTED_LOCALES) {
+    const service = createAppI18n({
+      loadCatalog: async (requestedLocale) =>
+        readLocaleCatalog(requestedLocale),
+      readPreference: async () => locale,
+    });
+    await service.initialize();
+
+    assert.equal(resolveGreetingName("Alex", service.getMessage), "Alex");
+    assert.equal(
+      resolveGreetingName("", service.getMessage),
+      service.getMessage("greetingDefaultName"),
+    );
+    assert.equal(
+      resolveGreetingName(undefined, service.getMessage),
+      service.getMessage("greetingDefaultName"),
+    );
+  }
+});
+
+test("greeting fallback follows app language changes without persisting as the user name", async () => {
+  const storage = { language: null, userName: undefined };
+  const service = createAppI18n({
+    loadCatalog: async (locale) => readLocaleCatalog(locale),
+    readPreference: async () => storage.language,
+    writePreference: async (locale) => {
+      storage.language = locale;
+    },
+    getChromeLocale: () => "uk-UA",
+  });
+  await service.initialize();
+
+  assert.equal(
+    resolveGreetingName(storage.userName, service.getMessage),
+    "Друже",
+  );
+  await service.setLanguage("en");
+  assert.equal(
+    resolveGreetingName(storage.userName, service.getMessage),
+    "Friend",
+  );
+  await service.setLanguage("ru");
+  assert.equal(
+    resolveGreetingName(storage.userName, service.getMessage),
+    "Друг",
+  );
+  await service.setLanguage("ko");
+  assert.equal(
+    resolveGreetingName(storage.userName, service.getMessage),
+    "친구",
+  );
+  assert.equal(storage.userName, undefined);
+
+  storage.userName = "Alex";
+  await service.setLanguage("en");
+  assert.equal(
+    resolveGreetingName(storage.userName, service.getMessage),
+    "Alex",
+  );
+  await service.setLanguage("ru");
+  assert.equal(
+    resolveGreetingName(storage.userName, service.getMessage),
+    "Alex",
+  );
+  await service.setLanguage("ko");
+  assert.equal(
+    resolveGreetingName(storage.userName, service.getMessage),
+    "Alex",
+  );
+  assert.equal(storage.userName, "Alex");
 });

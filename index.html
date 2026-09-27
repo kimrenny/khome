@@ -40,18 +40,18 @@
                     <div id="link-form" class="display-none">
                         <input type="text" id="site-name" placeholder="Site Name*">
                         <input type="text" id="site-url" placeholder="Site URL*">
-                        <button data-i18n="Save" id="save-link-btn">Save</button>
-                        <button data-i18n="Cancel" id="cancel-link-btn">Cancel</button>
+                        <button id="save-link-btn">Save</button>
+                        <button id="cancel-link-btn">Cancel</button>
                     </div>
                 </div>
                </div>
             </div>
             <div id="user-links" class="display-none"></div>
-            <div data-i18n="Limit-custom-links" id="error-message" class="error-message">Limit of custom links creation exceeded!</div>
+            <div id="error-message" class="error-message">Limit of custom links creation exceeded!</div>
            </div>
            <div id="search-bar" class="search-bar">
                 <form id="searchForm">
-                    <input data-i18n="search" type="text" id="search-input" placeholder="Search" autocomplete="off">
+                    <input type="text" id="search-input" placeholder="Search" autocomplete="off">
                 </form>
            </div> 
         </div>
@@ -85,7 +85,7 @@
         </div>
 
         <form id="task-form">
-            <input data-i18n="add-new-task" type="text" id="task-input" placeholder="Add new task" autocomplete="off">
+            <input type="text" id="task-input" placeholder="Add new task" autocomplete="off">
         </form>
 
         <div id="clear-task-btn" class="clear-task-button" style="display: none">
@@ -95,10 +95,10 @@
         <div id="modal" class="modal">
             <div class="modal-content user-select-none">
                 <span id="clear-task-close-button" class="close-button">x</span>
-                <p data-i18n="clear-task-list" class="clear-task-list-title">Clear Task List?</p>
+                <p class="clear-task-list-title" id="localized-clearTaskList-1">Clear Task List?</p>
                 <div class="modal-buttons">
-                    <button data-i18n="Yes" id="confirm-clear-button">Yes</button>
-                    <button data-i18n="Cancel" id="cancel-clear-button">Cancel</button>
+                    <button id="confirm-clear-button">Yes</button>
+                    <button id="cancel-clear-button">Cancel</button>
                 </div>
             </div>
         </div>
@@ -107,19 +107,19 @@
     </section>
 
     <div id="footer">
-        <div data-i18n="saved" id="changes-modal-success" class="display-none">Saved</div>
+        <div id="changes-modal-success" class="display-none">Saved</div>
 
         <div id="settings-btn" class="settings-button"></div>
 
         <div id="settings-modal" class="set-modal display-none user-select-none">
             <div id="settings-left" class="settings-left">
-                <div data-i18n="General-section" class="settings-section" data-target="general-section">General</div>
-                <div data-i18n="D-day-section" class="settings-section" data-target="d-day-section">D-day</div>
-                <div data-i18n="Background-section" class="settings-section" data-target="background-section">Background</div>
-                <div data-i18n="Alarm-section" class="settings-section" data-target="alarm-section">Alarm</div>
-                <div data-i18n="Help-section" class="settings-section" data-target="help-section">Help*</div>
-                <div data-i18n="Whats-new-section" class="settings-section" data-target="whats-new-section">What's new</div>
-                <div data-i18n="About-section" class="settings-section" data-target="about-section">About</div>
+                <div class="settings-section" data-target="general-section" id="localized-generalSection-1">General</div>
+                <div class="settings-section" data-target="d-day-section" id="localized-dDaySection-1">D-day</div>
+                <div class="settings-section" data-target="background-section" id="localized-backgroundSection-1">Background</div>
+                <div class="settings-section" data-target="alarm-section" id="localized-alarmSection-1">Alarm</div>
+                <div class="settings-section" data-target="help-section" id="localized-helpSection-1">Help*</div>
+                <div class="settings-section" data-target="whats-new-section" id="localized-whatsNewSection-1">What's new</div>
+                <div class="settings-section" data-target="about-section" id="localized-aboutSection-1">About</div>
             </div>
             <div class="divider"></div>
             <div class="settings-right-container">
@@ -128,49 +128,49 @@
                         <div class="setting-header">Display</div>
 
                         <div class="setting-item">
-                            <span data-i18n="Language">Language</span>
+                            <span id="language-selector-label">Language</span>
                             <select id="languageSelector">
                                 <option value="en">English</option>
-                                <option value="ko">한국어</option>
                                 <option value="fr">Français</option>
+                                <option value="ja">日本語</option>
+                                <option value="ko">한국어</option>
                                 <option value="ru">Русский</option>
                                 <option value="uk">Українська</option>
-                                <option value="zh">中文</option>
-                                <option value="ja">日本語</option>
+                                <option value="zh_CN">中文</option>
                             </select>
                         </div>
                         <hr>
 
                         <div class="setting-item">
-                            <span data-i18n="Bookmark">Bookmark</span>
+                            <span id="localized-bookmark-1">Bookmark</span>
                             <div id="bookmark-toggle" class="toggle-switch on">
                                 <div class="toggle-handle"></div>
                             </div>
                         </div>
                         <hr>
                         <div class="setting-item">
-                            <span data-i18n="search">Search</span>
+                            <span id="localized-searchPlaceholder-1">Search</span>
                             <div id="search-toggle" class="toggle-switch on">
                                 <div class="toggle-handle"></div>
                             </div>
                         </div>
                         <hr>
                         <div class="setting-item">
-                            <span data-i18n="Weather">Weather</span>
+                            <span id="localized-weather-1">Weather</span>
                             <div id="weather-toggle" class="toggle-switch on">
                                 <div class="toggle-handle"></div>
                             </div>
                         </div>
                         <hr>
                         <div class="setting-item">
-                            <span data-i18n="Greetings">Greetings</span>
+                            <span id="localized-greetings-1">Greetings</span>
                             <div id="greetings-toggle" class="toggle-switch on">
                                 <div class="toggle-handle"></div>
                             </div>
                         </div>
                         <hr>
                         <div class="setting-item">
-                            <span data-i18n="Task-List">Task List</span>
+                            <span id="localized-taskList-1">Task List</span>
                             <div id="task-list-toggle" class="toggle-switch on">
                                 <div class="toggle-handle"></div>
                             </div>
@@ -178,19 +178,19 @@
 
                         <div class="other-headers">Clock</div>
                         <div class="setting-item">
-                            <span data-i18n="24-clock">24-clock</span>
+                            <span id="localized-clock24Hour-1">24-clock</span>
                             <div id="clock-toggle" class="toggle-switch on">
                                 <div class="toggle-handle"></div>
                             </div>
                         </div>
                         <div class="setting-item">
-                            <span data-i18n="clock-format" class="setting-item-addition">Clock format: 24 hour</span>
+                            <span class="setting-item-addition" id="localized-clockFormat-1">Clock format: 24 hour</span>
                         </div>
 
-                        <div data-i18n="change-name" class="other-headers">Change name</div>
+                        <div class="other-headers" id="localized-changeName-1">Change name</div>
                         <div>
-                            <input type="text" id="name-input" data-i18n="Enter-name-placeholder" placeholder="Enter your name here">
-                            <button data-i18n="Submit" id="submit-btn">Submit</button>
+                            <input type="text" id="name-input" placeholder="Enter your name here">
+                            <button id="submit-btn">Submit</button>
                         </div>
                     </div>
                     <div id="d-day-section" class="settings-content">
@@ -202,32 +202,32 @@
                         </div>
                         <hr>
                         <div id="setting-item-d-day" class="setting-item">
-                            <span data-i18n="d-day-display">Display D-day at the top of the page.</span>
+                            <span id="localized-dDayDisplay-1">Display D-day at the top of the page.</span>
                         </div>
                         <input type="text" id="dateInput" placeholder="dd.mm.yyyy">
-                        <button data-i18n="Submit" id="submitDate">Submit</button>
-                        <button data-i18n="Reset" id="resetDate">Reset</button>
+                        <button id="submitDate">Submit</button>
+                        <button id="resetDate">Reset</button>
                     </div>
                     <div id="background-section" class="settings-content">
                         <div class="setting-item">
-                            <span data-i18n="background-opacity">Background Opacity</span>
+                            <span id="localized-backgroundOpacity-1">Background Opacity</span>
                         </div>
                         <input type="range" min="0" max="1" step="0.01" value="0.7" class="setting-slider">
-                        <span data-i18n="setting-background" class="setting-background">0: transparent, 1: opaque</span>
+                        <span class="setting-background" id="localized-settingBackground-1">0: transparent, 1: opaque</span>
                         <div class="slider-value-container">
                             <span class="slider-value">0.7</span>
                         </div>
-                        <div data-i18n="slideshow" class="setting-header-slideshow">Slideshow</div>
+                        <div class="setting-header-slideshow" id="localized-slideshow-1">Slideshow</div>
                         <div class="setting-item">
-                            <span data-i18n="slideshow">Slideshow</span>
+                            <span id="localized-slideshow-2">Slideshow</span>
                             <div id="slideshow-toggle" class="toggle-switch-slideshow on">
                                 <div class="toggle-handle"></div>
                             </div>
                         </div>
-                        <span data-i18n="slideshow-background" class="setting-background">Slideshow for background images (reload)</span>
+                        <span class="setting-background" id="localized-slideshowBackground-1">Slideshow for background images (reload)</span>
                         <hr class="background-hr">
                         <div class="setting-item">
-                            <span data-i18n="slideshow-speed">Slideshow speed (sec.)</span>
+                            <span id="localized-slideshowSpeed-1">Slideshow speed (sec.)</span>
                         </div>
                         <input type="range" min="3" max="900" step="1" value="10" class="slideshow-speed">
                         <div class="slideshow-speed-value-container">
@@ -235,91 +235,91 @@
                         </div>
                         <hr>
                         <div class="setting-item">
-                            <span data-i18n="edit-images-list">Edit images list</span>
-                            <button data-i18n="Edit" id="edit-images-modal-btn">Edit</button>
+                            <span id="localized-editImagesList-1">Edit images list</span>
+                            <button id="edit-images-modal-btn">Edit</button>
                         </div>
                     </div>
                     <div id="alarm-section" class="settings-content">
                         <div class="setting-item timer-button-switch">
-                            <span data-i18n="timer-btn">Display Timer Button</span>
+                            <span id="localized-timerBtn-1">Display Timer Button</span>
                             <div id="timer-button-toggle" class="toggle-switch on">
                                 <div class="toggle-handle"></div>
                             </div>
                         </div>
                         <hr>
                         <div class="setting-item timer-button-switch">
-                            <span data-i18n="alarm-sound">Alarm sound</span>
+                            <span id="localized-alarmSound-1">Alarm sound</span>
                             <select id="timerSoundSelect"></select>
                             <button id="playSoundButton" style="display: inline-block"></button>
                             <button id="saveSoundButton" style="display: inline-block"></button>
                         </div>
                     </div>
                     <div id="help-section" class="settings-content">
-                        <div data-i18n="contact-dev" class="setting-header">Contact Developer</div>
+                        <div class="setting-header" id="localized-contactDev-1">Contact Developer</div>
                         <div class="whatsnew">
-                            <span data-i18n="contact-message">If you have any problems with the application, you find errors or have suggestions for improvement, as well as background images, write to me -  <a href="mailto:kimrenny.tech@gmail.com
+                            <span id="localized-contactMessage-1">If you have any problems with the application, you find errors or have suggestions for improvement, as well as background images, write to me -  <a href="mailto:kimrenny.tech@gmail.com
                                 ">kimrenny.tech@gmail.com
                             </a></span> 
-                            <span data-i18n="localize-contact-message" class="font-12">If you are fluent in your language and would like help adding your language to the application, please write to the email above indicating the translation of all (if possible) application elements.</span>
+                            <span class="font-12" id="localized-localizeContactMessage-1">If you are fluent in your language and would like help adding your language to the application, please write to the email above indicating the translation of all (if possible) application elements.</span>
                         </div>
                     </div>
                     <div id="whats-new-section" class="settings-content">
                         <div class="setting-header">1.1.0</div>
                         <div class="whatsnew">
-                            <span data-i18n="whats-new-110-1">Add your own custom background images.</span>
-                            <span data-i18n="whats-new-110-2">Custom backgrounds and selections are preserved across extension updates.</span>
-                            <span data-i18n="whats-new-110-3">The image editor now includes Select All and Deselect All.</span>
+                            <span id="localized-whatsNew1101-1">Add your own custom background images.</span>
+                            <span id="localized-whatsNew1102-1">Custom backgrounds and selections are preserved across extension updates.</span>
+                            <span id="localized-whatsNew1103-1">The image editor now includes Select All and Deselect All.</span>
                         </div>
                         <div class="other-setting-header">1.0.2</div>
                         <div class="whatsnew">
-                            <span data-i18n="whats-new-102-1">Added new background images.</span>
-                            <span data-i18n="whats-new-102-2">The display of image previews has been optimized.</span>
+                            <span id="localized-whatsNew1021-1">Added new background images.</span>
+                            <span id="localized-whatsNew1022-1">The display of image previews has been optimized.</span>
                         </div>
                         <div class="other-setting-header">1.0.1.2</div>
                         <div class="whatsnew">
-                            <span data-i18n="whats-new-1012-1">The ability to change the search engine has been disabled. All searches are now performed through the browser's default search engine (a requirement for Google Chrome applications).</span>
+                            <span id="localized-whatsNew10121-1">The ability to change the search engine has been disabled. All searches are now performed through the browser's default search engine (a requirement for Google Chrome applications).</span>
                         </div>
                         <div class="other-setting-header">1.0.1.1</div>
                         <div class="whatsnew">
-                            <span data-i18n="whats-new-1004-1">Added new background images.</span>
+                            <span id="localized-whatsNew10041-1">Added new background images.</span>
                         </div>
                         <div class="other-setting-header">1.0.1</div>
                         <div class="whatsnew">
-                            <span data-i18n="whats-new-1005-1">Added the feature to change the list of background images.</span>
-                            <span data-i18n="whats-new-1005-2">Added translation into several popular languages ​​in the world.</span>
+                            <span id="localized-whatsNew10051-1">Added the feature to change the list of background images.</span>
+                            <span id="localized-whatsNew10052-1">Added translation into several popular languages ​​in the world.</span>
                         </div>
                         <div class="other-setting-header">1.0.0.4</div>
                         <div class="whatsnew">
-                            <span data-i18n="whats-new-1004-1">Added new background images.</span>
-                            <span data-i18n="whats-new-1004-2">Minor functionality changes and bug fixes.</span>
+                            <span id="localized-whatsNew10041-2">Added new background images.</span>
+                            <span id="localized-whatsNew10042-1">Minor functionality changes and bug fixes.</span>
                         </div>
                         <div class="other-setting-header">1.0.0.3</div>
                         <div class="whatsnew">
-                            <span data-i18n="whats-new-1003-1">Added new background images. To enable their display, change the slider's position in the "Background" settings to the maximum value (41).</span>
-                            <span data-i18n="whats-new-1003-2" class="font-12-important">If you did not change this value manually, it will change automatically.</span>
+                            <span id="localized-whatsNew10031-1">Added new background images. To enable their display, change the slider's position in the "Background" settings to the maximum value (41).</span>
+                            <span class="font-12-important" id="localized-whatsNew10032-1">If you did not change this value manually, it will change automatically.</span>
                         </div>
                         <div class="other-setting-header">1.0.0.2</div>
                         <div class="whatsnew">
-                            <span data-i18n="whats-new-1002-1">Fixed some bugs.</span>
+                            <span id="localized-whatsNew10021-1">Fixed some bugs.</span>
                         </div>
                         <div class="other-setting-header">1.0.0.1</div>
                         <div class="whatsnew">
-                            <span data-i18n="whats-new-1001-1">Minor functional and display bug fixes.</span>
+                            <span id="localized-whatsNew10011-1">Minor functional and display bug fixes.</span>
                         </div>
                         <div class="other-setting-header">1.0.0</div>
                         <div class="whatsnew">
-                            <span data-i18n="whats-new-1000-1">Added D-day.</span>
-                            <span data-i18n="whats-new-1000-2">Added background images.</span>
-                            <span data-i18n="whats-new-1000-3">Added Task List.</span>
-                            <span data-i18n="whats-new-1000-4">Added Search Bar.</span>
-                            <span data-i18n="whats-new-1000-5">Added Timer.</span>
+                            <span id="localized-whatsNew10001-1">Added D-day.</span>
+                            <span id="localized-whatsNew10002-1">Added background images.</span>
+                            <span id="localized-whatsNew10003-1">Added Task List.</span>
+                            <span id="localized-whatsNew10004-1">Added Search Bar.</span>
+                            <span id="localized-whatsNew10005-1">Added Timer.</span>
                         </div>
                     </div>
                     <div id="about-section" class="settings-content">
                     <div class="about">
                         <img class="about-image" src="images/favicon.png" alt="">
                         <span class="font-bold">KHome - KDrama New Tab</span>
-                        <span data-i18n="current-version">Current Version 1.1.0</span>
+                        <span id="localized-currentVersion-1">Current Version 1.1.0</span>
                         <span>
                         <a href="https://chromewebstore.google.com/detail/lembmipemeoknhfmibcladjbediaefjk" target="_blank">Rate this app</a>
                         <span>if you like it.</span>
@@ -344,17 +344,17 @@
 
                 <div id="timers-modal" class="timers-modal display-none hidden">
                     <div id="timers-modal-content" class="timers-modal-content">
-                        <div data-i18n="timer-type" class="timers-select-header user-select-none">Select Type:</div>
+                        <div class="timers-select-header user-select-none" id="localized-timerType-1">Select Type:</div>
                         <div id="timers-select-container" class="timers-select-container">
                             <div class="setting-item-timers">
-                                <span data-i18n="timer">Timer</span>
+                                <span id="localized-timer-1">Timer</span>
                                 <div id="timer-toggle-alarm" class="toggle-switch off">
                                     <div class="toggle-handle"></div>
                                 </div>
                             </div>
                         <hr>
                             <div class="setting-item-timers">
-                                <span data-i18n="alarm">Alarm</span>
+                                <span id="localized-alarm-1">Alarm</span>
                                 <div id="alarm-toggle-alarm" class="toggle-switch off">
                                     <div class="toggle-handle"></div>
                                 </div>
@@ -368,15 +368,15 @@
                         <div id="timers-modal-list"></div>
                     </div>
                     <div id="timers-create-btn-arrow" class="timers-create-button-arrow">←</div>
-                    <div data-i18n="add-new-timer" id="timers-create-btn" class="timers-create-button">Add new timer</div>
+                    <div id="timers-create-btn" class="timers-create-button">Add new timer</div>
                 </div>
 
                 <div id="timer-create-modal" class="timer-create-modal display-none">
                     <div id="timer-create-modal-content">
-                        <input data-i18n="new-timer-name" type="text" id="timer-name" placeholder="Timer Name*">
-                        <input data-i18n="new-timer-time" type="text" id="timer-time" placeholder="Time*" readonly>
-                        <button data-i18n="Save" id="save-timer-btn">Save</button>
-                        <button data-i18n="Cancel" id="cancel-timer-btn">Cancel</button>
+                        <input type="text" id="timer-name" placeholder="Timer Name*">
+                        <input type="text" id="timer-time" placeholder="Time*" readonly>
+                        <button id="save-timer-btn">Save</button>
+                        <button id="cancel-timer-btn">Cancel</button>
                     </div>
                 </div>
 
@@ -385,15 +385,15 @@
                         <div id="alarms-modal-list"></div>
                     </div>
                     <div id="alarms-create-btn-arrow" class="alarms-create-button-arrow">←</div>
-                    <div data-i18n="add-new-alarm" id="alarms-create-btn" class="alarms-create-button">Add new alarm</div>
+                    <div id="alarms-create-btn" class="alarms-create-button">Add new alarm</div>
                 </div>
 
                 <div id="alarm-create-modal" class="alarm-create-modal display-none">
                     <div id="alarm-create-modal-content">
-                        <input data-i18n="new-alarm-name" type="text" id="alarm-name" placeholder="Alarm Name*">
+                        <input type="text" id="alarm-name" placeholder="Alarm Name*">
                         <input type="text" id="alarm-time" placeholder="00:00:00">
-                        <button data-i18n="Save" id="save-alarm-btn">Save</button>
-                        <button data-i18n="Cancel" id="cancel-alarm-btn">Cancel</button>
+                        <button id="save-alarm-btn">Save</button>
+                        <button id="cancel-alarm-btn">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -420,15 +420,15 @@
     </div>
     <div id="editImagesModal" class="modal-edit-images">
         <div class="modal-edit-images-content">
-            <span class="close">&times;</span>
-            <h2 data-i18n="select-images">Select Images</h2>
+                    <span class="close" id="edit-images-close">&times;</span>
+            <h2 id="localized-selectImages-1">Select Images</h2>
             <div class="image-grid" id="imageGrid"></div>
             <p id="custom-background-error" class="custom-background-error display-none"></p>
             <div class="edit-images-actions">
-                <button data-i18n="add-custom-image" type="button" id="addCustomImageBtn">Add custom image</button>
+                <button type="button" id="addCustomImageBtn">Add custom image</button>
                 <button type="button" id="selectAllBtn">
-                    <span data-i18n="select-all">Select All</span>
-                    <span data-i18n="deselect-all" hidden>Deselect All</span>
+                    <span id="localized-selectAll-1">Select All</span>
+                    <span hidden id="localized-deselectAll-1">Deselect All</span>
                 </button>
             </div>
             <input type="file" id="custom-background-input" accept="image/jpeg,image/png,image/webp,image/gif,.jpg,.jpeg,.png,.webp,.gif" multiple hidden>

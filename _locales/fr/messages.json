@@ -1,0 +1,498 @@
+{
+  "greetingMorning1": {
+    "message": "Bonjour, $name$ !",
+    "description": "Existing localized UI text for greeting_morning_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "ami"
+      }
+    }
+  },
+  "greetingMorning2": {
+    "message": "Salut, $name$ !",
+    "description": "Existing localized UI text for greeting_morning_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "ami"
+      }
+    }
+  },
+  "greetingMorning3": {
+    "message": "Réveille-toi, $name$ !",
+    "description": "Existing localized UI text for greeting_morning_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "ami"
+      }
+    }
+  },
+  "greetingAfternoon1": {
+    "message": "Bonjour, $name$ !",
+    "description": "Existing localized UI text for greeting_afternoon_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "ami"
+      }
+    }
+  },
+  "greetingAfternoon2": {
+    "message": "Coucou, $name$ !",
+    "description": "Existing localized UI text for greeting_afternoon_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "ami"
+      }
+    }
+  },
+  "greetingAfternoon3": {
+    "message": "Bon après-midi, $name$ !",
+    "description": "Existing localized UI text for greeting_afternoon_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "ami"
+      }
+    }
+  },
+  "greetingEvening1": {
+    "message": "Bonsoir, $name$ !",
+    "description": "Existing localized UI text for greeting_evening_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "ami"
+      }
+    }
+  },
+  "greetingEvening2": {
+    "message": "Salut, $name$ !",
+    "description": "Existing localized UI text for greeting_evening_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "ami"
+      }
+    }
+  },
+  "greetingEvening3": {
+    "message": "Bonsoir, $name$ !",
+    "description": "Existing localized UI text for greeting_evening_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "ami"
+      }
+    }
+  },
+  "greetingNight1": {
+    "message": "Bonne nuit, $name$ !",
+    "description": "Existing localized UI text for greeting_night_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "ami"
+      }
+    }
+  },
+  "greetingNight2": {
+    "message": "Dors bien, $name$ !",
+    "description": "Existing localized UI text for greeting_night_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "ami"
+      }
+    }
+  },
+  "greetingNight3": {
+    "message": "Fais de beaux rêves, $name$ !",
+    "description": "Existing localized UI text for greeting_night_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "ami"
+      }
+    }
+  },
+  "defaultUserName": {
+    "message": "Cher ami",
+    "description": "Existing localized UI text for default_user_name."
+  },
+  "greetingDefaultName": {
+    "message": "Ami",
+    "description": "Fallback name used in greetings when the user has not configured a name."
+  },
+  "addNewTask": {
+    "message": "Ajouter une tâche",
+    "description": "Existing localized UI text for add-new-task."
+  },
+  "clearTaskList": {
+    "message": "Effacer la liste ?",
+    "description": "Existing localized UI text for clear-task-list."
+  },
+  "searchPlaceholder": {
+    "message": "Recherche",
+    "description": "Existing localized UI text for search."
+  },
+  "generalSection": {
+    "message": "Général",
+    "description": "Existing localized UI text for General-section."
+  },
+  "dDaySection": {
+    "message": "Jour J",
+    "description": "Existing localized UI text for D-day-section."
+  },
+  "backgroundSection": {
+    "message": "Fond d’écran",
+    "description": "Existing localized UI text for Background-section."
+  },
+  "alarmSection": {
+    "message": "Alarme",
+    "description": "Existing localized UI text for Alarm-section."
+  },
+  "helpSection": {
+    "message": "Aide*",
+    "description": "Existing localized UI text for Help-section."
+  },
+  "whatsNewSection": {
+    "message": "Nouveautés",
+    "description": "Existing localized UI text for Whats-new-section."
+  },
+  "aboutSection": {
+    "message": "À propos",
+    "description": "Existing localized UI text for About-section."
+  },
+  "language": {
+    "message": "Langue",
+    "description": "Existing localized UI text for Language."
+  },
+  "bookmark": {
+    "message": "Favoris",
+    "description": "Existing localized UI text for Bookmark."
+  },
+  "searchSettings": {
+    "message": "Rechercher",
+    "description": "Existing localized UI text for Search."
+  },
+  "weather": {
+    "message": "Météo",
+    "description": "Existing localized UI text for Weather."
+  },
+  "greetings": {
+    "message": "Salutations",
+    "description": "Existing localized UI text for Greetings."
+  },
+  "taskList": {
+    "message": "Liste de tâches",
+    "description": "Existing localized UI text for Task-List."
+  },
+  "clock24Hour": {
+    "message": "Horloge 24h",
+    "description": "Existing localized UI text for 24-clock."
+  },
+  "clockFormat": {
+    "message": "Format de l'horloge : 24 heures",
+    "description": "Existing localized UI text for clock-format."
+  },
+  "changeName": {
+    "message": "Changer de nom",
+    "description": "Existing localized UI text for change-name."
+  },
+  "enterNamePlaceholder": {
+    "message": "Entrez votre nom ici",
+    "description": "Existing localized UI text for Enter-name-placeholder."
+  },
+  "submit": {
+    "message": "Envoyer",
+    "description": "Existing localized UI text for Submit."
+  },
+  "reset": {
+    "message": "Réinitialiser",
+    "description": "Existing localized UI text for Reset."
+  },
+  "save": {
+    "message": "Sauvegarder",
+    "description": "Existing localized UI text for Save."
+  },
+  "edit": {
+    "message": "Modifier",
+    "description": "Existing localized UI text for Edit."
+  },
+  "yes": {
+    "message": "Oui",
+    "description": "Existing localized UI text for Yes."
+  },
+  "cancel": {
+    "message": "Annuler",
+    "description": "Existing localized UI text for Cancel."
+  },
+  "searchEngine": {
+    "message": "Moteur de recherche",
+    "description": "Existing localized UI text for search-engine."
+  },
+  "dDayDisplay": {
+    "message": "Afficher Jour J en haut de la page.",
+    "description": "Existing localized UI text for d-day-display."
+  },
+  "backgroundOpacity": {
+    "message": "Opacité du fond",
+    "description": "Existing localized UI text for background-opacity."
+  },
+  "settingBackground": {
+    "message": "0 : transparent, 1 : opaque",
+    "description": "Existing localized UI text for setting-background."
+  },
+  "slideshow": {
+    "message": "Diaporama",
+    "description": "Existing localized UI text for slideshow."
+  },
+  "slideshowBackground": {
+    "message": "Diaporama pour les images de fond (recharger)",
+    "description": "Existing localized UI text for slideshow-background."
+  },
+  "slideshowSpeed": {
+    "message": "Vitesse du diaporama (sec.)",
+    "description": "Existing localized UI text for slideshow-speed."
+  },
+  "editImagesList": {
+    "message": "Modifier la liste des images",
+    "description": "Existing localized UI text for edit-images-list."
+  },
+  "timerBtn": {
+    "message": "Afficher le bouton Timer",
+    "description": "Existing localized UI text for timer-btn."
+  },
+  "alarmSound": {
+    "message": "Son de l'alarme",
+    "description": "Existing localized UI text for alarm-sound."
+  },
+  "contactDev": {
+    "message": "Contacter le développeur",
+    "description": "Existing localized UI text for contact-dev."
+  },
+  "contactMessage": {
+    "message": "Si vous avez des problèmes avec l'application, trouvez des erreurs ou avez des suggestions, ainsi que des images de fond, écrivez-moi - <a href='mailto:kimrenny.tech@gmail.com'>kimrenny.tech@gmail.com</a>",
+    "description": "Existing localized UI text for contact-message."
+  },
+  "localizeContactMessage": {
+    "message": "Si vous souhaitez aider à ajouter votre langue, écrivez à l'email ci-dessus avec les traductions des éléments de l'application.",
+    "description": "Existing localized UI text for localize-contact-message."
+  },
+  "whatsNew1021": {
+    "message": "Ajout de nouvelles images de fond.",
+    "description": "Existing localized UI text for whats-new-102-1."
+  },
+  "whatsNew1022": {
+    "message": "L'affichage des aperçus d'images a été optimisé.",
+    "description": "Existing localized UI text for whats-new-102-2."
+  },
+  "whatsNew1101": {
+    "message": "Ajoutez vos propres images d’arrière-plan.",
+    "description": "Existing localized UI text for whats-new-110-1."
+  },
+  "whatsNew1102": {
+    "message": "Vos images personnalisées et vos sélections sont conservées après les mises à jour de l’extension.",
+    "description": "Existing localized UI text for whats-new-110-2."
+  },
+  "whatsNew1103": {
+    "message": "L’éditeur d’images propose désormais « Tout sélectionner » et « Tout désélectionner ».",
+    "description": "Existing localized UI text for whats-new-110-3."
+  },
+  "whatsNew10121": {
+    "message": "La possibilité de changer le moteur de recherche a été désactivée. Toutes les recherches seront désormais effectuées via le moteur de recherche par défaut du navigateur, comme l'exige les applications Google Chrome.",
+    "description": "Existing localized UI text for whats-new-1012-1."
+  },
+  "whatsNew10051": {
+    "message": "Ajout de la liste des images de fond.",
+    "description": "Existing localized UI text for whats-new-1005-1."
+  },
+  "whatsNew10052": {
+    "message": "Ajout de plusieurs langues populaires.",
+    "description": "Existing localized UI text for whats-new-1005-2."
+  },
+  "whatsNew10041": {
+    "message": "Ajout de nouvelles images de fond.",
+    "description": "Existing localized UI text for whats-new-1004-1."
+  },
+  "whatsNew10042": {
+    "message": "Petites modifications fonctionnelles et corrections.",
+    "description": "Existing localized UI text for whats-new-1004-2."
+  },
+  "whatsNew10031": {
+    "message": "Ajout de nouvelles images de fond.",
+    "description": "Existing localized UI text for whats-new-1003-1."
+  },
+  "whatsNew10032": {
+    "message": "Si vous n'avez pas changé cette valeur manuellement, elle sera mise à jour automatiquement.",
+    "description": "Existing localized UI text for whats-new-1003-2."
+  },
+  "whatsNew10021": {
+    "message": "Correction de certains bugs.",
+    "description": "Existing localized UI text for whats-new-1002-1."
+  },
+  "whatsNew10011": {
+    "message": "Corrections mineures.",
+    "description": "Existing localized UI text for whats-new-1001-1."
+  },
+  "whatsNew10001": {
+    "message": "Ajout de Jour J.",
+    "description": "Existing localized UI text for whats-new-1000-1."
+  },
+  "whatsNew10002": {
+    "message": "Ajout des images de fond.",
+    "description": "Existing localized UI text for whats-new-1000-2."
+  },
+  "whatsNew10003": {
+    "message": "Ajout de la liste des tâches.",
+    "description": "Existing localized UI text for whats-new-1000-3."
+  },
+  "whatsNew10004": {
+    "message": "Ajout de la barre de recherche.",
+    "description": "Existing localized UI text for whats-new-1000-4."
+  },
+  "whatsNew10005": {
+    "message": "Ajout du Timer.",
+    "description": "Existing localized UI text for whats-new-1000-5."
+  },
+  "currentVersion": {
+    "message": "Version actuelle 1.1.0",
+    "description": "Existing localized UI text for current-version."
+  },
+  "timerType": {
+    "message": "Sélectionner le type :",
+    "description": "Existing localized UI text for timer-type."
+  },
+  "timer": {
+    "message": "Minuteur",
+    "description": "Existing localized UI text for timer."
+  },
+  "alarm": {
+    "message": "Alarme",
+    "description": "Existing localized UI text for alarm."
+  },
+  "addNewTimer": {
+    "message": "Ajouter un nouveau minuteur",
+    "description": "Existing localized UI text for add-new-timer."
+  },
+  "newTimerName": {
+    "message": "Nom du minuteur*",
+    "description": "Existing localized UI text for new-timer-name."
+  },
+  "newTimerTime": {
+    "message": "Temps*",
+    "description": "Existing localized UI text for new-timer-time."
+  },
+  "addNewAlarm": {
+    "message": "Ajouter une nouvelle alarme",
+    "description": "Existing localized UI text for add-new-alarm."
+  },
+  "newAlarmName": {
+    "message": "Nom de l'alarme*",
+    "description": "Existing localized UI text for new-alarm-name."
+  },
+  "selectImages": {
+    "message": "Sélectionner les images",
+    "description": "Existing localized UI text for select-images."
+  },
+  "selectAll": {
+    "message": "Tout sélectionner",
+    "description": "Existing localized UI text for select-all."
+  },
+  "deselectAll": {
+    "message": "Tout désélectionner",
+    "description": "Existing localized UI text for deselect-all."
+  },
+  "addCustomImage": {
+    "message": "Ajouter une image personnalisée",
+    "description": "Existing localized UI text for add-custom-image."
+  },
+  "removeCustomImage": {
+    "message": "Supprimer l’image personnalisée",
+    "description": "Existing localized UI text for remove-custom-image."
+  },
+  "customBackgroundUnsupported": {
+    "message": "Ce type de fichier n'est pas pris en charge.",
+    "description": "Existing localized UI text for custom-background-unsupported."
+  },
+  "customBackgroundInvalid": {
+    "message": "Cette image n'a pas pu être lue.",
+    "description": "Existing localized UI text for custom-background-invalid."
+  },
+  "customBackgroundCopyFailed": {
+    "message": "L'image n'a pas pu être enregistrée.",
+    "description": "Existing localized UI text for custom-background-copy-failed."
+  },
+  "customBackgroundSourceUnavailable": {
+    "message": "Le fichier sélectionné n'est plus disponible.",
+    "description": "Existing localized UI text for custom-background-source-unavailable."
+  },
+  "customBackgroundStorageError": {
+    "message": "Impossible de charger les images personnalisées.",
+    "description": "Existing localized UI text for custom-background-storage-error."
+  },
+  "saved": {
+    "message": "sauvegardé",
+    "description": "Existing localized UI text for saved."
+  },
+  "limitCustomLinks": {
+    "message": "Limite de création de liens personnalisés dépassée !",
+    "description": "Existing localized UI text for Limit-custom-links."
+  },
+  "extensionName": {
+    "message": "KHome - KDrama New Tab",
+    "description": "The localized name of the Chrome extension."
+  },
+  "extensionDescription": {
+    "message": "Définit une page d’accueil personnalisée pour Chrome.",
+    "description": "The localized description shown for the extension."
+  },
+  "newTabTitle": {
+    "message": "Nouvel onglet",
+    "description": "The document title of the extension's new-tab page."
+  },
+  "dDayLabel": {
+    "message": "Jour J",
+    "description": "Label shown when the configured D-day is today."
+  },
+  "invalidDate": {
+    "message": "Veuillez saisir une date valide.",
+    "description": "Validation message shown when an invalid D-day is entered."
+  },
+  "ok": {
+    "message": "OK",
+    "description": "Confirmation button label."
+  },
+  "deleteLink": {
+    "message": "Supprimer le lien",
+    "description": "Accessible name for the delete-link control."
+  },
+  "settings": {
+    "message": "Ouvrir les paramètres",
+    "description": "Accessible name for the settings control."
+  },
+  "viewTimers": {
+    "message": "Afficher les minuteurs et les alarmes",
+    "description": "Accessible name for the timers view control."
+  },
+  "close": {
+    "message": "Fermer",
+    "description": "Accessible name for a close control."
+  },
+  "playSound": {
+    "message": "Lire le son de l'alarme",
+    "description": "Accessible name for the play-sound control."
+  },
+  "saveSound": {
+    "message": "Enregistrer le son de l'alarme",
+    "description": "Accessible name for the save-sound control."
+  },
+  "pauseTimer": {
+    "message": "Mettre le minuteur en pause",
+    "description": "Accessible name for the pause-timer control."
+  }
+}

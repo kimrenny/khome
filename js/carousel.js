@@ -10,6 +10,7 @@ const {
 } = require("./backgroundCatalog");
 const customBackgroundStore = require("./customBackgroundStore");
 const { importCustomImages } = require("./customBackgroundService");
+const { appI18n } = require("./appI18n");
 const {
   DEFAULT_SLIDESHOW_INTERVAL,
   normalizeSlideshowInterval,
@@ -35,6 +36,7 @@ let selectedImages = [];
 let customRecords = [];
 let availableBackgroundIds = [...images];
 let customCatalogReady = false;
+let customBackgroundErrorMessageKey;
 
 const customObjectUrls = new Map();
 
@@ -96,8 +98,8 @@ function updateSelectAllButton() {
     selectedImages,
     availableBackgroundIds,
   );
-  const selectAllLabel = button.querySelector('[data-i18n="select-all"]');
-  const deselectAllLabel = button.querySelector('[data-i18n="deselect-all"]');
+  const selectAllLabel = document.getElementById("localized-selectAll-1");
+  const deselectAllLabel = document.getElementById("localized-deselectAll-1");
 
   if (selectAllLabel && deselectAllLabel) {
     selectAllLabel.hidden = allSelected;
@@ -191,8 +193,10 @@ function appendGridItem(id, thumbSrc, isCustom) {
     const removeBtn = document.createElement("button");
     removeBtn.type = "button";
     removeBtn.className = "remove-custom-bg";
-    removeBtn.setAttribute("data-i18n-aria-label", "remove-custom-image");
-    removeBtn.setAttribute("aria-label", "Remove");
+    removeBtn.setAttribute(
+      "aria-label",
+      appI18n.getMessage("removeCustomImage"),
+    );
     removeBtn.textContent = "×";
     removeBtn.addEventListener("click", function (event) {
       event.preventDefault();
@@ -230,25 +234,16 @@ function showCustomBackgroundError(reason) {
   }
 
   const keys = {
-    unsupported: "custom-background-unsupported",
-    invalid: "custom-background-invalid",
-    "copy-failed": "custom-background-copy-failed",
-    "source-unavailable": "custom-background-source-unavailable",
-    "storage-error": "custom-background-storage-error",
+    unsupported: "customBackgroundUnsupported",
+    invalid: "customBackgroundInvalid",
+    "copy-failed": "customBackgroundCopyFailed",
+    "source-unavailable": "customBackgroundSourceUnavailable",
+    "storage-error": "customBackgroundStorageError",
   };
 
-  const fallbacks = {
-    "custom-background-unsupported": "This file type is not supported.",
-    "custom-background-invalid": "This image could not be read.",
-    "custom-background-copy-failed": "The image could not be saved.",
-    "custom-background-source-unavailable":
-      "The selected file is no longer available.",
-    "custom-background-storage-error": "Custom images could not be loaded.",
-  };
-
-  const key = keys[reason] || "custom-background-storage-error";
-  errorEl.setAttribute("data-i18n", key);
-  errorEl.textContent = fallbacks[key];
+  const key = keys[reason] || "customBackgroundStorageError";
+  customBackgroundErrorMessageKey = key;
+  errorEl.textContent = appI18n.getMessage(key);
   errorEl.classList.remove("display-none");
 }
 
@@ -257,9 +252,25 @@ function clearCustomBackgroundError() {
   if (!errorEl) {
     return;
   }
+  customBackgroundErrorMessageKey = undefined;
   errorEl.textContent = "";
   errorEl.classList.add("display-none");
 }
+
+function updateCustomBackgroundMessages() {
+  document.querySelectorAll(".remove-custom-bg").forEach((button) => {
+    button.setAttribute("aria-label", appI18n.getMessage("removeCustomImage"));
+  });
+
+  if (customBackgroundErrorMessageKey) {
+    const errorEl = document.getElementById("custom-background-error");
+    if (errorEl) {
+      errorEl.textContent = appI18n.getMessage(customBackgroundErrorMessageKey);
+    }
+  }
+}
+
+appI18n.onLanguageChanged(updateCustomBackgroundMessages);
 
 async function decodeCustomImage(blob) {
   if (typeof createImageBitmap === "function") {

@@ -1,0 +1,498 @@
+{
+  "greetingMorning1": {
+    "message": "Доброго ранку, $name$!",
+    "description": "Existing localized UI text for greeting_morning_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "друже"
+      }
+    }
+  },
+  "greetingMorning2": {
+    "message": "Прокидайся, $name$!",
+    "description": "Existing localized UI text for greeting_morning_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "друже"
+      }
+    }
+  },
+  "greetingMorning3": {
+    "message": "Ранок, $name$!",
+    "description": "Existing localized UI text for greeting_morning_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "друже"
+      }
+    }
+  },
+  "greetingAfternoon1": {
+    "message": "Привіт, $name$!",
+    "description": "Existing localized UI text for greeting_afternoon_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "друже"
+      }
+    }
+  },
+  "greetingAfternoon2": {
+    "message": "Хай, $name$!",
+    "description": "Existing localized UI text for greeting_afternoon_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "друже"
+      }
+    }
+  },
+  "greetingAfternoon3": {
+    "message": "Добрий день, $name$!",
+    "description": "Existing localized UI text for greeting_afternoon_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "друже"
+      }
+    }
+  },
+  "greetingEvening1": {
+    "message": "Добрий вечір, $name$!",
+    "description": "Existing localized UI text for greeting_evening_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "друже"
+      }
+    }
+  },
+  "greetingEvening2": {
+    "message": "Вечір, $name$!",
+    "description": "Existing localized UI text for greeting_evening_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "друже"
+      }
+    }
+  },
+  "greetingEvening3": {
+    "message": "Привіт, $name$!",
+    "description": "Existing localized UI text for greeting_evening_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "друже"
+      }
+    }
+  },
+  "greetingNight1": {
+    "message": "На добраніч, $name$!",
+    "description": "Existing localized UI text for greeting_night_1.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "друже"
+      }
+    }
+  },
+  "greetingNight2": {
+    "message": "Солодких снів, $name$!",
+    "description": "Existing localized UI text for greeting_night_2.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "друже"
+      }
+    }
+  },
+  "greetingNight3": {
+    "message": "Доброї ночі, $name$!",
+    "description": "Existing localized UI text for greeting_night_3.",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "друже"
+      }
+    }
+  },
+  "defaultUserName": {
+    "message": "Дорогий друже",
+    "description": "Existing localized UI text for default_user_name."
+  },
+  "greetingDefaultName": {
+    "message": "Друже",
+    "description": "Fallback name used in greetings when the user has not configured a name."
+  },
+  "addNewTask": {
+    "message": "Додати нове завдання",
+    "description": "Existing localized UI text for add-new-task."
+  },
+  "clearTaskList": {
+    "message": "Очистити список завдань?",
+    "description": "Existing localized UI text for clear-task-list."
+  },
+  "searchPlaceholder": {
+    "message": "Пошук",
+    "description": "Existing localized UI text for search."
+  },
+  "generalSection": {
+    "message": "Загальне",
+    "description": "Existing localized UI text for General-section."
+  },
+  "dDaySection": {
+    "message": "D-day",
+    "description": "Existing localized UI text for D-day-section."
+  },
+  "backgroundSection": {
+    "message": "Фон",
+    "description": "Existing localized UI text for Background-section."
+  },
+  "alarmSection": {
+    "message": "Будильник",
+    "description": "Existing localized UI text for Alarm-section."
+  },
+  "helpSection": {
+    "message": "Допомога*",
+    "description": "Existing localized UI text for Help-section."
+  },
+  "whatsNewSection": {
+    "message": "Новини",
+    "description": "Existing localized UI text for Whats-new-section."
+  },
+  "aboutSection": {
+    "message": "Про додаток",
+    "description": "Existing localized UI text for About-section."
+  },
+  "language": {
+    "message": "Мова",
+    "description": "Existing localized UI text for Language."
+  },
+  "bookmark": {
+    "message": "Закладка",
+    "description": "Existing localized UI text for Bookmark."
+  },
+  "searchSettings": {
+    "message": "Пошук",
+    "description": "Existing localized UI text for Search."
+  },
+  "weather": {
+    "message": "Погода",
+    "description": "Existing localized UI text for Weather."
+  },
+  "greetings": {
+    "message": "Привітання",
+    "description": "Existing localized UI text for Greetings."
+  },
+  "taskList": {
+    "message": "Список завдань",
+    "description": "Existing localized UI text for Task-List."
+  },
+  "clock24Hour": {
+    "message": "24-годинний формат",
+    "description": "Existing localized UI text for 24-clock."
+  },
+  "clockFormat": {
+    "message": "Формат годинника: 24 години",
+    "description": "Existing localized UI text for clock-format."
+  },
+  "changeName": {
+    "message": "Змінити ім'я",
+    "description": "Existing localized UI text for change-name."
+  },
+  "enterNamePlaceholder": {
+    "message": "Введіть своє ім'я",
+    "description": "Existing localized UI text for Enter-name-placeholder."
+  },
+  "submit": {
+    "message": "Зберегти",
+    "description": "Existing localized UI text for Submit."
+  },
+  "reset": {
+    "message": "Скинути",
+    "description": "Existing localized UI text for Reset."
+  },
+  "save": {
+    "message": "Зберегти",
+    "description": "Existing localized UI text for Save."
+  },
+  "edit": {
+    "message": "Редагувати",
+    "description": "Existing localized UI text for Edit."
+  },
+  "yes": {
+    "message": "Так",
+    "description": "Existing localized UI text for Yes."
+  },
+  "cancel": {
+    "message": "Скасувати",
+    "description": "Existing localized UI text for Cancel."
+  },
+  "searchEngine": {
+    "message": "Пошукова система",
+    "description": "Existing localized UI text for search-engine."
+  },
+  "dDayDisplay": {
+    "message": "Показати D-day вгорі сторінки.",
+    "description": "Existing localized UI text for d-day-display."
+  },
+  "backgroundOpacity": {
+    "message": "Непрозорість фону",
+    "description": "Existing localized UI text for background-opacity."
+  },
+  "settingBackground": {
+    "message": "0: прозорий, 1: непрозорий",
+    "description": "Existing localized UI text for setting-background."
+  },
+  "slideshow": {
+    "message": "Слайд-шоу",
+    "description": "Existing localized UI text for slideshow."
+  },
+  "slideshowBackground": {
+    "message": "Слайд-шоу для фонового зображення (оновити)",
+    "description": "Existing localized UI text for slideshow-background."
+  },
+  "slideshowSpeed": {
+    "message": "Швидкість слайд-шоу (сек.)",
+    "description": "Existing localized UI text for slideshow-speed."
+  },
+  "editImagesList": {
+    "message": "Редагувати список зображень",
+    "description": "Existing localized UI text for edit-images-list."
+  },
+  "timerBtn": {
+    "message": "Показати кнопку таймера",
+    "description": "Existing localized UI text for timer-btn."
+  },
+  "alarmSound": {
+    "message": "Звук будильника",
+    "description": "Existing localized UI text for alarm-sound."
+  },
+  "contactDev": {
+    "message": "Зв'язатися з розробником",
+    "description": "Existing localized UI text for contact-dev."
+  },
+  "contactMessage": {
+    "message": "Якщо у вас є проблеми з додатком, знайдені помилки або пропозиції, напишіть мені - <a href='mailto:kimrenny.tech@gmail.com'>kimrenny.tech@gmail.com</a>",
+    "description": "Existing localized UI text for contact-message."
+  },
+  "localizeContactMessage": {
+    "message": "Якщо ви володієте своєю мовою і хочете допомогти з додаванням мови в додаток, напишіть на вказану вище електронну пошту, надавши переклад усіх (по можливості) елементів додатку.",
+    "description": "Existing localized UI text for localize-contact-message."
+  },
+  "whatsNew1021": {
+    "message": "Додано нові фонові зображення.",
+    "description": "Existing localized UI text for whats-new-102-1."
+  },
+  "whatsNew1022": {
+    "message": "Оптимізовано відображення прев'ю зображень.",
+    "description": "Existing localized UI text for whats-new-102-2."
+  },
+  "whatsNew1101": {
+    "message": "Додавайте власні фонові зображення.",
+    "description": "Existing localized UI text for whats-new-110-1."
+  },
+  "whatsNew1102": {
+    "message": "Власні фони та вибрані зображення зберігаються після оновлення розширення.",
+    "description": "Existing localized UI text for whats-new-110-2."
+  },
+  "whatsNew1103": {
+    "message": "У редакторі зображень з’явилися команди «Вибрати все» та «Зняти виділення з усіх».",
+    "description": "Existing localized UI text for whats-new-110-3."
+  },
+  "whatsNew10121": {
+    "message": "Можливість змінювати пошукову систему була вимкнена. Усі пошукові запити тепер виконуватимуться через пошукову систему за замовчуванням браузера, як того вимагають додатки Google Chrome.",
+    "description": "Existing localized UI text for whats-new-1012-1."
+  },
+  "whatsNew10051": {
+    "message": "Додано функцію зміни списку фонів.",
+    "description": "Existing localized UI text for whats-new-1005-1."
+  },
+  "whatsNew10052": {
+    "message": "Додано переклади на кілька популярних мов.",
+    "description": "Existing localized UI text for whats-new-1005-2."
+  },
+  "whatsNew10041": {
+    "message": "Додано нові фонові зображення.",
+    "description": "Existing localized UI text for whats-new-1004-1."
+  },
+  "whatsNew10042": {
+    "message": "Невеликі зміни функціональності та виправлення помилок.",
+    "description": "Existing localized UI text for whats-new-1004-2."
+  },
+  "whatsNew10031": {
+    "message": "Додано нові фонові зображення. Для активації змініть положення повзунка в налаштуваннях 'Фон' на максимальне значення (41).",
+    "description": "Existing localized UI text for whats-new-1003-1."
+  },
+  "whatsNew10032": {
+    "message": "Якщо ви не змінювали це значення вручну, воно зміниться автоматично.",
+    "description": "Existing localized UI text for whats-new-1003-2."
+  },
+  "whatsNew10021": {
+    "message": "Виправлено деякі помилки.",
+    "description": "Existing localized UI text for whats-new-1002-1."
+  },
+  "whatsNew10011": {
+    "message": "Невеликі виправлення функціональності та відображення.",
+    "description": "Existing localized UI text for whats-new-1001-1."
+  },
+  "whatsNew10001": {
+    "message": "Додано D-day.",
+    "description": "Existing localized UI text for whats-new-1000-1."
+  },
+  "whatsNew10002": {
+    "message": "Додано фонові зображення.",
+    "description": "Existing localized UI text for whats-new-1000-2."
+  },
+  "whatsNew10003": {
+    "message": "Додано список завдань.",
+    "description": "Existing localized UI text for whats-new-1000-3."
+  },
+  "whatsNew10004": {
+    "message": "Додано панель пошуку.",
+    "description": "Existing localized UI text for whats-new-1000-4."
+  },
+  "whatsNew10005": {
+    "message": "Додано таймер.",
+    "description": "Existing localized UI text for whats-new-1000-5."
+  },
+  "currentVersion": {
+    "message": "Поточна версія 1.1.0",
+    "description": "Existing localized UI text for current-version."
+  },
+  "timerType": {
+    "message": "Виберіть тип:",
+    "description": "Existing localized UI text for timer-type."
+  },
+  "timer": {
+    "message": "Таймер",
+    "description": "Existing localized UI text for timer."
+  },
+  "alarm": {
+    "message": "Будильник",
+    "description": "Existing localized UI text for alarm."
+  },
+  "addNewTimer": {
+    "message": "Додати новий таймер",
+    "description": "Existing localized UI text for add-new-timer."
+  },
+  "newTimerName": {
+    "message": "Ім'я таймера*",
+    "description": "Existing localized UI text for new-timer-name."
+  },
+  "newTimerTime": {
+    "message": "Час*",
+    "description": "Existing localized UI text for new-timer-time."
+  },
+  "addNewAlarm": {
+    "message": "Додати новий будильник",
+    "description": "Existing localized UI text for add-new-alarm."
+  },
+  "newAlarmName": {
+    "message": "Ім'я будильника*",
+    "description": "Existing localized UI text for new-alarm-name."
+  },
+  "selectImages": {
+    "message": "Вибрати зображення",
+    "description": "Existing localized UI text for select-images."
+  },
+  "selectAll": {
+    "message": "Вибрати все",
+    "description": "Existing localized UI text for select-all."
+  },
+  "deselectAll": {
+    "message": "Зняти виділення з усіх",
+    "description": "Existing localized UI text for deselect-all."
+  },
+  "addCustomImage": {
+    "message": "Додати власне зображення",
+    "description": "Existing localized UI text for add-custom-image."
+  },
+  "removeCustomImage": {
+    "message": "Видалити власне зображення",
+    "description": "Existing localized UI text for remove-custom-image."
+  },
+  "customBackgroundUnsupported": {
+    "message": "Цей тип файлу не підтримується.",
+    "description": "Existing localized UI text for custom-background-unsupported."
+  },
+  "customBackgroundInvalid": {
+    "message": "Не вдалося прочитати це зображення.",
+    "description": "Existing localized UI text for custom-background-invalid."
+  },
+  "customBackgroundCopyFailed": {
+    "message": "Не вдалося зберегти зображення.",
+    "description": "Existing localized UI text for custom-background-copy-failed."
+  },
+  "customBackgroundSourceUnavailable": {
+    "message": "Вибраний файл більше недоступний.",
+    "description": "Existing localized UI text for custom-background-source-unavailable."
+  },
+  "customBackgroundStorageError": {
+    "message": "Не вдалося завантажити користувацькі зображення.",
+    "description": "Existing localized UI text for custom-background-storage-error."
+  },
+  "saved": {
+    "message": "Збережено",
+    "description": "Existing localized UI text for saved."
+  },
+  "limitCustomLinks": {
+    "message": "Перевищено ліміт на створення кастомних посилань!",
+    "description": "Existing localized UI text for Limit-custom-links."
+  },
+  "extensionName": {
+    "message": "KHome - KDrama New Tab",
+    "description": "The localized name of the Chrome extension."
+  },
+  "extensionDescription": {
+    "message": "Встановлює власну домашню сторінку Chrome.",
+    "description": "The localized description shown for the extension."
+  },
+  "newTabTitle": {
+    "message": "Нова вкладка",
+    "description": "The document title of the extension's new-tab page."
+  },
+  "dDayLabel": {
+    "message": "D - Day",
+    "description": "Label shown when the configured D-day is today."
+  },
+  "invalidDate": {
+    "message": "Введіть правильну дату.",
+    "description": "Validation message shown when an invalid D-day is entered."
+  },
+  "ok": {
+    "message": "Гаразд",
+    "description": "Confirmation button label."
+  },
+  "deleteLink": {
+    "message": "Видалити посилання",
+    "description": "Accessible name for the delete-link control."
+  },
+  "settings": {
+    "message": "Відкрити налаштування",
+    "description": "Accessible name for the settings control."
+  },
+  "viewTimers": {
+    "message": "Переглянути таймери та будильники",
+    "description": "Accessible name for the timers view control."
+  },
+  "close": {
+    "message": "Закрити",
+    "description": "Accessible name for a close control."
+  },
+  "playSound": {
+    "message": "Відтворити звук будильника",
+    "description": "Accessible name for the play-sound control."
+  },
+  "saveSound": {
+    "message": "Зберегти звук будильника",
+    "description": "Accessible name for the save-sound control."
+  },
+  "pauseTimer": {
+    "message": "Призупинити таймер",
+    "description": "Accessible name for the pause-timer control."
+  }
+}
