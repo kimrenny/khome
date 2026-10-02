@@ -93,6 +93,21 @@ function toggleAllBackgroundSelections(selectedIds, availableIds) {
   return [...new Set(available)];
 }
 
+function toggleBackgroundSelection(selectedIds, id) {
+  if (typeof id !== "string" || !id) {
+    return normalizePersistedSelectedImages(selectedIds);
+  }
+
+  const selectedSet = new Set(normalizePersistedSelectedImages(selectedIds));
+  if (selectedSet.has(id)) {
+    selectedSet.delete(id);
+  } else {
+    selectedSet.add(id);
+  }
+
+  return [...selectedSet];
+}
+
 function getExtension(fileName) {
   if (typeof fileName !== "string") {
     return "";
@@ -168,6 +183,7 @@ module.exports = {
   sanitizeSelectedImages,
   areAllBackgroundsSelected,
   toggleAllBackgroundSelections,
+  toggleBackgroundSelection,
   validateCustomImageFile,
   normalizeCustomRecord,
 };

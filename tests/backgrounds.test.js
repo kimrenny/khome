@@ -14,6 +14,7 @@ const {
   sanitizeSelectedImages,
   areAllBackgroundsSelected,
   toggleAllBackgroundSelections,
+  toggleBackgroundSelection,
   validateCustomImageFile,
   normalizeCustomRecord,
   CUSTOM_BACKGROUND_PREFIX,
@@ -184,6 +185,109 @@ test("bulk selection includes custom stable IDs and deselects everything", () =>
   assert.deepEqual(toggleAllBackgroundSelections(available, available), []);
   assert.equal(areAllBackgroundsSelected(available, available), true);
   assert.equal(areAllBackgroundsSelected([], available), false);
+});
+
+test("selecting a previously unselected built-in background", () => {
+  const initial = [];
+  const selected = toggleBackgroundSelection(initial, "bg-webp/photo_1.webp");
+  assert.deepEqual(selected, ["bg-webp/photo_1.webp"]);
+});
+
+test("deselecting a selected built-in background", () => {
+  const selected = ["bg-webp/photo_1.webp"];
+  const deselected = toggleBackgroundSelection(
+    selected,
+    "bg-webp/photo_1.webp",
+  );
+  assert.deepEqual(deselected, []);
+});
+
+test("selecting and deselecting a custom background", () => {
+  let selected = [];
+  selected = toggleBackgroundSelection(selected, "custom:img-1");
+  assert.deepEqual(selected, ["custom:img-1"]);
+
+  selected = toggleBackgroundSelection(selected, "custom:img-1");
+  assert.deepEqual(selected, []);
+});
+
+test("deselecting when exactly 1 background is selected", () => {
+  const selected = ["bg-webp/photo_5.webp"];
+  const updated = toggleBackgroundSelection(selected, "bg-webp/photo_5.webp");
+  assert.deepEqual(updated, []);
+});
+
+test("deselecting when exactly 2 backgrounds are selected", () => {
+  const selected = ["bg-webp/photo_1.webp", "bg-webp/photo_2.webp"];
+  const updated = toggleBackgroundSelection(selected, "bg-webp/photo_1.webp");
+  assert.deepEqual(updated, ["bg-webp/photo_2.webp"]);
+});
+
+test("deselecting when exactly 3 backgrounds are selected", () => {
+  const selected = [
+    "bg-webp/photo_1.webp",
+    "bg-webp/photo_2.webp",
+    "bg-webp/photo_3.webp",
+  ];
+  const updated = toggleBackgroundSelection(selected, "bg-webp/photo_2.webp");
+  assert.deepEqual(updated, ["bg-webp/photo_1.webp", "bg-webp/photo_3.webp"]);
+});
+
+test("deselecting one item while other backgrounds remain selected", () => {
+  const selected = [
+    "bg-webp/photo_1.webp",
+    "bg-webp/photo_2.webp",
+    "custom:img-1",
+  ];
+  const updated = toggleBackgroundSelection(selected, "bg-webp/photo_1.webp");
+  assert.deepEqual(updated, ["bg-webp/photo_2.webp", "custom:img-1"]);
+});
+
+test("mixed built-in and custom background selection", () => {
+  let selected = [];
+  selected = toggleBackgroundSelection(selected, "bg-webp/photo_1.webp");
+  selected = toggleBackgroundSelection(selected, "custom:img-1");
+  assert.deepEqual(selected, ["bg-webp/photo_1.webp", "custom:img-1"]);
+
+  // Deselect custom, built-in remains
+  selected = toggleBackgroundSelection(selected, "custom:img-1");
+  assert.deepEqual(selected, ["bg-webp/photo_1.webp"]);
+
+  // Deselect built-in, now empty
+  selected = toggleBackgroundSelection(selected, "bg-webp/photo_1.webp");
+  assert.deepEqual(selected, []);
+});
+
+test("sequence: select A -> select B -> select C -> deselect B -> deselect A -> select D", () => {
+  let selected = [];
+
+  // select A
+  selected = toggleBackgroundSelection(selected, "bg-webp/photo_1.webp");
+  assert.deepEqual(selected, ["bg-webp/photo_1.webp"]);
+
+  // select B
+  selected = toggleBackgroundSelection(selected, "bg-webp/photo_2.webp");
+  assert.deepEqual(selected, ["bg-webp/photo_1.webp", "bg-webp/photo_2.webp"]);
+
+  // select C (custom)
+  selected = toggleBackgroundSelection(selected, "custom:img-c");
+  assert.deepEqual(selected, [
+    "bg-webp/photo_1.webp",
+    "bg-webp/photo_2.webp",
+    "custom:img-c",
+  ]);
+
+  // deselect B
+  selected = toggleBackgroundSelection(selected, "bg-webp/photo_2.webp");
+  assert.deepEqual(selected, ["bg-webp/photo_1.webp", "custom:img-c"]);
+
+  // deselect A
+  selected = toggleBackgroundSelection(selected, "bg-webp/photo_1.webp");
+  assert.deepEqual(selected, ["custom:img-c"]);
+
+  // select D
+  selected = toggleBackgroundSelection(selected, "bg-webp/photo_4.webp");
+  assert.deepEqual(selected, ["custom:img-c", "bg-webp/photo_4.webp"]);
 });
 
 test("removing a selected custom image recalculates against remaining IDs", () => {

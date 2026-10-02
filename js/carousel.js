@@ -7,6 +7,7 @@ const {
   normalizePersistedSelectedImages,
   areAllBackgroundsSelected,
   toggleAllBackgroundSelections,
+  toggleBackgroundSelection,
 } = require("./backgroundCatalog");
 const customBackgroundStore = require("./customBackgroundStore");
 const { importCustomImages } = require("./customBackgroundService");
@@ -171,17 +172,8 @@ function appendGridItem(id, thumbSrc, isCustom) {
   }
 
   imgElement.addEventListener("click", function () {
-    const isSelected = imgElement.classList.contains("selected");
-
-    if (isSelected) {
-      if (selectedImages.length > 3) {
-        imgElement.classList.remove("selected");
-        selectedImages = selectedImages.filter((img) => img !== id);
-      }
-    } else {
-      imgElement.classList.add("selected");
-      selectedImages.push(id);
-    }
+    selectedImages = toggleBackgroundSelection(selectedImages, id);
+    imgElement.classList.toggle("selected", selectedImages.includes(id));
 
     persistSelectedImages();
     updateSelectAllButton();
